@@ -2,26 +2,94 @@ var mymedical = angular.module("mymed",['ngRoute','ngCookies','ngTagsInput']);
 
 
 mymedical.controller('getPersonalCtrl',['$scope','$http','$cookies',function($scope,$http,$cookies) {
-
+var emailCookie1 = $cookies.get('cookieEmail');
     $http.get("http://localhost:3000/getPersonal").success(function(data){
             var myData = [];
             var searchFilter;
             var allTags;
-            var emailCookie1 = $cookies.get('cookieEmail');
+            
 
-            //desplay data only for online email
+          
+            //display data only for online email
             for(var t=0; t<data.length ;t++)
             {
               if(data[t].email == emailCookie1 )
               {
                 myData.push(data[t]);
               }
+              $scope.insertDataToDB = myData;
             }
-            $scope.insertDataToDB = myData;
-            
-             
 
+            var shortBy;
+            $scope.shortFunc= function(){
+              shortBy = document.getElementById('shortData').value;
+              //console.log(shortBy);
+            
+
+            switch(shortBy)
+            {
+              case 'AZ':{
+                myData.sort(function(a, b) {
+                  var textA = a.Title.toUpperCase();
+                  var textB = b.Title.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+                });
+              break;
+              }
+              case 'ZA':{
+                myData.reverse(function(a, b) {
+                  var textA = a.Title.toUpperCase();
+                  var textB = b.Title.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+                });
+                break;
+              }
+              case 'firstDate':{
+                myData.sort(function(a,b) {
+                  a = a.myDate.split('/').reverse().join('');
+                  b = b.myDate.split('/').reverse().join('');
+                  return a > b ? 1 : a < b ? -1 : 0;
+                });
+                break;
+              }
+              case 'lastDate':
+                myData.reverse(function(a,b) {
+                  a = a.myDate.split('/').sort().join('');
+                  b = b.myDate.split('/').sort().join('');
+                  return a > b ? 1 : a < b ? -1 : 0;
+                });
+                break;
+            }
+
+        }
    });
+
+  
+
+  var x= {};
+  x.email = emailCookie1;
+  
+    $http.post('http://localhost:3000/getPersonalTags',JSON.stringify(x)).then(function(res){
+       var temp = res.data;
+       var myPersonalTags = [];
+       for(var i=0; i<temp.length ; i++)
+       {
+          // console.log(temp[i].tags);
+          myPersonalTags.push(temp[i].tags);
+       }
+       $scope.personalTag = myPersonalTags;
+    });
+
+    $scope.removeTag = function(val)
+    { 
+      var data ={};
+      data.email = emailCookie1;
+      data.tag = val;
+      //console.log(val);
+      $http.post('http://localhost:3000/removePersonalTag',JSON.stringify(data)).then()
+      location.reload();
+      data = {};
+    }
 
     var modal = document.getElementById("myModal");
     var span = document.getElementsByClassName("close")[0];
@@ -102,10 +170,16 @@ mymedical.controller('getPersonalCtrl',['$scope','$http','$cookies',function($sc
     }
 
 $scope.viewCurrent = function(value){
-  console.log("setting the value");
-  set(value);
-  window.location= "viewDetails.html";
+  $cookies.put('cookieView',JSON.stringify(value));
+  window.location = "viewDetails.html";
 }
+
+
+$scope.editData = function(valueEdit){
+  $cookies.put('cookieEdit',JSON.stringify(valueEdit));
+  window.location = "editData.html";
+}
+
 
 }]);
 
@@ -350,10 +424,17 @@ $scope.submitForm = function() {
     //data.file = myfile.src;
 //alert(data.myDate);
 console.log("submit");
-
  
-  $http.post('http://localhost:3000/addPersonal',JSON.stringify(data)).then()
-  
+  $http.post('http://localhost:3000/addPersonal',JSON.stringify(data)).then(function(data){
+       $scope.Category = '';
+       $scope.Recommendation ='';
+       $scope.Title = '';
+       $scope.Info='';
+       $scope.Tags=''; 
+       data = {};
+       //like this?????? why? do you any resiret after the than?no but i need... no/// just the res 
+  })
+
   }
 
     $scope.loadTags = function($query) {
@@ -409,32 +490,343 @@ mymedical.controller('profileCtrl',['$scope','$http','$cookies', function($scope
 mymedical.controller('calCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
   $http.get('http://localhost:3000/doctors').then(function(doctors) {
         var temp = [];
-        angular.forEach(doctors.data, function(doctor) {
+        /*angular.forEach(doctors.data, function(doctor) {
             $http.post('http://localhost:3000/calculateRanking', doctor)
                 .then(function(res) {
                     doctor.Ranking = res.data;
                     temp.push(doctor);
                 });
         });
-        $scope.general = temp;
+        */
+        //console.log(doctors);
+        $scope.general = doctors.data;
+        
     });
+
+  $scope.PA = 0;
+  $scope.Pro = 0;
+  $scope.AV = 0;
+  $scope.AT = 0;
+  $scope.Rec = 0;
+
+var userRank ={};
+
+  $scope.rankDoc = function(entity,name,expertise, address, rank,lastUp,numAll, numMy){
+    //console.log(rank);
+    $scope.dataName = name;
+    $scope.dataAddress = address;
+    $scope.dataRank = rank;
+    $scope.lastUpdate = lastUp;
+    $scope.Credibility = Math.round((numMy/numAll)*100);
+    userRank.name = name;
+    userRank.address = address;
+    userRank.entity = entity;
+    userRank.expertise =expertise;
+
+
+    // Get the modal
+    console.log("im in the right function");
+
+    var modal = document.getElementById('myModal');
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+ 
+    modal.style.display = "block";
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    var star = document.getElementById("showMyRank");
+    
+    while (star.hasChildNodes()) {
+        star.removeChild(star.lastChild);
+    }
+
+
+    switch(Math.round(rank)){
+      case 0:
+      {
+        for(var i=0; i<5; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-empty-lg.png";
+          star.appendChild(node);
+        }
+        break;
+      }
+      case 1:
+      {
+        for(var i=0; i<1; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-fill-lg.png";
+          star.appendChild(node);
+        }
+        for(var i=0; i<4; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-empty-lg.png";
+          star.appendChild(node);
+        }
+        break;
+      }
+      case 2:
+      {
+        for(var i=0; i<2; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-fill-lg.png";
+          star.appendChild(node);
+        }
+        for(var i=0; i<3; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-empty-lg.png";
+          star.appendChild(node);
+        }
+
+        break;
+      }
+      case 3:
+      {
+        for(var i=0; i<3; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-fill-lg.png";
+          star.appendChild(node);
+        }
+        for(var i=0; i<2; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-empty-lg.png";
+          star.appendChild(node);
+        }
+        break;
+      }
+      case 4:
+      {
+        for(var i=0; i<4; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-fill-lg.png";
+          star.appendChild(node);
+        }
+        for(var i=0; i<1; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-empty-lg.png";
+          star.appendChild(node);
+        }
+
+        break;
+      }
+      case 5:
+      {
+        for(var i=0; i<5; i++)
+        {
+          var node = document.createElement("img");
+          node.src = "../images/star-fill-lg.png";
+          star.appendChild(node);
+        }
+
+        break;
+      }
+    }
+
+    $scope.clickPA = function (param) {
+        console.log("ranking of personal attention " + param );
+        userRank.attention = param;
+    };
+    $scope.clickPro = function (param) {
+        console.log("ranking of proff " + param );
+        userRank.proffessional = param;
+    };
+    $scope.clickAV = function (param) {
+        console.log("ranking of availiable " + param );
+        userRank.availability = param;
+    };
+    $scope.clickAT = function (param) {
+        console.log("ranking of atmosphere " + param );
+        userRank.atmosphere = param;
+    };
+    $scope.clickRec = function (param) {
+        console.log("ranking of personal recommendation " + param );
+        userRank.recommendation = param;
+    };
+    $scope.sendRank= function()
+    {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+
+        if(dd<10) {
+            dd='0'+dd
+        } 
+
+        if(mm<10) {
+            mm='0'+mm
+        } 
+
+        today = dd+'/'+mm+'/'+yyyy;
+        userRank.insertDate = today;
+      if(userRank.attention!=null && userRank.proffessional!=null && userRank.availability!=null
+        && userRank.atmosphere!=null && userRank.recommendation!=null){
+        $http.post('http://localhost:3000/getOneRank', userRank);
+        modal.style.display = "none";   
+      }
+      else{
+        var error = document.getElementById('errorLog');
+        error.innerHTML="please rank all categories";
+      }
+    }
+  }
+  
+
 }]);
+
+
+
+mymedical.directive('starRating', function () {
+    return {
+        scope: {
+            rating: '=',
+            maxRating: '@',
+            readOnly: '@',
+            click: "&",
+            mouseHover: "&",
+            mouseLeave: "&"
+        },
+        restrict: 'EA',
+        template:
+            "<div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' ng-repeat='idx in maxRatings track by $index'> \
+                    <img ng-src='{{((hoverValue + _rating) <= $index) && \"http://www.codeproject.com/script/ratings/images/star-empty-lg.png\" || \"http://www.codeproject.com/script/ratings/images/star-fill-lg.png\"}}' \
+                    ng-Click='isolatedClick($index + 1)' \
+                    ng-mouseenter='isolatedMouseHover($index + 1)' \
+                    ng-mouseleave='isolatedMouseLeave($index + 1)'></img> \
+            </div>",
+        compile: function (element, attrs) {
+            if (!attrs.maxRating || (Number(attrs.maxRating) <= 0)) {
+                attrs.maxRating = '5';
+            };
+        },
+        controller: function ($scope, $element, $attrs) {
+            $scope.maxRatings = [];
+
+            for (var i = 1; i <= $scope.maxRating; i++) {
+                $scope.maxRatings.push({});
+            };
+
+            $scope._rating = $scope.rating;
+      
+      $scope.isolatedClick = function (param) {
+        if ($scope.readOnly == 'true') return;
+
+        $scope.rating = $scope._rating = param;
+        $scope.hoverValue = 0;
+        $scope.click({
+          param: param
+        });
+      };
+
+      $scope.isolatedMouseHover = function (param) {
+        if ($scope.readOnly == 'true') return;
+
+        $scope._rating = 0;
+        $scope.hoverValue = param;
+        $scope.mouseHover({
+          param: param
+        });
+      };
+
+      $scope.isolatedMouseLeave = function (param) {
+        if ($scope.readOnly == 'true') return;
+
+        $scope._rating = $scope.rating;
+        $scope.hoverValue = 0;
+        $scope.mouseLeave({
+          param: param
+        });
+      };
+        }
+    };
+});
 
 mymedical.controller('viewPersonalCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
-    $scope.myinfo = get();
-    console.log("trying to get");
-    console.log($scope.myinfo);
+    //$scope.myinfo = get();
+
+    $scope.myinfo=JSON.parse($cookies.get('cookieView'));
+
+    //console.log("trying to get");
+    console.log(typeof($scope.myinfo));
 }]);
 
-    var savedData = {};
-     function set(data) {
-       savedData = data;
-       console.log("in the set function");
-     }
-     function get() {
-      console.log("in the get function")
-      return savedData;
-     }
+mymedical.controller('editPersonalCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
+
+    var myEdit = JSON.parse($cookies.get('cookieEdit'));
+    $scope.myinfoEdit= myEdit;
+    $scope.Tags = myEdit.Tags;
+    var data ={};
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+      if(dd<10) {
+          dd='0'+dd
+      } 
+
+      if(mm<10) {
+          mm='0'+mm
+      } 
+
+    today = dd+'/'+mm+'/'+yyyy;
+
+    $scope.loadTag = function($query) {
+        return $http.get('http://localhost:3000/getTags', { cache: true}).then(function(response) {
+      var tags = response.data;
+      console.log();
+        return tags.filter(function(tag) {
+          return tag.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+      });
+    });
+  };
+
+    $scope.submitEdit = function() {
+      var info = document.getElementById('Info').value;
+      var recommendation = document.getElementById('Recommendation').value;
+      var title = document.getElementById('Title').value;
+
+     data.Tags = $scope.Tags;
+     data.Info  = info;
+     data.Recommendation  = recommendation;
+     data.Title  = title;
+     data.email = myEdit.email;
+     data.oldInfo = myEdit.Info;
+     data.oldRec =  myEdit.Recommendation;
+     data.oldTitle = myEdit.Title;
+     data.myDate = today;
+    console.log("submit");
+
+
+  $http.post('http://localhost:3000/updatePersonalData',JSON.stringify(data)).then()
+  
+  }
+
+
+}]);
+
+
 
 /*
    mymedical.factory('myService', function() {

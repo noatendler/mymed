@@ -6,6 +6,8 @@
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/ng-tags-input.min.css">
+        <link rel="stylesheet" href="css/ng-tags-input.bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <header class="deskHeader">
@@ -15,7 +17,7 @@
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal info</h3>
+                <h3 class="PersonalNav">Personal medical info</h3>
             </a>
             <a href="#">
                 <h3 class="GeneralNav">General info</h3>
@@ -25,19 +27,38 @@
             </a>
          </nav>
     </header>
-<body>
+<body ng-init="list = true">
     <main>
         <section>
             <img src="images/personalImg.jpg" class="topImgDesk">
         </section>
         <section class="topTitleDesk">
-            <span class="topTitle">Personal info</span>
+            <span class="topTitle">Personal medical info</span>
         </section>
          <section ng-controller="getPersonalCtrl">
              <a href="insertPersonal.html" class="redirectAdd">
                 <span class="addInfoDesk">add info</span>
                 <img src="images/addInfo.png" class="addInfoImg">
              </a>
+             <section ng-repeat="allTags in personalTag" >
+                <span ng-repeat="tag in allTags" class="tag label label-info">{{tag.name}}
+                    <a>
+                        <i class="remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(tag.name)"></i>
+                    </a>
+                </span>
+             </section>
+             <img class="changeView" src="images/list.png" ng-click="list = true; content = false; details = false;" >
+             <img class="changeView" src="images/details.png" ng-click="details = true; list=false; content=false;">
+             <img class="changeView" src="images/content.png" ng-click="content = true; list=false; details=false;">
+             <span>
+                 sort:
+                 <select name="shortData" ng-model="shortData" id="shortData" ng-change="shortFunc()">
+                    <option value="AZ">A to Z</option>
+                    <option value="ZA">Z to A</option>
+                    <option value="firstDate">First</option>
+                    <option value="lastDate">Last</option>
+                </select>
+             </span>
              <h2 class="currentDesk">current view:</h2>
              <h2 class="currentDesk" id="mysearch">{{searchString}}</h2>
              <br>
@@ -45,17 +66,32 @@
              <br>
              <p>{{insertData}}</p>
              <br>
-             <section ng-repeat="index in insertDataToDB | filter:searchString">
-                 <button ng-click="viewCurrent(index)">
-                  <img src="images/see.png" class="seeImg">
-                 </button>
+             <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="list" >
+                    <img src="images/see.png" class="seeImg" ng-click="viewCurrent(index)">
                     <img src="images/delete.png" class="delImg" ng-click="deletePopUp(index)">
-                 <a href="edit.html">
-                 <img src="images/edit.png" class="editImg">
-                 </a>
-                 <h1 class="titlePerDesk">{{index.Title}}</h1>
-                 <span>{{index.myDate}}</span>
-                 <p class="infoPerDesk">{{index.Info}}</p>
+                    <img src="images/edit.png" class="editImg" ng-click="editData(index)">
+                    <h1 class="titlePerDesk">{{index.Title}}</h1>
+                    <section ng-repeat="i in index.Tags">
+                       <p>{{i.name}}</p>
+                    </section>
+             </section>
+             <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="details">
+                    <img src="images/see.png" class="seeImg" ng-click="viewCurrent(index)">
+                    <img src="images/delete.png" class="delImg" ng-click="deletePopUp(index)">
+                    <img src="images/edit.png" class="editImg" ng-click="editData(index)">
+                    <h1 class="titlePerDesk">{{index.Title}}</h1>
+                    <h2>{{index.myDate}}</h2>
+             </section>
+             <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="content">
+                    <img src="images/see.png" class="seeImg" ng-click="viewCurrent(index)">
+                    <img src="images/delete.png" class="delImg" ng-click="deletePopUp(index)">
+                    <img src="images/edit.png" class="editImg" ng-click="editData(index)">
+                    <h1 class="titlePerDesk">{{index.Title}}</h1>
+                    <section ng-repeat="i in index.Tags">
+                       <p>{{i.name}}</p>
+                    </section>
+                    <p>{{index.Info}}</p>
+                    <h2>{{index.myDate}}</h2>
              </section>
              <section id="myModal" class="modal">
                 <section class="modal-content">

@@ -11,7 +11,11 @@ var doctorsSchema = new schema({
   reception_hours: [],
   lat: {type:Number},
   lng: {type:Number},
-  Ranking : {type:Number}
+  Ranking : {type:Number},
+  LastUpdate:{type:String},
+  //Credibility:{type:Number}
+  totaNumlRank:{type:Number},
+  myNumRank:{type:Number}
 },{collection: 'doctorsLocation'});
 
 
