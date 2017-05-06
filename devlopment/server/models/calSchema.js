@@ -3,7 +3,6 @@ var schema = mongoose.Schema;
 
 
 var calSchema = new schema({
-  insertDate:{type:String},
   Entity: {type:String},
   name: {type:String},
   Expertise : {type:String},

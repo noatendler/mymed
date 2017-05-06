@@ -1,20 +1,13 @@
 var mongoose = require('mongoose'),
 user = require('../models/usersSchema');
-//var setCookie = require('set-cookie');
 
 
 exports.findUser = function(req, res){
-   // console.log(Globals);
-   var cooikeEmail = req.body.email;
-   exports.cooikeEmail = cooikeEmail;
     user.find({email:req.body.email, pass:req.body.pass},function(err, docs){
         if(docs.length){
           console.log("found");
           //res.json(docs);
-
-          
-          //var getCookie = cookies.get( "unsigned" )
-          //res.redirect('http://localhost:8080/index.html');
+          res.redirect('http://localhost:8080/index.html');
 
         }
         else{
@@ -22,10 +15,7 @@ exports.findUser = function(req, res){
           res.redirect('http://localhost:8080/register.html');
         }
     });
-
 }
-
-
 
 function hasher(){
     var AUID = [],

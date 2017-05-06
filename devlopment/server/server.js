@@ -1,7 +1,5 @@
 var express=require('express');
 var app = express();
-
-
 var bodyParser = require('body-parser');
 var multipart = require('connect-multiparty');
 var multipartAction = multipart();
@@ -21,7 +19,7 @@ app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
     res.setHeader("Content-Type", "text/html");
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    //res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With,Accept,Content-Type');
@@ -34,8 +32,6 @@ app.use('/index', express.static('./public'));
 app.use('/login', express.static('./public'));
 app.use('/saveUser', express.static('./public'));
 
-
-
 app.get('/general', general.getData);
 app.get('/getPersonal', personal.getData);
 app.post('/addPersonal',multipartAction,personal.saveData);
@@ -47,11 +43,6 @@ app.post('/addPerUser', multipartAction, user.addPermission);
 app.post('/deletePerUser', multipartAction, user.deletePermission);
 app.post('/userInfo',multipartAction,user.getUserByEmail);
 app.get('/userInformation',user.getUsers);
-//app.post('/calculateRanking',multipartAction, doctors.calRank);
+app.post('/calculateRanking',multipartAction, doctors.calRank);
 app.post('/deletePersonalInfo',multipartAction, personal.delInfo);
-app.post('/getOneRank',multipartAction,doctors.getCalRank);
-app.post('/updatePersonalData',multipartAction,personal.updatePersonal);
-app.post('/getPersonalTags',multipartAction, personal.personalTags);
-app.post('/removePersonalTag',multipartAction,personal.removeTag);
-
 app.listen(port);

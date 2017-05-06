@@ -5,7 +5,6 @@
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-       <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <h1>my data</h1>
@@ -18,41 +17,6 @@
 		<h1>{{doc.Address}}</h1>
 		<h1>{{doc.reception_hours}}</h1>
 		<h1>{{doc.Ranking}}</h1>
-		<button ng-click="rankDoc(doc.Entity,doc.name,doc.Expertise, doc.Address, doc.Ranking, doc.LastUpdate, doc.totaNumlRank, doc.myNumRank)">rank me</button>
-
-		<!-- The Modal -->
-		<div id="myModal" class="modal">
-
-		  <!-- Modal content -->
-		  <section class="modal-content">
-		    <span class="close">&times;</span>
-		    	<p id="errorLog"></p>
-		    	<p>Doctor: {{dataName}}</p>
-		    	<p>current ranking: {{dataRank}} <span>was updated in:{{lastUpdate}}</span><span>Rank credibility:{{Credibility}}%</span></p>
-		    	<p>Address: {{dataAddress}}</p>
-	            <section id="showMyRank">
-   		        </section>
-   		        <br>
-   		        <br>
-   		        <p>Personal attention</p>
-   	           <section star-rating rating="PA" click="clickPA(param)">
-   	          </section>
-   	           <p>Professional</p>
-   	           <section star-rating rating="Pro" click="clickPro(param)">
-   	          </section>
-   	           <p>Availability to schedule an appointment</p>
-   	           <section star-rating rating="AV" click="clickAV(param)">
-   	          </section>
-   	           <p>Atmosphere in clinc</p>
-   	           <section star-rating rating="AT" click="clickAT(param)">
-   	          </section>
-   	           <p>Recommendation</p>
-   	           <section star-rating rating="Rec" click="clickRec(param)">
-   	          </section>
-   	          <input type="submit" ng-click="sendRank()" value="submit">
-		 </section>
-		 </div>
-		</div>
 	</section>
 </section>
 	<script src="js/lib/angular/angular.min.js"></script>

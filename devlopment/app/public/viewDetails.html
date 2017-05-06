@@ -13,7 +13,7 @@
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical info</h3>
+                <h3 class="PersonalNav">Personal info</h3>
             </a>
             <a href="#">
                 <h3 class="GeneralNav">General info</h3>
@@ -29,7 +29,7 @@
             <img src="images/personalImg.jpg" class="topImgDesk">
         </section>
         <section class="topTitleDesk">
-            <span class="topTitle">Personal medical info</span>
+            <span class="topTitle">Personal info</span>
         </section>
          <section ng-controller="viewPersonalCtrl">
              <a href="insertPersonal.html" class="redirectAdd">
@@ -37,12 +37,30 @@
                 <img src="images/addInfo.png" class="addInfoImg">
              </a>
              <br>
-                 <h1 class="titlePerDesk">{{myinfo.Title}}</h1>
-                   <span>{{myinfo.myDate}}</span>
-                   <p class="infoPerDesk">{{myinfo.Info}}</p>
-                   <section ng-repeat="i in myinfo.Tags">
-                       <p>{{myinfo.name}}</p>
-                   </section>
+            <p>{{text}}</p>
+             <!-- <section ng-repeat="index in text">
+                 <a href="delete.html">
+                 <img src="images/delete.png" class="delViewImg">
+                 </a>
+                 <a href="edit.html">
+                 <img src="images/edit.png" class="editViewImg">
+                 </a>
+                 <h1 class="titlePerDesk">{{index.Title}}</h1>
+                 <p class="infoPerDesk">{{index.Info}}</p>
+                 <img ng-src="{{index.file}}" class="fileImgView">
+                <h1 class="viewTitleTags">
+                    Tags
+                    <p ng-repeat ="t in index.Tags">
+                        <span class="viewTags">{{t.name}}</span>
+                    </p>
+                 </h1>
+                 <br>
+                 <section class="viewTime">
+                     <h2 class="titleTime">time passed since last
+                     <span>{{index.Title}}</span>
+                     </h2>
+                     <img src="images/clock.png" class="clock"> 
+                 </section>-->
              </section> 
     </main>
     <script src="js/lib/angular/angular.min.js"></script>
