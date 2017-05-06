@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="mymed">
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body ng-controller="searchController" id="bo">
+    <h1>Search Doctor Nearby</h1>
+    <form>
+   <label>select Expertise:</label>
+    <select id="expertise">
+        <option value="all" name="all">all</option>
+        <option value="Dentist" name="Dentist">Dentist</option>
+        <option value="Gastroenterology" name="Gastroenterology">Gastroenterology</option>
+        <option value="Famliy Doctor" name="Famliy Doctor">Famliy Doctor</option>
+        <option value="Gynecology" name="Gynecology">Gynecology</option>
+        <option value="Ophthalmology" name="Ophthalmology">Ophthalmology</option>
+        <option value="Dermatology" name="Dermatology">Dermatology</option>
+        <option value="Orthopedics" name="Orthopedics">Orthopedics</option>
+        <option value="Surgery" name="Surgery">Surgery</option>
+        <option value="Inernal medicine" name="Inernal medicine">Inernal medicine</option>
+        <option value="Psychiatrist" name="Psychiatrist">Psychiatrist</option>
+    </select>
+    <br><br>
+    <label>select HMO:</label>
+    <select id="HMO">
+        <option value="all" name="all">all</option>
+        <option value="Maccabi" name="Maccabi">Maccabi</option>
+        <option value="Clalit" name="Clalit">Clalit</option>
+        <option value="Meuhedet" name="Meuhedet">Meuhedet</option>
+        <option value="Leumit" name="Leumit">Leumit</option>
+    </select>
+    <br><br>
+    <input ng-model="input1" id="input1" name="input1" class="controls" type="text" placeholder="Search Doctor">
+    <input type="button" ng-click="checkSearch(input1)" value="Send" id="sendButton">
+    <input type="button" ng-click="show()" value="search again" id="showButton" style="display:none">
+    </form>
+    <div id="map"></div>
+    <h1>result:</h1>
+    <div ng-repeat="i in docNearby">
+      <h1>{{i.name}}</h1>
+      <p>{{i.Address}}</p>
+      <p>{{i.distance}}</p>
+      <p>{{i.HMO}}</p>
+      <p>{{i.Expertise}}</p>
+      <p ng-repeat="j in i.reception_hours">
+        <span ng-if="j.Sunday">Sunday:{{j.Sunday}}</span>
+        <span ng-if="j.Monday">Monday:{{j.Monday}}</span>
+        <span ng-if="j.Tuesday">Tuesday:{{j.Tuesday}}</span>
+        <span ng-if="j.Wednesday">Wednesday:{{j.Wednesday}}</span>
+        <span ng-if="j.Thursday">Thursday:{{j.Thursday}}</span>
+        <span ng-if="j.Friday">Friday:{{j.Friday}}</span>
+        <span ng-if="j.Saturday">Saturday:{{j.Saturday}}</span>
+      </p>
+    </div>
+    <script>
+     function initAutocomplete() { //initAutocomplete
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 32.0853, lng: 34.7818},
+          zoom: 10
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('input1');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.  
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+          
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHo4IfFEKL8UxvDQkoEkD6UPggg9RFPBI&callback=initMap&libraries=places,geometry&callback=initAutocomplete">
+    </script>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/angular/angular-resource.min.js"></script>
+    <script src="js/lib/angular/angular-route.min.js"></script>
+    <script src="js/lib/angular/angular-cookies.min.js"></script>
+    <script src="js/lib/angular/ng-tags-input.min.js"></script>
+    <script src="js/appController.js"></script>
+  </body>
+</html>

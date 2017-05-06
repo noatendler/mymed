@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="mymed">
+<head>
+    <title>profile</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body ng-controller="profileCtrl">
+      <h1 source="loadInfo()">Hello, {{username}}</h1>
+      <p>your key: {{key}}</p>
+	<p>add permission to a user</p>
+	<form>
+		<lable> enter email </lable>
+		<input type="text" ng-model="userEmail" name="userEmail"></input>
+		<lable>enter user key </lable>
+		<input type="text" ng-model="userKey" name="userKey"></input>
+		<br>
+		<lable>which permission would you like to grant? </lable>
+	  	<input type="radio" name="readWrite" ng-model="readWrite" value="0">read<br>
+	  	<input type="radio" name="readWrite" ng-model="readWrite" value="1">read+write<br>
+		<button type="submit" ng-click="addUser()">add</button>
+	</form>
+		<p>delete permission to a user</p>
+	<form>
+		<lable> enter email </lable>
+		<input type="text" ng-model="delEmail" name="delEmail"></input>
+		<button type="submit" ng-click="deleteUser()">delete</button>
+	</form>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/angular/angular-resource.min.js"></script>
+    <script src="js/lib/angular/angular-route.min.js"></script>
+    <script src="js/lib/angular/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular/ng-tags-input.min.js"></script>
+    <script src="js/lib/angular/ng-file-upload-shim.min.js"></script>
+    <script src="js/lib/angular/ng-file-upload.min.js"></script>
+    <script src="js/appController.js"></script>
+</body>
+</html>

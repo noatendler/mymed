@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="mymed">
+    <head>
+        <title>view private data</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <header class="deskHeader">
+        <a href="index.html" id="logo"> </a>
+         <nav>
+            <a href="index.html">
+                <h3 class="homeNav">Home</h3>
+            </a>
+            <a href="getPrivateData.html">
+                <h3 class="PersonalNav">Personal medical info</h3>
+            </a>
+            <a href="#">
+                <h3 class="GeneralNav">General info</h3>
+            </a>
+            <a href="searchDoc.html">
+                <h3 class="SearchNav">Search doctor nearby</h3>
+            </a>
+         </nav>
+    </header>
+<body>
+    <main>
+        <section>
+            <img src="images/personalImg.jpg" class="topImgDesk">
+        </section>
+        <section class="topTitleDesk">
+            <span class="topTitle">Personal medical info</span>
+        </section>
+         <section ng-controller="viewPersonalCtrl">
+             <a href="insertPersonal.html" class="redirectAdd">
+                <span class="addInfoDesk">add info</span>
+                <img src="images/addInfo.png" class="addInfoImg">
+             </a>
+             <br>
+                 <h1 class="titlePerDesk">{{myinfo.Title}}</h1>
+                   <span>{{myinfo.myDate}}</span>
+                   <p class="infoPerDesk">{{myinfo.Info}}</p>
+                   <section ng-repeat="i in myinfo.Tags">
+                       <p>{{myinfo.name}}</p>
+                   </section>
+             </section> 
+    </main>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/angular/angular-resource.min.js"></script>
+    <script src="js/lib/angular/angular-route.min.js"></script>
+    <script src="js/lib/angular/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular/ng-tags-input.min.js"></script>
+    <script src="js/appController.js"></script>
+</body>
+</html>
