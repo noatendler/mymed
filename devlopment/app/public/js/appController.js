@@ -382,7 +382,44 @@ $scope.loadCountries = function($query) {
 }]);
 */
 mymedical.controller('MainCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
-      
+
+var x ={};
+var emailCookie = $cookies.get('cookieEmail');
+x.email =emailCookie;
+var arrayPermission = [];
+
+$http.post('http://localhost:3000/userInfo',JSON.stringify(x)).success(function(data){
+  
+  for(var i=0; i<data.length; i++)
+  {
+    for(var j=0; j<(data[i].permission).length; j++)
+    {
+      arrayPermission.push(data[i].permission[j].perEmail);
+    }
+  }
+  $scope.names = arrayPermission;
+
+  $scope.$watch('permission', function() {
+  var getPremission = $scope.permission;
+  //console.log(getPremission);
+  var showPermission = document.getElementById('userPermission');
+  
+  //console.log(showPermission);
+  if(getPremission ==1 && showPermission!=null)
+  {
+      showPermission.style.display = "block";
+  } 
+  else
+  {
+    if(showPermission!=null)
+      showPermission.style.display = "none";
+  }
+});
+
+});
+
+
+
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
@@ -403,16 +440,23 @@ var yyyy = today.getFullYear();
 $scope.Tags = [];
 var data ={};
 
+var choice = [];
 
+$scope.getChocie = function(val) {
+
+  var myPosition = choice.indexOf(val);
+  if(myPosition==-1)
+    choice.push(val);
+  else
+    choice.splice(myPosition,1);
+
+}
 
 $scope.submitForm = function() {
-  //$window.location.reload();
+console.log(choice);  
+
   var emailCookie = $cookies.get('cookieEmail');
-  //console.log(emailCookie);
-     //data.file = $scope.file;
-     //console.log(data.file);
      data.Tags = $scope.Tags;
-     //console.log(data.Tags);
      data.email = emailCookie;
      //console.log(data.email);
      data.Info  = $scope.Info;
@@ -423,17 +467,16 @@ $scope.submitForm = function() {
     //var myfile = document.getElementById("file");  
     //data.file = myfile.src;
 //alert(data.myDate);
-console.log("submit");
+//console.log("submit");
  
-  $http.post('http://localhost:3000/addPersonal',JSON.stringify(data)).then(function(data){
-       $scope.Category = '';
-       $scope.Recommendation ='';
-       $scope.Title = '';
-       $scope.Info='';
-       $scope.Tags=''; 
-       data = {};
-       //like this?????? why? do you any resiret after the than?no but i need... no/// just the res 
-  })
+  // $http.post('http://localhost:3000/addPersonal',JSON.stringify(data)).then(function(data){
+  //      $scope.Category = '';
+  //      $scope.Recommendation ='';
+  //      $scope.Title = '';
+  //      $scope.Info='';
+  //      $scope.Tags=''; 
+  //      data = {};
+  // })
 
   }
 

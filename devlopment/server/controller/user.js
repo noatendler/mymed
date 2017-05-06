@@ -2,11 +2,9 @@ var mongoose = require('mongoose'),
 user = require('../models/usersSchema');
 //var setCookie = require('set-cookie');
 
-
+var cooikeEmail;
 exports.findUser = function(req, res){
    // console.log(Globals);
-   var cooikeEmail = req.body.email;
-   exports.cooikeEmail = cooikeEmail;
     user.find({email:req.body.email, pass:req.body.pass},function(err, docs){
         if(docs.length){
           console.log("found");
@@ -22,7 +20,7 @@ exports.findUser = function(req, res){
           res.redirect('http://localhost:8080/register.html');
         }
     });
-
+    
 }
 
 

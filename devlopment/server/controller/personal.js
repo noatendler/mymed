@@ -193,7 +193,7 @@ if( checkfile===1 && checktags===1)
     });
     usertags++;
   }
-  res.json("sucess");
+  response.json("sucess");
 }
 
 exports.delInfo = function(req, res){

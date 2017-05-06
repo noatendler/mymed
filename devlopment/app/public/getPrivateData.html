@@ -103,7 +103,7 @@
              </section>
              <br><br>
              <button ng-init="getAllAccess()">Access rights</button>
-                <select ng-model="selectedName" id="selectedName" name="selectedName" value="" ng-options="x for x in names"></select>
+                <select ng-model="selectedName" id="selectedName" name="selectedName" value="" ng-options="access for access in names"></select>
                 <section ng-repeat ="i in getUserPer">
                     Title: {{i.Title}}
                     <br>
