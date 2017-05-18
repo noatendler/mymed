@@ -10,7 +10,8 @@ var personalSchema = new schema({
   Category : {type : String},
   file: {type: String},
   Recommendation:{type:String},
-  myDate: {type:String}
+  myDate: {type:String},
+  permission: []
 },{collection: 'personal'});
 
 

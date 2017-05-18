@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html ng-app="mymed">
+<head>
+    <title>insert general data</title>
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="css/ng-tags-input.min.css">
+      <link rel="stylesheet" href="css/ng-tags-input.bootstrap.min.css">
+</head>
+ <header class="deskHeader">
+        <a href="index.html" id="logo"> </a>
+         <nav>
+            <a href="index.html">
+                <h3 class="homeNav">Home</h3>
+            </a>
+            <a href="getPrivateData.html">
+                <h3 class="PersonalNav">Personal medical info</h3>
+            </a>
+            <a href="generalRanking.html">
+                <h3 class="GeneralNav">General info</h3>
+            </a>
+            <a href="searchDoc.html">
+                <h3 class="SearchNav">Search doctor nearby</h3>
+            </a>
+         </nav>
+     </header>
+<body ng-controller="insertGeneralCtrl">
+    <form>
+    <h1>Please add general info</h1>
+      <div class="form-group">
+        <label for="pwd">Entity:</label>
+        <select id="entitySelect" ng-model="entitySelect" name="entitySelect">
+          <option value="Doctor">Doctor</option>
+          <option value="Hospital">Hospital</option>
+          <option value="Clinic">Clinic</option>
+        </select>    
+      </div> 
+      <div class="form-group">
+        <label for="pwd">Name:</label>
+        <input type="text" class="form-control" id="pwd" ng-model="name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Expertise:</label>
+        <input type="text" class="form-control" id="pwd" ng-model="Expertise" name="Expertise">
+      </div>
+      <div class="form-group">
+        <label for="pwd">HMO:</label>
+        <select id="hmoSelect" ng-model="hmoSelect" name="hmoSelect">
+          <option value="Maccabi">Maccabi</option>
+          <option value="Clalit">Clalit</option>
+          <option value="Meuhedet">Meuhedet</option>
+          <option value="Leumit">Leumit</option>
+        </select> 
+      </div>
+      <div class="form-group">
+        <label for="pwd">Address:</label>
+        <input type="text" class="form-control" id="pwd" ng-model="Address" name="Address">
+      </div>
+      <div class="form-group">
+      <label for="pwd">Reception hours:</label>
+      <br>
+      <label for="pwd">Sunday</label>
+      <br>
+        <label>From</label>
+          <input type="time" id="SundayHoursFrom" ng-model="SundayHoursFrom" name="SundayHoursFrom" value="">
+        <label>Until</label>
+          <input type="time" id="SundayHoursUntil" ng-model="SundayHoursUntil" name="SundayHoursUntil" value="">
+      <br><br>
+      <label for="pwd">Monday</label>
+        <br>
+        <label for="pwd">from</label>
+          <input type="time" id="MondayHoursFrom" ng-model="MondayHoursFrom" name="MondayHoursFrom">
+        <label>Until</label>
+          <input type="time" id="MondayHoursUntil" ng-model="MondayHoursUntil" name="MondayHoursUntil">
+          <br><br>
+      <label for="pwd">Tuesday</label>
+        <br>
+        <label for="pwd">from</label>
+          <input type="time" id="TuesdayHoursFrom" ng-model="TuesdayHoursFrom" name="TuesdayHoursFrom">
+        <label>Until</label>
+          <input type="time" id="TuesdayHoursUntil" ng-model="TuesdayHoursUntil" name="TuesdayHoursUntil">
+          <br><br>
+      <label for="pwd">Wednesday</label>
+        <br>
+        <label for="pwd">from</label>
+          <input type="time" id="WednesdayHoursFrom" ng-model="WednesdayHoursFrom" name="WednesdayHoursFrom">
+        <label>Until</label>
+          <input type="time" id="WednesdayHoursUntil" ng-model="WednesdayHoursUntil" name="WednesdayHoursUntil">
+          <br><br>
+      <label for="pwd">Thursday</label>
+        <br>
+        <label for="pwd">from</label>
+          <input type="time" id="ThursdayHoursFrom" ng-model="ThursdayHoursFrom" name="ThursdayHoursFrom">
+        <label>Until</label>
+          <input type="time" id="ThursdayHoursUntil" ng-model="ThursdayHoursUntil" name="ThursdayHoursUntil">
+          <br><br>
+      <label for="pwd">Friday</label>
+        <br>
+        <label for="pwd">from</label>
+          <input type="time" id="FridayHoursFrom" ng-model="FridayHoursFrom" name="FridayHoursFrom">
+        <label>Until</label>
+          <input type="time" id="FridayHoursUntil" ng-model="FridayHoursUntil" name="FridayHoursUntil">
+      <br><br>
+      <button type="submit" class="btn btn-default" ng-click="saveGeneral()">Submit</button>
+      </div>
+    </form>
+    <script>
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHo4IfFEKL8UxvDQkoEkD6UPggg9RFPBI&libraries=places,geometry">
+    </script>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/angular/angular-resource.min.js"></script>
+    <script src="js/lib/angular/angular-route.min.js"></script>
+    <script src="js/lib/angular/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular/ng-tags-input.min.js"></script>
+    <script src="js/appController.js"></script>
+</body>
+</html>

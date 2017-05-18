@@ -5,6 +5,7 @@ var fs = require('fs')
 var mime = require('mime');
 var user = require('../models/usersSchema');
 var taginsert = require('../models/userTagSchema');
+var ImageResize = require('node-image-resize');
 
 exports.updatePersonal = function(req,res)
 {
@@ -27,8 +28,8 @@ exports.getData = function(req, res){
 };
 
 var client = knox.createClient({
-    key: 'AKIAIUG5TZXOMHY74LLA'
-    , secret: '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'
+    key: 'AKIAJEGUYTCV6V5XQFZA'
+    , secret: '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'
     , bucket: 'mymedicalshenkar'
 });
 
@@ -121,7 +122,7 @@ if( checkfile===1 && checktags===1)
         || mimetype.localeCompare('image/png')
         || mimetype.localeCompare('image/gif')) {
 
-        req = client.putStream(stream, hash+'.png',
+        req = client.putStream(stream, hash+'.jpeg',
             {
                 'Content-Type': mimetype,
                 'Cache-Control': 'max-age=604800',
@@ -138,6 +139,7 @@ if( checkfile===1 && checktags===1)
                 file: req.url,
                 Recommendation:request.body.Recommendation,
                 myDate:tempDate
+
               });
               savePersonal.save(function(error, result) {
                 if (error) {
@@ -194,6 +196,125 @@ if( checkfile===1 && checktags===1)
     usertags++;
   }
   response.json("sucess");
+}
+
+
+exports.addInfoNoTags = function(request, response){
+  console.log("save data no tags, date, permission");
+
+    var hash = hasher();
+    var myfile = request.files.file;
+
+    var stream = fs.createReadStream(myfile.path);
+    var mimetype = mime.lookup(myfile.path);
+    var req;
+        if (mimetype.localeCompare('image/jpeg')
+        || mimetype.localeCompare('image/pjpeg')
+        || mimetype.localeCompare('image/png')
+        || mimetype.localeCompare('image/gif')) {
+
+        req = client.putStream(stream, hash+'.jpeg',
+            {
+                'Content-Type': mimetype,
+                'Cache-Control': 'max-age=604800',
+                'x-amz-acl': 'public-read',
+                'Content-Length': myfile.size
+            },
+            function(err, result) {
+             var savePersonal = new personal({
+                email : request.body.email,
+                Tags : [],
+                Title: request.body.Title,
+                Info: request.body.Info,
+                Category:request.body.Category,
+                file: req.url,
+                Recommendation:request.body.Recommendation,
+                myDate: request.body.mydate
+              });
+              savePersonal.save(function(error, result) {
+                if (error) {
+                  console.error(error);
+                } else {
+                  console.log("save");
+                  response.redirect('http://localhost:8080/insertTagsPermission.html');
+                  //response.json("save");
+                }
+              })
+          });
+       } else {
+            console.log(err);
+        }
+}
+
+exports.addTagPer = function(req, res){
+  console.log(req.body);
+  var tagsName=[];
+  var per = [];
+  var myemail = req.body.email;
+
+  for(var i=0; i<req.body.Tags.length; i++)
+  {
+    //console.log(req.body.Tags[i].name);
+    tagsName.push({name:req.body.Tags[i].name});
+  }
+  for(var j=0; j<req.body.Permission.length; j++)
+  {
+   per.push({perEmail: req.body.Permission[j]});
+  }
+  personal.update({email: req.body.email, Info: req.body.Info, Recommendation: req.body.Recommendation, Title: req.body.Title, myDate:req.body.mydate},{Tags: tagsName, permission:per}, 
+    function(err, num) {
+      if(err)
+        console.log(err);
+      else
+        console.log("updated"+num);
+    });
+
+  taginsert.find({email: myemail}, function(err, docsTags){
+    var tagtemp = [];
+    if(docsTags.length == 0)
+    {
+      var saveTag = new taginsert({
+          email: myemail,
+          tags: tagsName
+      });
+      saveTag.save(function(error, result) {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log("save");
+        }
+      });
+    }
+    else{
+      var tagtemp = [];
+      for(var t=0; t<docsTags.length; t++)
+      {
+        for(var k=0; k<(docsTags[t].tags).length ; k++)
+        {
+          //console.log(docsTags[t].tags[k].name);
+          tagtemp.push(docsTags[t].tags[k].name);
+        }
+      }
+      //console.log(tagtemp); 
+
+    for(var j=0; j<(tagsName).length ; j++)
+    {
+          //console.log( ((tagtemp).indexOf(mytags[j].name) != -1));
+          if(!((tagtemp).indexOf(tagsName[j].name) != -1))
+          {
+            taginsert.findOneAndUpdate(
+            {email:myemail},
+            {$push: {"tags": {name: tagsName[j].name}}},
+            {safe: true, upsert: true},
+            function(err, model) {
+              if(err)
+                console.log(err);
+            });
+          }
+        }
+      }
+    });
+
 }
 
 exports.delInfo = function(req, res){
@@ -262,18 +383,6 @@ exports.removeTag = function(req, res)
       console.log("success");
   });
 
-
-
-/*
-            personal.update(
-            {email:req.body.email},
-            {"$pull": {"Tags": {"name": req.body.tag}}},
-            {safe: true, upsert: true},
-            function(err, model) {
-              if(err)
-                console.log(err);
-            });
-*/
 }
 
 

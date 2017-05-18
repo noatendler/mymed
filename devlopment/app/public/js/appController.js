@@ -123,50 +123,55 @@ var emailCookie1 = $cookies.get('cookieEmail');
       modal.style.display = "none";
       location.reload();
     }
+var emailCookie = $cookies.get('cookieEmail');
+   var userPermission=[];
+      //get all users 
 
-    $scope.getAllAccess = function()
-    {     //get all users 
-          $http.get("http://localhost:3000/userInformation").success(function(data){
+      $http.get("http://localhost:3000/userInformation").success(function(data){
             
-             //check who have premision to this user
-              var emailCookie = $cookies.get('cookieEmail');
-              var userPermission;
-              var checkEmailPer=[];
-              var userPerData = [];
-              var choosenUser;
-              var checkNamePer=[];
+        //check who have premision to this user
+        
+        
+        var choosenUser;
 
-              for(var i=0 ; i< data.length ; i++)
-              {
-                for(var j=0 ; j<(data[i].permission).length ; j++)
-                {
-                    if(data[i].permission[j].perEmail == emailCookie)
-                    {
-                       userPermission = data[i];
-                    }
-                }
-              }
-             
-               checkEmailPer.push(userPermission.email);
-               checkNamePer.push(userPermission.userName);
-               
-                  $scope.names = checkEmailPer;
-                  
-                  choosenUser = document.getElementById('selectedName').value;
-                 
-                  var selectUser = choosenUser.substr(7);
-                
-                $http.get("http://localhost:3000/getPersonal").success(function(data2){
-                  for(var t=0 ; t< data2.length; t++)
-                  {
-                     if((data2[t].email == checkEmailPer) && (data2[t].email == selectUser))
-                     {
-                        userPerData.push(data2[t]);
-                     }
-                  }
-                  $scope.getUserPer = userPerData;
-              });
+        console.log(emailCookie);
+
+        for(var i=0 ; i< data.length ; i++)
+        {
+          for(var j=0;j<(data[i].permission).length; j++)
+          {
+            if(data[i].permission[j].perEmail == emailCookie)
+              userPermission.push(data[i].email);
+          }
+        }
+        });
+        //console.log(userPermission);       
+        $scope.names = userPermission;  
+        
+    $scope.getAllAccess = function()
+      {
+       var showDataUser= [];
+       choosenUser = document.getElementById('selectedName').value;
+        var selectUser = choosenUser.substr(7);
+           
+        $http.get("http://localhost:3000/getPersonal").success(function(personalInfo){
+          for(var t=0 ; t< personalInfo.length; t++)
+          {
+            console.log(personalInfo);
+            //console.log(personalInfo[t].permission);
+            for(var i=0; i<(personalInfo[t].permission).length; i++)
+            {
+              if(personalInfo[t].permission[i].perEmail == emailCookie )
+                showDataUser.push(personalInfo[t]);
+            }
+          }
+
+          //console.log(showDataUser)
+          $scope.getUserPer = showDataUser;
           });
+        
+        
+          
     }
 
 $scope.viewCurrent = function(value){
@@ -381,6 +386,7 @@ $scope.loadCountries = function($query) {
   
 }]);
 */
+/*
 mymedical.controller('MainCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
 
 var x ={};
@@ -469,14 +475,15 @@ console.log(choice);
 //alert(data.myDate);
 //console.log("submit");
  
-  // $http.post('http://localhost:3000/addPersonal',JSON.stringify(data)).then(function(data){
-  //      $scope.Category = '';
-  //      $scope.Recommendation ='';
-  //      $scope.Title = '';
-  //      $scope.Info='';
-  //      $scope.Tags=''; 
-  //      data = {};
-  // })
+   $http.post('http://localhost:3000/addPersonal',JSON.stringify(data)).then(function(data){
+       $scope.Category = '';
+       $scope.Recommendation ='';
+       $scope.Title = '';
+       $scope.Info='';
+       $scope.Tags=''; 
+       data = {};
+  
+  })
 
   }
 
@@ -490,6 +497,113 @@ console.log(choice);
   };
   
 }]);
+*/
+
+mymedical.controller('detailsCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
+
+  var emailCookie = $cookies.get('cookieEmail');
+  $scope.showEmail = emailCookie;
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    } 
+
+    if(mm<10) {
+        mm='0'+mm
+    } 
+    today = dd+'/'+mm+'/'+yyyy;
+    $scope.showDate = today;
+    
+    $scope.personalSave =function(){
+      var saveInfo ={};
+      saveInfo.email = emailCookie;
+      saveInfo.Title = $scope.Title;
+      saveInfo.Category = $scope.Category;
+      saveInfo.Info = $scope.Info;
+      saveInfo.Recommendation = $scope.Recommendation;
+      saveInfo.mydate = today;
+      $cookies.put('cookieSave',JSON.stringify(saveInfo));
+  }
+}]);
+
+mymedical.controller('TagsPerCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
+  $scope.myinfo = JSON.parse($cookies.get('cookieSave'));
+  var myinfo = JSON.parse($cookies.get('cookieSave'));
+
+  var x ={};
+  var emailCookie = $cookies.get('cookieEmail');
+  x.email =emailCookie;
+  var arrayPermission = [];
+
+$http.post('http://localhost:3000/userInfo',JSON.stringify(x)).success(function(data){
+  
+  for(var i=0; i<data.length; i++)
+  {
+    for(var j=0; j<(data[i].permission).length; j++)
+    {
+      arrayPermission.push(data[i].permission[j].perEmail);
+    }
+  }
+  $scope.names = arrayPermission;
+
+  $scope.$watch('permission', function() {
+  var getPremission = $scope.permission;
+  //console.log(getPremission);
+  var showPermission = document.getElementById('userPermission');
+  
+  //console.log(showPermission);
+  if(getPremission ==1 && showPermission!=null)
+  {
+      showPermission.style.display = "block";
+  } 
+  else
+  {
+    if(showPermission!=null)
+      showPermission.style.display = "none";
+  }
+});
+
+});
+
+var choice = [];
+
+$scope.getChocie = function(val) {
+
+  var myPosition = choice.indexOf(val);
+  if(myPosition==-1)
+    choice.push(val);
+  else
+    choice.splice(myPosition,1);
+
+}
+
+  $scope.addTagsPer = function(){
+    var tagsPer = {};
+    tagsPer.email = emailCookie;
+    tagsPer.Title = myinfo.Title;
+    tagsPer.Info = myinfo.Info;
+    tagsPer.Recommendation = myinfo.Recommendation;
+    tagsPer.mydate = myinfo.mydate;
+    tagsPer.Tags = $scope.Tags;
+    tagsPer.Permission = choice;
+
+    $http.post('http://localhost:3000/addPerTags',JSON.stringify(tagsPer)).then()
+  }
+
+    $scope.loadTags = function($query) {
+    return $http.get('http://localhost:3000/getTags', { cache: true}).then(function(response) {
+      var tags = response.data;
+      return tags.filter(function(tag) {
+        return tag.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+      });
+    });
+  };
+}]);
+
 
 mymedical.controller('profileCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
       
@@ -869,17 +983,69 @@ mymedical.controller('editPersonalCtrl',['$scope','$http','$cookies', function($
 
 }]);
 
+mymedical.controller('insertGeneralCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
 
 
-/*
-   mymedical.factory('myService', function() {
-     
+    var data ={};
 
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
 
-     return {
-      set: set,
-      get: get
-     }
-  });
+      if(dd<10) {
+          dd='0'+dd
+      } 
 
-*/
+      if(mm<10) {
+          mm='0'+mm
+      } 
+
+    today = dd+'/'+mm+'/'+yyyy;
+
+//get resp hours
+    $scope.saveGeneral = function() {
+      var convertAddress = $scope.Address;
+      var sunday,monday,tuesday,wednesday,thursday,friday;
+      var receptionHours = [];
+      
+      var sundayFrom = document.getElementById("SundayHoursFrom").value;
+      var sundayUntil = document.getElementById("SundayHoursUntil").value;
+      var mondayFrom = document.getElementById("MondayHoursFrom").value;
+      var mondayUntil = document.getElementById("MondayHoursUntil").value;
+      var tuesdayFrom = document.getElementById("TuesdayHoursFrom").value;
+      var tuesdayUntil = document.getElementById("TuesdayHoursUntil").value;
+      var wednesdayFrom = document.getElementById("WednesdayHoursFrom").value;
+      var wednesdayUntil = document.getElementById("WednesdayHoursUntil").value;
+      var thursdayFrom = document.getElementById("ThursdayHoursFrom").value;
+      var thursdayUntil = document.getElementById("ThursdayHoursUntil").value;
+      var fridayFrom = document.getElementById("FridayHoursFrom").value;
+      var fridayUntil = document.getElementById("FridayHoursUntil").value;
+      var HMO = document.getElementById('hmoSelect').value;
+      var Entity = document.getElementById('entitySelect').value;
+
+      sunday = "Sunday:"+' '+sundayFrom+' '+"-"+' '+sundayUntil;
+      monday = "Monday:"+' '+mondayFrom+' '+"-"+' '+mondayUntil;
+      tuesday = "Tuesday:"+' '+tuesdayFrom+' '+"-"+' '+tuesdayUntil;
+      wednesday = "Wednesday:"+' '+wednesdayFrom+' '+"-"+' '+wednesdayUntil; 
+      thursday = "Thursday:"+' '+thursdayFrom+' '+"-"+' '+thursdayUntil; 
+      friday = "Friday:"+' '+fridayFrom+' '+"-"+' '+fridayUntil; 
+      receptionHours.push(sunday,monday,tuesday,wednesday,thursday,friday);
+
+      //console.log(receptionHours);
+
+     data.Entity = Entity;
+     data.name  = $scope.name;
+     data.Expertise  = $scope.Expertise;
+     data.HMO  = HMO;
+     data.Address = $scope.Address;
+     data.reception_hours = receptionHours;
+     data.address = convertAddress;
+     data.LastUpdate = today;
+
+  $http.post('http://localhost:3000/getGeneralData',JSON.stringify(data)).then()
+  
+  }
+
+}]);
+

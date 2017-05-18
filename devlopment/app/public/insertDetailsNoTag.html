@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="mymed">
+<head>
+    <title>insert personal data</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="detailsCtrl">
+    <form enctype="multipart/form-data" method="post" action="http://localhost:3000/addDataNoTags">
+    <h1>Please add your private info</h1>
+        <input type="text" class="form-control" id="emailInput" name="email" value={{showEmail}}>
+      <div class="form-group">
+        <label for="pwd">Title:</label>
+        <input type="text" class="form-control" id="pwd" name="Title"  ng-model="Title">
+      </div> 
+      <div class="form-group">
+        <label for="pwd">Info:</label>
+        <input type="text" class="form-control" id="pwd" name="Info" ng-model="Info">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Category:</label>
+        <input type="text" class="form-control" id="pwd" name="Category" ng-model="Category">
+      </div>
+      <div class="form-group">
+        <label for="pwd">File:</label>
+          <input type="file" id="file" name="file" value="">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Recommendation:</label>
+        <input type="text" class="form-control" id="pwd" name="Recommendation" ng-model="Recommendation">
+      </div>
+      <input type="text" class="form-control" id="dateInput" name="mydate" value={{showDate}}>   
+      <button type="submit" class="btn btn-default" ng-click="personalSave()">Submit
+      </button>
+    </form>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/angular/angular-resource.min.js"></script>
+    <script src="js/lib/angular/angular-route.min.js"></script>
+    <script src="js/lib/angular/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular/ng-tags-input.min.js"></script>
+    <script src="js/appController.js"></script>
+</body>
+</html>
