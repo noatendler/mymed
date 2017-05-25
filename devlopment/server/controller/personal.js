@@ -6,6 +6,12 @@ var mime = require('mime');
 var user = require('../models/usersSchema');
 var taginsert = require('../models/userTagSchema');
 var ImageResize = require('node-image-resize');
+var notifi = require('../models/notificationSchema');
+var data = require('../details/date.json');
+var moment = require('moment');
+var sendmail = require('sendmail')();
+
+
 
 exports.updatePersonal = function(req,res)
 {
@@ -247,7 +253,89 @@ exports.addInfoNoTags = function(request, response){
 }
 
 exports.addTagPer = function(req, res){
-  console.log(req.body);
+ // console.log(req.body);
+  var mydata = JSON.parse(JSON.stringify(data));
+  var myKeys = Object.keys(mydata);
+  //var myValue = Object.values(mydata);
+  var dateFormats = {
+  "iso_int" : "YYYY-MM-DD",
+  "short_date" : "DD/MM/YYYY",
+  "date_regular": "DD-MM-YYYY",
+  "date_dots": "DD.MM.YYYY",
+  "date_yearDOt":"DD.MM.YY",
+  "date_2": "DD-MM-YY",
+  "date_3":"DD/MM/YY"
+  }
+
+  function getFormat(d){
+    for (var prop in dateFormats) {
+          if(moment(d, dateFormats[prop],true).isValid()){
+             return dateFormats[prop];
+          }
+    }
+    return null;
+  }
+
+  var dateTime = [];
+  //the recommendation analyze
+  var recommendation = req.body.Recommendation;
+  var splitToArray = recommendation.split(" ");
+  var formatFound;
+
+
+  for(var j=0; j<splitToArray.length; j++)
+  {
+    for(var i=0; i<myKeys.length ; i++)
+    {
+      if(myKeys[i] == splitToArray[j])
+      {
+        dateTime.push(mydata[myKeys[i]]);
+        //console.log("added "+splitToArray[j]+" "+mydata[myKeys[i]]);
+      }
+    }
+      formatFound = getFormat(splitToArray[j]); //returns "YYYY-MM-DDTHH:MM:SS"
+      if(formatFound !==null)
+      {
+         dateTime.push(splitToArray[j]);
+         //console.log("added "+splitToArray[j]);
+      }
+      if(!isNaN(splitToArray[j]))
+      {
+        dateTime.push(Number(splitToArray[j]));
+        //console.log("added "+splitToArray[j]+" "+mydata[myKeys[i]]);
+      } 
+  }
+
+var getDateNoti=0;
+
+console.log(dateTime);
+for(var k=0; k<dateTime.length; k++)
+{
+  if(getFormat(dateTime[k])!==null)
+  {
+      getDateNoti = dateTime[k];
+      break;
+  }
+  else if(dateTime.length == 1)
+  {
+    getDateNoti = dateTime[k];
+    break;
+  }
+  else if(dateTime[k] == 'every')
+  {
+    getDateNoti = 'every'+dateTime[k+1];
+    break;
+  }
+  else
+  {
+    getDateNoti+=  dateTime[k++] * dateTime[k++]; 
+
+  }
+}
+
+console.log(getDateNoti);
+
+
   var tagsName=[];
   var per = [];
   var myemail = req.body.email;
@@ -313,7 +401,10 @@ exports.addTagPer = function(req, res){
           }
         }
       }
+
+      res.json({"date":getDateNoti});
     });
+
 
 }
 
@@ -385,4 +476,70 @@ exports.removeTag = function(req, res)
 
 }
 
+exports.saveNotification = function(req, res)
+{
+  console.log(req.body);
+    var saveMyNoti = new notifi({
+          email: req.body.email,
+          Recommendation : req.body.Recommendation,
+          dateNoti : req.body.dateNoti,
+          repeat: req.body.repeat
+      });
+      saveMyNoti.save(function(error, result) {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log("save");
+        }
+      });
+}
+/*
+exports.sendEmail = function(req , res)
+{
+  var email,Recommendation;
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  if(dd<10) {
+    dd='0'+dd
+  } 
+  if(mm<10) {
+    mm='0'+mm
+  } 
+  today = dd+'/'+mm+'/'+yyyy;
 
+  notifi.find({}, function(err, docs){
+    for(var i=0; i<docs.length; i++)
+    {
+      email = docs[i].email;
+      Recommendation = docs[i].Recommendation;
+      var tempDate = new Date(docs[i].dateNoti);
+      dd = tempDate.getDate();
+      mm = tempDate.getMonth()+1; //January is 0!
+      yyyy = tempDate.getFullYear();
+      if(dd<10) {
+        dd='0'+dd
+      } 
+      if(mm<10) {
+        mm='0'+mm
+      } 
+      tempDate = dd+'/'+mm+'/'+yyyy;
+    
+      if(today === tempDate)
+      {
+          console.log("sending email");
+          sendmail({
+              from: 'mymedicalpro@gmail.com',
+              to: email,
+              subject: 'Notification from my medical',
+              html: Recommendation,
+            }, function(err, reply) {
+              console.log(err && err.stack);
+              console.dir(reply);
+          });
+      }
+    }
+  });
+}
+*/

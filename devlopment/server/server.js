@@ -58,7 +58,7 @@ app.post('/removePersonalTag',multipartAction,personal.removeTag);
 app.post('/addDataNoTags',multipartAction, personal.addInfoNoTags);
 app.post('/addPerTags',multipartAction, personal.addTagPer);
 app.post('/getGeneralData',multipartAction,general.saveGeneralData);
-
-
+app.post('/addNotification',multipartAction,personal.saveNotification);
+app.get('/sendEmail',personal.sendEmail);
 
 app.listen(port);

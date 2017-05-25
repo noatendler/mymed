@@ -3,6 +3,7 @@ general = require('../models/generalSchema');
 var doc = require('../models/doctorsSchema');
 var NodeGeocoder = require('node-geocoder');
 
+
 var options = {
   provider: 'google',
   httpAdapter: 'https', // Default 
