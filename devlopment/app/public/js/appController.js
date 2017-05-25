@@ -339,15 +339,14 @@ mymedical.controller('loginCtrl',['$scope','$http','$cookies', function($scope,$
 }]);
 
 mymedical.controller('registerCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
-  $scope.registerUser = function(valEmail, valUser){
+  $scope.registerUser = function(valEmail){
         var user = {};
         user.email=$scope.myemail;
         user.pass = $scope.pass;
         user.userName = $scope.userName;
 
         //var cook=$cookies.get('cookieEmail');
-        $cookies.put('cookieEmail',value);
-        $cookies.put('cookieUserName',value);
+        $cookies.put('cookieEmail',valEmail);
         //console.log(value);
               
 
@@ -530,7 +529,7 @@ mymedical.controller('detailsCtrl',['$scope','$http','$cookies', function($scope
   }
 }]);
 
-mymedical.controller('TagsPerCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
+mymedical.controller('TagsPerCtrl',['$scope','$http','$cookies','dateFilter', function($scope,$http,$cookies,dateFilter){
   $scope.myinfo = JSON.parse($cookies.get('cookieSave'));
   var myinfo = JSON.parse($cookies.get('cookieSave'));
 
@@ -580,8 +579,10 @@ $scope.getChocie = function(val) {
     choice.splice(myPosition,1);
 
 }
+var modal = document.getElementById('myModal');
 
   $scope.addTagsPer = function(){
+    
     var tagsPer = {};
     tagsPer.email = emailCookie;
     tagsPer.Title = myinfo.Title;
@@ -590,8 +591,71 @@ $scope.getChocie = function(val) {
     tagsPer.mydate = myinfo.mydate;
     tagsPer.Tags = $scope.Tags;
     tagsPer.Permission = choice;
+    
+    $http.post('http://localhost:3000/addPerTags',JSON.stringify(tagsPer)).then(function(docs){
+        
+    var notiDate = docs.data.date;
 
-    $http.post('http://localhost:3000/addPerTags',JSON.stringify(tagsPer)).then()
+    console.log(typeof(notiDate));
+
+    $scope.date = new Date();
+    var todayDate = new Date();
+    $scope.$watch('date', function (date)
+    {
+      var somedate = date;
+      var reminderDay = document.getElementsByName('reminder');        
+      if(notiDate.includes("every"))
+      {
+        var getRepeat = notiDate.replace("every", "");
+        for (var i = 0, length = reminderDay.length; i < length; i++) {
+          if (reminderDay[i].value == Number(getRepeat)) {
+              reminderDay[i].checked = true;
+            break;
+          }
+        }
+        $scope.dateString = todayDate;       
+      }
+      else if(notiDate.includes("-"))
+      {
+        var myDate = new Date(notiDate.split('-').reverse().join('/'));
+        $scope.dateString = myDate;
+      }
+      else if(notiDate.includes("/"))
+      {
+        var myDate = new Date(notiDate.split('/').reverse().join('/'));
+        $scope.dateString = myDate;
+      }
+      else if( notnotiDateiDay.includes("."))
+      {
+        var myDate = new Date(notiDate.split('.').reverse().join('/'));
+        $scope.dateString = myDate;
+      }
+      else
+      {
+        var numberOfDaysToAdd = notiDate;
+        somedate.setDate(somedate.getDate() + numberOfDaysToAdd);
+        somedate = new Date(somedate);     
+        $scope.dateString = somedate;
+      }
+    });
+      
+
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
+       
+          modal.style.display = "block";
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+              modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    } 
+    });
   }
 
     $scope.loadTags = function($query) {
@@ -602,6 +666,34 @@ $scope.getChocie = function(val) {
       });
     });
   };
+
+//save notification for each user by email
+$scope.SaveNoti = function(val)
+{
+
+    if(val == 'no')
+    {
+      modal.style.display = "none";
+    }
+    if(val == 'yes')
+    {
+      var saveNoti = {};
+      saveNoti.email = emailCookie;
+      saveNoti.Recommendation = myinfo.Recommendation;
+      saveNoti.dateNoti = $scope.dateString;
+      var reminderDay = document.getElementsByName('reminder');        
+
+      for (var i = 0, length = reminderDay.length; i < length; i++) {
+        if (reminderDay[i].checked) {
+          saveNoti.repeat=reminderDay[i].value;
+          break;
+        }
+      }
+      modal.style.display = "none";
+      $http.post('http://localhost:3000/addNotification',JSON.stringify(saveNoti)).then() 
+    }
+}
+
 }]);
 
 

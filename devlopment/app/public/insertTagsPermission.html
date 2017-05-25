@@ -2,6 +2,7 @@
 <html ng-app="mymed">
 <head>
     <title>insert personal data</title>
+      <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <link rel="stylesheet" href="css/ng-tags-input.min.css">
@@ -49,6 +50,26 @@
       <button type="submit" class="btn btn-default" ng-click="addTagsPer()">Submit
       </button>
     </form>
+        <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <section class="modal-content">
+        <span class="close">&times;</span>
+        <h1>would you like to creat a notification?</h1>
+        <p>{{myinfo.Recommendation}}</p>
+         <input type="date" ng-model="dateString" id="date">
+         <br>
+         <input type="radio" name="reminder" value="0" checked>once
+         <input type="radio" name="reminder" value="1">every day
+         <input type="radio" name="reminder" value="7">every week
+         <input type="radio" name="reminder" value="30">every month
+         <input type="radio" name="reminder" value="365">every year
+        <br>
+        <button ng-click="SaveNoti('yes')">yes</button>
+        <button ng-click="SaveNoti('no')">no</button>
+     </section>
+     </div>
         <script type="text/ng-template" id="my-custom-template">
       <div class="right-panel">
         <span ng-bind-html="$highlight($getDisplayText())"></span>
