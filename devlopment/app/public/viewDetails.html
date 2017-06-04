@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html ng-app="mymed">
     <head>
-        <title>view private data</title>
+        <title>View private data</title>
+        <link rel="stylesheet" href="css/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-        <link rel="stylesheet" href="css/style.css">
     </head>
     <header class="deskHeader">
         <a href="index.html" id="logo"> </a>
@@ -15,7 +15,7 @@
             <a href="getPrivateData.html">
                 <h3 class="PersonalNav">Personal medical info</h3>
             </a>
-            <a href="#">
+            <a href="generalRanking.html">
                 <h3 class="GeneralNav">General info</h3>
             </a>
             <a href="searchDoc.html">
@@ -31,19 +31,19 @@
         <section class="topTitleDesk">
             <span class="topTitle">Personal medical info</span>
         </section>
-         <section ng-controller="viewPersonalCtrl">
-             <a href="insertPersonal.html" class="redirectAdd">
+        <section ng-controller="viewPersonalCtrl">
+            <a href="insertPersonal.html" class="redirectAdd">
                 <span class="addInfoDesk">add info</span>
                 <img src="images/addInfo.png" class="addInfoImg">
-             </a>
-             <br>
-                 <h1 class="titlePerDesk">{{myinfo.Title}}</h1>
-                   <span>{{myinfo.myDate}}</span>
-                   <p class="infoPerDesk">{{myinfo.Info}}</p>
+            </a>
+            <br>
+                <h1 class="titlePerDesk">{{myinfo.Title}}</h1>
+                   <span class="contentName">{{myinfo.myDate}}</span>
+                   <p class="contentName">{{myinfo.Info}}</p>
                    <section ng-repeat="i in myinfo.Tags">
                        <p>{{myinfo.name}}</p>
                    </section>
-             </section> 
+        </section> 
     </main>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>

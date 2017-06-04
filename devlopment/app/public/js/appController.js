@@ -682,7 +682,6 @@ $scope.SaveNoti = function(val)
       saveNoti.Recommendation = myinfo.Recommendation;
       saveNoti.dateNoti = $scope.dateString;
       var reminderDay = document.getElementsByName('reminder');        
-
       for (var i = 0, length = reminderDay.length; i < length; i++) {
         if (reminderDay[i].checked) {
           saveNoti.repeat=reminderDay[i].value;
@@ -739,18 +738,62 @@ mymedical.controller('profileCtrl',['$scope','$http','$cookies', function($scope
 mymedical.controller('calCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
   $http.get('http://localhost:3000/doctors').then(function(doctors) {
         var temp = [];
-        /*angular.forEach(doctors.data, function(doctor) {
-            $http.post('http://localhost:3000/calculateRanking', doctor)
-                .then(function(res) {
-                    doctor.Ranking = res.data;
-                    temp.push(doctor);
-                });
-        });
-        */
-        //console.log(doctors);
         $scope.general = doctors.data;
         
     });
+
+  var emailCookie = $cookies.get('cookieEmail');
+
+  $scope.user = function()
+  {
+    if(emailCookie == 'admin@gmail.com')
+      return true;
+    else
+      return false;
+  }
+
+  $scope.edit = function(valueEdit)
+  {
+      $cookies.put('cookieEditGeneral',JSON.stringify(valueEdit));
+      window.location = "editGeneralData.html";
+  }
+
+
+    $scope.deleteDoc=function(doc)
+    {
+      var deletemodal = document.getElementById('deletePopup');
+
+      // Get the <span> element that closes the modal
+      var deletespan = document.getElementsByClassName("closeDelete")[0];
+ 
+      console.log("fgefe");
+      console.log(doc);
+      deletemodal.style.display = "block";
+      // When the user clicks on <span> (x), close the modal
+      deletespan.onclick = function() {
+          deletemodal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == deletemodal) {
+              deletemodal.style.display = "none";
+          }
+      }
+      $scope.delAddress = doc.Address; 
+      $scope.delName = doc.name; 
+      $scope.delEntity = doc.Entity;
+
+      $scope.delYes= function(){
+        deletemodal.style.display = "none";
+        $http.post('http://localhost:3000/delGeneral',JSON.stringify(doc));
+      }
+
+      $scope.delNo = function(){
+        deletemodal.style.display = "none";
+      }
+
+    }
 
   $scope.PA = 0;
   $scope.Pro = 0;
@@ -1139,5 +1182,61 @@ mymedical.controller('insertGeneralCtrl',['$scope','$http','$cookies', function(
   
   }
 
+}]);
+
+mymedical.controller('editGeneralCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
+
+    var generalEdit = JSON.parse($cookies.get('cookieEditGeneral'));
+    $scope.infoGeneral= generalEdit;
+
+    for(var i=0; i<generalEdit.reception_hours.length; i++)
+    {
+      if(generalEdit.reception_hours[i].Sunday != null)
+        $scope.sunday = generalEdit.reception_hours[i].Sunday;
+      if(generalEdit.reception_hours[i].Monday != null)
+        $scope.monday = generalEdit.reception_hours[i].Monday;
+      if(generalEdit.reception_hours[i].Tuesday != null)
+        $scope.tuesday = generalEdit.reception_hours[i].Tuesday;
+      if(generalEdit.reception_hours[i].Wednesday != null)
+        $scope.wednesday = generalEdit.reception_hours[i].Wednesday;
+      if(generalEdit.reception_hours[i].Thursday != null)
+        $scope.thursday = generalEdit.reception_hours[i].Thursday;
+      if(generalEdit.reception_hours[i].Friday != null)
+        $scope.friday = generalEdit.reception_hours[i].Friday;
+    } 
+
+    var data ={};
+    var reception = {};
+    
+    $scope.EditGeneral = function() {
+     
+      if($scope.sunday != null)
+        reception.Sunday = $scope.sunday;
+      if($scope.monday != null)
+        reception.Monday = $scope.monday;
+      if($scope.tusday != null)
+        reception.Tuesday = $scope.tusday;
+      if($scope.wednesday != null)
+        reception.Wednesday = $scope.wednesday;
+      if($scope.thursday != null)
+        reception.Thursday = $scope.thursday;
+      if($scope.friday != null)
+        reception.Friday = $scope.friday;
+
+     data.Entity  = $scope.infoGeneral.Entity;
+     data.name  = $scope.infoGeneral.name;
+     data.Expertise  = $scope.infoGeneral.Expertise;
+     data.HMO = $scope.infoGeneral.HMO;
+     data.reception_hours = reception;
+     data.EntityBefore = generalEdit.Entity;
+     data.NameBefore = generalEdit.name;
+     data.AddressBefore = generalEdit.Address;
+    //console.log(data);
+
+
+  $http.post('http://localhost:3000/updateGeneralData',JSON.stringify(data)).then()
+  
+  }
+      
 }]);
 

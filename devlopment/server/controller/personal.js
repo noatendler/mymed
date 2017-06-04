@@ -9,7 +9,7 @@ var ImageResize = require('node-image-resize');
 var notifi = require('../models/notificationSchema');
 var data = require('../details/date.json');
 var moment = require('moment');
-var sendmail = require('sendmail')();
+
 
 
 
@@ -479,10 +479,13 @@ exports.removeTag = function(req, res)
 exports.saveNotification = function(req, res)
 {
   console.log(req.body);
+  var addOne = new Date(req.body.dateNoti);
+  addOne.setDate(addOne.getDate() + 1);
+  addOne = new Date(addOne); 
     var saveMyNoti = new notifi({
           email: req.body.email,
           Recommendation : req.body.Recommendation,
-          dateNoti : req.body.dateNoti,
+          dateNoti : addOne,
           repeat: req.body.repeat
       });
       saveMyNoti.save(function(error, result) {

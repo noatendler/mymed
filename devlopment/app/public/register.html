@@ -7,7 +7,6 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="css/style.css">
 </head>
-
     <header class="deskHeader">
         <a href="index.html" id="logo"> </a>
          <nav>
@@ -17,7 +16,7 @@
             <a href="getPrivateData.html">
                 <h3 class="PersonalNav">Personal medical info</h3>
             </a>
-            <a href="#">
+            <a href="generalRanking.html">
                 <h3 class="GeneralNav">General info</h3>
             </a>
             <a href="searchDoc.html">
@@ -27,20 +26,20 @@
      </header>
 <body ng-controller="registerCtrl">
     <form enctype="multipart/form-data">
-    <h1>please register</h1>
+    <h1 class="registerTitle">Please register</h1>
       <div class="form-group">
-        <label for="pwd">User name:</label>
-        <input type="text" class="form-control" id="pwd" ng-model="userName" name="userName">
+        <label for="pwd" class="registerLabel">User name</label>
+        <input type="text" class="form-control registerInput" id="pwd" ng-model="userName" name="userName" placeholder="user name">
       </div>   
       <div class="form-group">
-        <label for="email">Email address:</label>
-        <input type="email" class="form-control" id="email" ng-model="myemail" name="email">
+        <label for="email" class="registerLabel">Email address</label>
+        <input type="email" class="form-control registerInput" id="email" ng-model="myemail" name="email" placeholder="example@gmail.com">
       </div>
       <div class="form-group">
-        <label for="pwd">password:</label>
-        <input type="text" class="form-control" id="pwd" ng-model="pass" name="pass">
+        <label for="pwd" class="registerLabel">password</label>
+        <input type="text" class="form-control registerInput" id="pwd" ng-model="pass" name="pass" placeholder="password">
       </div>   
-      <button type="Submit" class="btn btn-default" ng-click="registerUser(myemail)">Register</button>
+      <button type="Submit" class="btn btn-default registerButton" ng-click="registerUser(myemail)">Register</button>
     </form>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
 general = require('../models/generalSchema');
-var doc = require('../models/doctorsSchema');
+var doctors = require('../models/doctorsSchema');
 var NodeGeocoder = require('node-geocoder');
 
 
@@ -58,4 +58,28 @@ exports.saveGeneralData = function(req , res){
 
     });
     
+}
+
+exports.updateGeneral = function(req , res)
+{
+console.log(req.body);
+ doctors.update({Entity: req.body.EntityBefore, name:req.body.NameBefore, Address:req.body.AddressBefore},{Entity: req.body.Entity, name:req.body.name, Address:req.body.Address, Expertise:req.body.Expertise,HMO:req.body.HMO,reception_hours:req.body.reception_hours},
+        function(err, num) {
+          if(err)
+            console.log(err);
+          else
+            console.log("updated "+num);
+ });
+}
+
+exports.delGeneral = function(req , res)
+{
+    doctors.remove({Entity: req.body.Entity, name:req.body.name, Address:req.body.Address, Expertise:req.body.Expertise,HMO:req.body.HMO,reception_hours:req.body.reception_hours},function(err, docs){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log("success");
+      }
+    });
 }

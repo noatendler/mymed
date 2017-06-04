@@ -17,7 +17,7 @@
             <a href="getPrivateData.html">
                 <h3 class="PersonalNav">Personal medical info</h3>
             </a>
-            <a href="#">
+            <a href="generalRanking.html">
                 <h3 class="GeneralNav">General info</h3>
             </a>
             <a href="searchDoc.html">
@@ -27,18 +27,18 @@
      </header>
 <body ng-controller="loginCtrl">
     <form enctype="multipart/form-data">
-    <h1>Login existing user</h1>
+    <h1 class="loginTitle">Please Login</h1>
       <div class="form-group">
-        <label for="email">Email address:</label>
-        <input type="email" class="form-control" id="email" ng-model="myemail" name="email">
+        <label for="email" class="emailLoginT">Email address</label>
+        <input type="email" class="form-control emailLogin" id="email" ng-model="myemail" name="email" placeholder="example@gmail.com">
       </div>
       <div class="form-group">
-        <label for="pwd">password:</label>
-        <input type="text" class="form-control" id="pwd" ng-model="pass" name="pass">
+        <label for="pwd" class="passLoginT">password</label>
+        <input type="text" class="form-control passLogin" id="pwd" ng-model="pass" name="pass" placeholder="password">
       </div>   
-      <button type="Submit" class="btn btn-default" ng-click="cookieAndCheck(myemail)">Login</button>
+      <button type="Submit" class="btn btn-default loginButton" ng-click="cookieAndCheck(myemail)">Login</button>
     </form>
-    <a href="register.html" class="btn btn-default" role="button">register</a>
+    <a href="register.html" class="btn btn-default registerBut" role="button">Register</a>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>
     <script src="js/lib/angular/angular-route.min.js"></script>

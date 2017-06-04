@@ -12,6 +12,7 @@ var user = require('./controller/user');
 var doctors = require('./controller/doctors');
 var tag = require('./controller/tag');
 
+
 var port = process.env.PORT || 3000;
 app.set('port', port);
 
@@ -59,6 +60,7 @@ app.post('/addDataNoTags',multipartAction, personal.addInfoNoTags);
 app.post('/addPerTags',multipartAction, personal.addTagPer);
 app.post('/getGeneralData',multipartAction,general.saveGeneralData);
 app.post('/addNotification',multipartAction,personal.saveNotification);
-app.get('/sendEmail',personal.sendEmail);
+app.post('/updateGeneralData',general.updateGeneral);
+app.post('/delGeneral',general.delGeneral);
 
 app.listen(port);

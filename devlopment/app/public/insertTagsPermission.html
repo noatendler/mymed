@@ -8,28 +8,52 @@
       <link rel="stylesheet" href="css/ng-tags-input.min.css">
       <link rel="stylesheet" href="css/ng-tags-input.bootstrap.min.css">
 </head>
+<header class="deskHeader">
+        <a href="index.html" id="logo"> </a>
+         <nav>
+            <a href="index.html">
+                <h3 class="homeNav">Home</h3>
+            </a>
+            <a href="getPrivateData.html">
+                <h3 class="PersonalNav">Personal medical info</h3>
+            </a>
+            <a href="generalRanking.html">
+                <h3 class="GeneralNav">General info</h3>
+            </a>
+            <a href="searchDoc.html">
+                <h3 class="SearchNav">Search doctor nearby</h3>
+            </a>
+         </nav>
+</header>
+  <section>
+    <img src="images/personalImg.jpg" class="topImgDesk">
+  </section>
+  <section class="topTitleDesk">
+    <span class="topTitle">Personal medical info</span>
+  </section>
 <body ng-controller="TagsPerCtrl">
+  <br><br><br><br>
     <form>
-    <h1>Please add TAGS AND PERMISSION</h1>
+    <h1 class="insertTitle">Please add Tags and Premission</h1>
       <div class="form-group">
-        <label for="pwd">Title:</label>
-        <p>{{myinfo.Title}}</p>
+        <label for="pwd" class="editTitle">Title</label>
+        <p class="editPersonal">{{myinfo.Title}}</p>
       </div> 
       <div class="form-group">
-        <label for="pwd">Info:</label>
-        <p>{{myinfo.Info}}</p>
+        <label for="pwd" class="editTitle">Info</label>
+        <p class="editPersonal">{{myinfo.Info}}</p>
       </div>
       <div class="form-group">
-        <label for="pwd">Category:</label>
-        <p>{{myinfo.Category}}</p>
+        <label for="pwd" class="editTitle">Category</label>
+        <p class="editPersonal">{{myinfo.Category}}</p>
       </div>
       <p id="demo"></p>
       <div class="form-group">
-        <label for="pwd">Recommendation:</label>
-        <p>{{myinfo.Recommendation}}</p>
+        <label for="pwd" class="editTitle">Recommendation</label>
+        <p class="editPersonal">{{myinfo.Recommendation}}</p>
       </div>
-      <label for="pwd">Tags:</label>
-      <tags-input ng-model="Tags" name="Tags" id="Tags" display-property="name" placeholder="Add a tag for you information" replace-spaces-with-dashes="false">
+      <label for="pwd" class="editTitle">Tags</label>
+      <tags-input ng-model="Tags" class="editPersonal" name="Tags" id="Tags" display-property="name" placeholder="Add a tag for you information" replace-spaces-with-dashes="false">
       <auto-complete source="loadTags($query)"
                      min-length="0"
                      load-on-focus="true"
@@ -38,43 +62,42 @@
                      template="my-custom-template"></auto-complete>
     </tags-input>
     <br>
-    <label>permission</label>
+    <label class="editTitle">permission</label>
     <br>
-      <input type="radio" name="permission" ng-model="permission" value="0" checked>No<br>  
-      <input type="radio" name="permission" ng-model="permission" value="1">Yes<br>
+      <input type="radio" name="permission" class="perButton" ng-model="permission" value="0" checked><label class="addPer">No</label><br>  
+      <input type="radio" name="permission" class="perButton" ng-model="permission" value="1"><label class="addPer">Yes</label><br>
     <div ng-modle="userPermission" id="userPermission">
       <section ng-repeat="per in names">
         <input type="checkbox" ng-model="myChoice" ng-change="getChocie(names[$index])"  ng-true-value="1" ng-false-value="0"><lable>{{per}}</lable>
       </section>
     </div>       
-      <button type="submit" class="btn btn-default" ng-click="addTagsPer()">Submit
+      <button type="submit" class="btn btn-default submitAddInfo" ng-click="addTagsPer()">Submit
       </button>
     </form>
-        <!-- The Modal -->
+    <!-- The Modal -->
     <div id="myModal" class="modal">
-
-      <!-- Modal content -->
+    <!-- Modal content -->
       <section class="modal-content">
         <span class="close">&times;</span>
         <h1>would you like to creat a notification?</h1>
         <p>{{myinfo.Recommendation}}</p>
          <input type="date" ng-model="dateString" id="date">
-         <br>
+         <br><br>
          <input type="radio" name="reminder" value="0" checked>once
          <input type="radio" name="reminder" value="1">every day
          <input type="radio" name="reminder" value="7">every week
          <input type="radio" name="reminder" value="30">every month
          <input type="radio" name="reminder" value="365">every year
         <br>
-        <button ng-click="SaveNoti('yes')">yes</button>
-        <button ng-click="SaveNoti('no')">no</button>
-     </section>
-     </div>
+        <button ng-click="SaveNoti('yes')" class="createNoti">yes</button>
+        <button ng-click="SaveNoti('no')" class="createNoti">no</button>
+      </section>
+    </div>
         <script type="text/ng-template" id="my-custom-template">
-      <div class="right-panel">
-        <span ng-bind-html="$highlight($getDisplayText())"></span>
-      </div> 
-      </script>
+         <div class="right-panel">
+          <span ng-bind-html="$highlight($getDisplayText())"></span>
+         </div> 
+        </script>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>
     <script src="js/lib/angular/angular-route.min.js"></script>

@@ -1,147 +1,167 @@
 *{
   margin:auto;
   padding:0px;
-
 }
 header,nav,footer,main,section{
   display:block;
 }
-a{
-    text-decoration: none;
+a
+{
+  text-decoration: none;
 }
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #description {
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-      }
-
-      #infowindow-content .title {
-        font-weight: bold;
-      }
-
-      #infowindow-content {
-        display: none;
-      }
-
-      #map #infowindow-content {
-        display: inline;
-      }
-
-      .pac-card {
-        margin: 10px 10px 0 0;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        background-color: #fff;
-        font-family: Roboto;
-      }
-
-      #pac-container {
-        padding-bottom: 12px;
-        margin-right: 12px;
-      }
-
-      .pac-controls {
-        display: inline-block;
-        padding: 5px 11px;
-      }
-
-      .pac-controls label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-
-      #input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
-
-      #input:focus {
-        border-color: #4d90fe;
-      }
-
-      #title {
-        color: #fff;
-        background-color: #4d90fe;
-        font-size: 25px;
-        font-weight: 500;
-        padding: 6px 12px;
-      }
-      #target {
-        width: 345px;
-      }
-#main-title{
-    text-align: center;
-    margin-top: 170px;
+#navBar:active
+{
+ color: red;
+} 
+#map
+{
+  height: 100%;
 }
-.login{
-    margin-left: 500px;
-    margin-top: 30px;
+/* Optional: Makes the sample page fill the window. */
+html, body
+{
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-.desktop-nav{
-    background-color: #F7F6F6;
+#description
+{
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
 }
-.home{
-    display: inline;
+#infowindow-content .title
+{
+  font-weight: bold;
+}
+#infowindow-content
+{
+  display: none;
+}
+#map #infowindow-content
+{
+  display: inline;
+}
+.pac-card
+{
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+#pac-container
+{
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+.pac-controls
+{
+  display: inline-block;
+  padding: 5px 11px;
+}
+.pac-controls label
+{
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+#input
+{
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+#input:focus
+{
+  border-color: #4d90fe;
+}
+#title 
+{
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+#target
+{
+  width: 345px;
+}
+#main-title
+{
+  text-align: center;
+  margin-top: 170px;
+}
+.login
+{
+  margin-left: 500px;
+  margin-top: 30px;
+}
+.desktop-nav
+{
+  background-color: #F7F6F6;
+}
+.home
+{
+  display: inline;
 }
 .personal-info
 {
-    display: inline;
+  display: inline;
 }
-.general-info{
-    display: inline;
+.general-info
+{
+  display: inline;
 }
-.search-doc{
-    display: inline;
+.search-doc
+{
+  display: inline;
 }
-.redirectAdd{
-    float: right;
-    margin-top: 30px;
-    margin-right: 60px;
+.redirectAdd
+{
+  float: right;
+  margin-top: 30px;  
+  margin-right: 60px;
 }
-.deskHeader{
+.deskHeader
+{
   background-color: #F7F6F6;
   height: 120px;
 }
-.homeNav{
+.homeNav
+{
   display: inline-block;
   padding-right: 50px;
-  margin-left: 200px;
+  margin-left: 100px;
   margin-top: 75px;
   color: #2A2760;
   font-size: 25px;
 }
-.PersonalNav{
+.PersonalNav
+{
   display: inline-block;
   padding-right: 50px;
   color:#2A2760;
   font-size: 25px;
 }
-.GeneralNav{
+.GeneralNav
+{
   display: inline-block;
   padding-right: 50px;
   color: #2A2760;
   font-size: 25px;
 }
-.SearchNav{
+.SearchNav
+{
   display: inline-block;
   color: #2A2760;
   font-size: 25px;
@@ -193,7 +213,7 @@ a{
 {
   color: #ffffff;
   font-size: 30px;
-  margin-left: 600px;
+  margin-left: 540px;
   font-weight: bold;
 }
 .topTitleDesk
@@ -207,17 +227,18 @@ a{
 {
   font-size: 22px;
   position: relative;
-  top: 20px;
+  top: 30px;
   left: 72px;
   color: #1D2108;
+  text-decoration: none;
 }
 .currentDesk
 {
-    font-size: 22px;
-    color: #1D2108;
-    margin-top: 35px;
-    display: inline-block;
-    margin-left: 20px; 
+  font-size: 22px;
+  color: #1D2108;
+  margin-top: 35px;
+  display: inline-block;
+  margin-left: 20px; 
 }
 .addInfoImg
 {
@@ -225,11 +246,11 @@ a{
 }
 #filter
 {
-    padding: 10px 55px 10px 35px;
-    margin-left: 20px;
-    margin-top: 10px;
-    border: 1px solid #D6D6D6;
-    font-size: 15px;
+  padding: 10px 55px 10px 35px;
+  margin-left: 20px;
+  margin-top: 10px;
+  border: 1px solid #D6D6D6;
+  font-size: 15px;
     /*background-image: url('../images/search.png');*/
 }
 .fileImg
@@ -237,23 +258,26 @@ a{
   width: 200px;
   height: 200px;
 }
-.seeImg{
-    margin-left: 260px;
-    position: relative;
-    top: 32px;
-    cursor:pointer;
+.seeImg
+{
+  margin-left: 370px;
+  position: relative;
+  top: 32px;
+  cursor:pointer;
 }
-.delImg{
-    position: relative;
-    top: 32px;
-    left: 10px; 
-    cursor:pointer;
+.delImg
+{
+  position: relative;
+  top: 32px;
+  left: 10px; 
+  cursor:pointer;
 }
-.editImg{
-    position: relative;
-    top: 32px;
-    left: 15px;
-    cursor:pointer; 
+.editImg
+{
+  position: relative;
+  top: 32px;
+  left: 15px;
+  cursor:pointer; 
 }
 .titlePerDesk
 {
@@ -274,7 +298,8 @@ a{
   margin-left: 20px;
   margin-top: 10px;
 }
-.viewTags{
+.viewTags
+{
   color: #ffffff;
   font-size: 30px;
   background-color:#2A2760;
@@ -286,27 +311,28 @@ a{
   font-size: 30px;
   margin-left: 20px;
 }
-.delViewImg{
-    position: relative;
-    left: 230px;
-    top: 32px;
+.delViewImg
+{
+  position: relative;
+  left: 230px;
+  top: 32px;
 }
 .editViewImg
 {
-     position: relative;
-    left: 240px;
-    top: 32px; 
+  position: relative;
+  left: 240px;
+  top: 32px; 
 }
 .viewTime
 {
   border: 1px solid #D6D6D6;
   width: 440px;
   height: 400px;
-    float: right;
-    margin-right: 30px;
-    display: inline-block;
-    margin-top: -340px;
-    padding-bottom: 20px;
+  float: right;
+  margin-right: 30px;
+  display: inline-block;
+  margin-top: -340px;
+  padding-bottom: 20px;
 }
 .titleTime
 {
@@ -317,47 +343,61 @@ a{
 }
 .clock
 {
-      margin-top: 100px;
-    margin-left: 130px;
+  margin-top: 100px;
+  margin-left: 130px;
 }
 /* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+.modal
+{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
 /* Modal Content */
-.modal-content {
-    background-color: #ffffff;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+.modal-content
+{
+  background-color: #ffffff;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
 }
-
-
 /* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+.closeDelete
+{
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
-
+.closeDelete:hover,
+.closeDelete:focus
+{
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close
+{
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
 .close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+.close:focus
+{
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 #errorLog
 {
@@ -371,55 +411,361 @@ a{
 }
 #buttonYes
 {
-    margin-left: 450px;
-    padding-right: 30px;
-    padding-left: 30px;
-    cursor:pointer;
+  margin-left: 450px;
+  padding-right: 30px;
+  padding-left: 30px;
+  cursor:pointer;
 }
 #buttonNo
 {
-    padding-left: 30px;
-    padding-right: 30px;
-    margin-left: 20px;
-    cursor:pointer;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 20px;
+  cursor:pointer;
 }
-.tag {
+.tag
+{
   font-size: 14px;
   padding: .3em .4em .4em;
   margin: 0 .1em;
   margin-top: 20px;
   float: right;
 }
-.tag a {
+.tag a
+{
   color: #bbb;
   cursor: pointer;
   opacity: 0.6;
 }
-.tag a:hover {
+.tag a:hover
+{
   opacity: 1.0
 }
-.tag .remove {
+.tag .remove
+{
   vertical-align: bottom;
   top: 0;
 }
-.tag a {
+.tag a
+{
   margin: 0 0 0 .3em;
 }
-.tag a .glyphicon-white {
+.tag a .glyphicon-white
+{
   color: #fff;
   margin-bottom: 2px;
 }
 .changeView
 {
   cursor: pointer;
+  margin-left: 20px;
+  height: 30px;
 }
-#emailInput{
+#emailInput
+{
   display: none;
 }
-#dateInput{
+#dateInput
+{
   display:none;
 }
-#popupRecommend
+.deleteGeneral
 {
-
+  display: none;
+}
+.editGeneral
+{
+  display: none;
+}
+/*login pag*/
+.loginTitle
+{
+  text-align: center;
+  margin-top: 100px;
+  color: #2A2760;
+}
+.emailLogin
+{
+  margin-left: 480px;
+  margin-top: 50px;
+  width: 400px;
+}
+.emailLoginT
+{
+  font-size: 20px;
+  margin-left: 480px;
+  position: relative;
+  top: 50px;
+  color: #2A2760;
+}
+.passLogin
+{
+  margin-left: 480px;
+  width: 400px;
+  margin-top: 40px;
+}
+.passLoginT
+{
+  font-size: 20px;
+  margin-left: 480px;
+  position: relative;
+  top: 40px;
+  color: #2A2760; 
+}
+.loginButton
+{
+  margin-left: 480px;
+  margin-top: 20px;
+}
+.registerBut
+{
+  margin-left: 570px;
+  margin-top: -55px;
+}
+/*get personal info*/
+.sortInfo
+{
+  width: 90px;
+}
+.sortDateT
+{
+  margin-left: 40px;
+}
+.accessButton
+{
+  padding: 2px 5px;
+  margin-left: 20px;
+}
+#tagsPersonal
+{
+  width: 370px;
+  margin-left: 750px;
+  position: relative;
+  top: 165px;
+}
+.tagDataPer
+{
+  color: #ffffff;
+  font-size: 20px;
+  margin-left: 20px;
+  display: inline;
+  background-color: #5bc0de;
+  border-radius: 4px;
+  padding: 3px;
+}
+.datePersonal
+{
+  font-size: 20px;
+  margin-left: 20px;
+  color: #2A2760;
+}
+.contentName
+{
+  color: #2A2760;
+  font-size: 20px;
+  margin-left: 20px;
+  width: 300px;
+}
+/*insert personal data*/
+.InsertPerT
+{
+  text-align: center;
+  margin-top: 50px;
+}
+/*general ranking/data*/
+.labelGeneral
+{
+  margin-left: 20px;
+  margin-top: 20px;
+  color: #2A2760;
+  font-size: 25px;
+  display: block;
+}
+.generalData
+{
+  display: inline;
+  font-size: 25px;
+  position: relative;
+  top: -35px;
+  left: 150px;
+}
+.rankButton
+{
+  cursor: pointer;
+  margin-left: 10px;
+  position: relative;
+  top: 50px;
+}
+/*search doctor*/
+.selectTitle
+{
+  color: #2A2760;
+  font-size: 20px;
+  margin-left: 20px;
+  position: relative;
+  top: 30px;
+}
+#expertise
+{
+  position: relative;
+  top: 30px;
+  left: 20px;
+}
+#HMO
+{
+  position: relative;
+  top: 30px;
+  left: 20px; 
+}
+#sendButton
+{
+  padding: 5px 23px;
+  border-radius: 5px;
+  position: relative;
+  left: 330px;
+  top: -13px;
+}
+#input1
+{
+  padding: 5px 10px;
+  margin-top: 17px;
+}
+.searchResult
+{
+  color: #2A2760;
+  margin-top: 40px;
+  margin-left: 20px;
+}
+.editPersonal
+{
+  width: 700px;
+  margin: auto;
+}
+.submitEdit
+{
+  margin-left: 324px;
+}
+.editTitle
+{
+  font-size: 25px;
+  color: #2A2760;
+  margin-left: 324px;
+}
+.popUpGeneral
+{
+  font-size: 18px;
+}
+.submitPopUp
+{
+  margin-top: 10px;
+}
+.fileButton
+{
+  margin-left: 323px;
+}
+.submitAddInfo
+{
+  margin-left: 324px;
+  margin-bottom: 20px;
+}
+.insertTitle
+{
+  font-size: 25px;
+  color: #2A2760;
+  margin-top: -30px;
+  text-align: center;
+}
+.addPer
+{
+  position: relative;
+  left: 330px;
+  top: -2px;
+}
+.perButton
+{
+  position: relative;
+  left: 325px; 
+}
+.createNoti
+{
+  margin-top: 20px;
+  margin-right: 10px;
+  color: #fff;
+  background-color: #1C0C4F;
+  width: 150px;
+  padding: 7px;
+  border-radius: 8px;
+  border: 1px;
+}
+.daysRank
+{
+  font-size: 20px;
+  margin-left: 20px;
+  margin-top: -5px;
+}
+.topGTitle
+{
+  color: #ffffff;
+  font-size: 30px;
+  margin-left: 575px;
+  font-weight: bold;
+}
+.entityGeneral
+{
+  margin-left: 10px;
+  position: relative;
+  top: -1px;
+  width: 200px;
+}
+.hmoGeneral
+{
+  margin-left: 10px;
+  width: 200px;
+  position: relative;
+  top: -3px;
+}
+.insertGTitle
+{
+  font-size: 20px;
+  color: #2A2760;
+  margin-left: 324px;
+}
+.fromTitle
+{
+  margin-left: 324px;
+  margin-top: 20px;
+}
+.seeGeneralImg
+{
+  margin-left: 360px;
+  position: relative;
+  top: 55px;
+  cursor: pointer;
+}
+/*register page*/
+.registerTitle
+{
+  margin-top: 60px;
+  text-align: center;
+  color: #2A2760;
+}
+.registerLabel
+{
+  font-size: 20px;
+  margin-left: 480px;
+  position: relative;
+  top: 30px;
+  color: #2A2760;
+}
+.registerInput
+{
+  margin-left: 480px;
+  margin-top: 30px;
+  width: 400px;
+}
+.registerButton
+{
+  margin-left: 480px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

@@ -25,28 +25,35 @@
             </a>
          </nav>
      </header>
+  <section>
+    <img src="images/general.jpg" class="topImgDesk">
+  </section>
+  <section class="topTitleDesk">
+    <span class="topGTitle">General info</span>
+  </section>
 <body ng-controller="insertGeneralCtrl">
+<br><br><br><br>
     <form>
-    <h1>Please add general info</h1>
+    <h1 class="insertTitle">Please add general info</h1>
       <div class="form-group">
-        <label for="pwd">Entity:</label>
-        <select id="entitySelect" ng-model="entitySelect" name="entitySelect">
+        <label for="pwd" class="editTitle">Entity</label>
+        <select class="entityGeneral" id="entitySelect" ng-model="entitySelect" name="entitySelect">
           <option value="Doctor">Doctor</option>
           <option value="Hospital">Hospital</option>
           <option value="Clinic">Clinic</option>
         </select>    
       </div> 
       <div class="form-group">
-        <label for="pwd">Name:</label>
-        <input type="text" class="form-control" id="pwd" ng-model="name" name="name">
+        <label for="pwd" class="editTitle">Name</label>
+        <input type="text" class="form-control editGeneral" id="pwd" ng-model="name" name="name" required>
       </div>
       <div class="form-group">
-        <label for="pwd">Expertise:</label>
-        <input type="text" class="form-control" id="pwd" ng-model="Expertise" name="Expertise">
+        <label for="pwd" class="editTitle">Expertise</label>
+        <input type="text" class="form-control editGeneral" id="pwd" ng-model="Expertise" name="Expertise" required>
       </div>
       <div class="form-group">
-        <label for="pwd">HMO:</label>
-        <select id="hmoSelect" ng-model="hmoSelect" name="hmoSelect">
+        <label for="pwd" class="editTitle">HMO</label>
+        <select class="hmoGeneral" id="hmoSelect" ng-model="hmoSelect" name="hmoSelect">
           <option value="Maccabi">Maccabi</option>
           <option value="Clalit">Clalit</option>
           <option value="Meuhedet">Meuhedet</option>
@@ -54,59 +61,58 @@
         </select> 
       </div>
       <div class="form-group">
-        <label for="pwd">Address:</label>
-        <input type="text" class="form-control" id="pwd" ng-model="Address" name="Address">
+        <label for="pwd" class="editTitle">Address</label>
+        <input type="text"  class="form-control editGeneral" id="pwd" ng-model="Address" name="Address">
       </div>
       <div class="form-group">
-      <label for="pwd">Reception hours:</label>
+      <label for="pwd" class="editTitle">Reception hours</label>
       <br>
-      <label for="pwd">Sunday</label>
+      <label for="pwd" class="insertGTitle">Sunday</label>
       <br>
-        <label>From</label>
+        <label class="fromTitle">From</label>
           <input type="time" id="SundayHoursFrom" ng-model="SundayHoursFrom" name="SundayHoursFrom" value="">
         <label>Until</label>
           <input type="time" id="SundayHoursUntil" ng-model="SundayHoursUntil" name="SundayHoursUntil" value="">
       <br><br>
-      <label for="pwd">Monday</label>
+      <label for="pwd" class="insertGTitle">Monday</label>
         <br>
-        <label for="pwd">from</label>
+        <label for="pwd" class="fromTitle">from</label>
           <input type="time" id="MondayHoursFrom" ng-model="MondayHoursFrom" name="MondayHoursFrom">
         <label>Until</label>
           <input type="time" id="MondayHoursUntil" ng-model="MondayHoursUntil" name="MondayHoursUntil">
           <br><br>
-      <label for="pwd">Tuesday</label>
+      <label for="pwd" class="insertGTitle">Tuesday</label>
         <br>
-        <label for="pwd">from</label>
+        <label for="pwd" class="fromTitle">from</label>
           <input type="time" id="TuesdayHoursFrom" ng-model="TuesdayHoursFrom" name="TuesdayHoursFrom">
         <label>Until</label>
           <input type="time" id="TuesdayHoursUntil" ng-model="TuesdayHoursUntil" name="TuesdayHoursUntil">
           <br><br>
-      <label for="pwd">Wednesday</label>
+      <label for="pwd" class="insertGTitle">Wednesday</label>
         <br>
-        <label for="pwd">from</label>
+        <label for="pwd" class="fromTitle">from</label>
           <input type="time" id="WednesdayHoursFrom" ng-model="WednesdayHoursFrom" name="WednesdayHoursFrom">
         <label>Until</label>
           <input type="time" id="WednesdayHoursUntil" ng-model="WednesdayHoursUntil" name="WednesdayHoursUntil">
           <br><br>
-      <label for="pwd">Thursday</label>
+      <label for="pwd" class="insertGTitle">Thursday</label>
         <br>
-        <label for="pwd">from</label>
+        <label for="pwd" class="fromTitle">from</label>
           <input type="time" id="ThursdayHoursFrom" ng-model="ThursdayHoursFrom" name="ThursdayHoursFrom">
         <label>Until</label>
           <input type="time" id="ThursdayHoursUntil" ng-model="ThursdayHoursUntil" name="ThursdayHoursUntil">
           <br><br>
-      <label for="pwd">Friday</label>
+      <label for="pwd" class="insertGTitle">Friday</label>
         <br>
-        <label for="pwd">from</label>
+        <label for="pwd" class="fromTitle">from</label>
           <input type="time" id="FridayHoursFrom" ng-model="FridayHoursFrom" name="FridayHoursFrom">
         <label>Until</label>
           <input type="time" id="FridayHoursUntil" ng-model="FridayHoursUntil" name="FridayHoursUntil">
       <br><br>
-      <button type="submit" class="btn btn-default" ng-click="saveGeneral()">Submit</button>
+      <button type="submit" class="btn btn-default submitAddInfo" ng-click="saveGeneral()">Submit</button>
       </div>
     </form>
     <script>
-
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHo4IfFEKL8UxvDQkoEkD6UPggg9RFPBI&libraries=places,geometry">

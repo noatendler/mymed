@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="mymed">
     <head>
-        <title>edit private data</title>
+        <title>Edit private data</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,7 +18,7 @@
             <a href="getPrivateData.html">
                 <h3 class="PersonalNav">Personal medical info</h3>
             </a>
-            <a href="#">
+            <a href="generalRanking.html">
                 <h3 class="GeneralNav">General info</h3>
             </a>
             <a href="searchDoc.html">
@@ -34,25 +34,24 @@
         <section class="topTitleDesk">
             <span class="topTitle">Personal medical info</span>
         </section>
-
-         <section ng-controller="editPersonalCtrl">
-             <a href="insertPersonal.html" class="redirectAdd">
+        <section ng-controller="editPersonalCtrl">
+             <a href="insertDetailsNoTag.html" class="redirectAdd">
                 <span class="addInfoDesk">add info</span>
                 <img src="images/addInfo.png" class="addInfoImg">
              </a>
              <br><br><br><br><br><br>
              <form ng-submit="submitEdit()">
-                 <label>Title:</label>
-                 <input class="form-control" id="Title" value="{{myinfoEdit.Title}}">
+                 <label class="editTitle">Title:</label>
+                 <input class="form-control editPersonal" id="Title" value="{{myinfoEdit.Title}}">
                  <br>
-                 <label>Info:</label>
-                 <input class="form-control" id="Info" value="{{myinfoEdit.Info}}">
+                 <label class="editTitle">Info:</label>
+                 <input class="form-control editPersonal" id="Info" value="{{myinfoEdit.Info}}">
                  <br>
-                 <label>Recommendation:</label>
-                 <input class="form-control" id="Recommendation" id="pwd" value="{{myinfoEdit.Recommendation}}" >
+                 <label class="editTitle">Recommendation:</label>
+                 <input class="form-control editPersonal" id="Recommendation" id="pwd" value="{{myinfoEdit.Recommendation}}" >
                  <br>
-                 <label>Tags:</label>
-                    <tags-input ng-model="Tags" name="Tags" id="Tags" display-property="name" replace-spaces-with-dashes="false">
+                 <label class="editTitle">Tags:</label>
+                    <tags-input ng-model="Tags" class="editPersonal" name="Tags" id="Tags" display-property="name" replace-spaces-with-dashes="false">
                         <auto-complete source="loadTag($query)"
                              min-length="0"
                              load-on-focus="true"
@@ -62,7 +61,7 @@
                           </auto-complete>
                     </tags-input>
                   <br>
-                  <button type="submit" class="btn btn-default">Submit
+                  <button type="submit" class="btn btn-default submitEdit">update
                   </button>
              </form>
             <script type="text/ng-template" id="my-custom-template">

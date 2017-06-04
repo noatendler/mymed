@@ -2,14 +2,32 @@
 <html ng-app="mymed">
 <head>
     <title>insert personal data</title>
+      <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <link rel="stylesheet" href="css/ng-tags-input.min.css">
       <link rel="stylesheet" href="css/ng-tags-input.bootstrap.min.css">
 </head>
+<header class="deskHeader">
+        <a href="index.html" id="logo"> </a>
+         <nav>
+            <a href="index.html">
+                <h3 class="homeNav">Home</h3>
+            </a>
+            <a href="getPrivateData.html">
+                <h3 class="PersonalNav">Personal medical info</h3>
+            </a>
+            <a href="generalRanking.html">
+                <h3 class="GeneralNav">General info</h3>
+            </a>
+            <a href="searchDoc.html">
+                <h3 class="SearchNav">Search doctor nearby</h3>
+            </a>
+         </nav>
+</header>
 <body ng-controller="MainCtrl">
     <form enctype="multipart/form-data" method="post" action="http://localhost:3000/addPersonal">
-    <h1>Please add your private info</h1>
+    <h1 class="InsertPerT">Please add your private info</h1>
       <div class="form-group">
         <label for="pwd">Title:</label>
         <input type="text" class="form-control" id="pwd" ng-model="Title" name="Title">

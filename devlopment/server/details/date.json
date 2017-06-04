@@ -39,5 +39,6 @@
     "weeks":7,
     "years":365,
     "and":"+",
-    "every":"every"
+    "every":"every",
+    "today":0
 }
