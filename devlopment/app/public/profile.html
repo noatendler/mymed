@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="mymed">
+<head>
+    <title>profile</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="css/style.css">
+</head>
+    <header class="deskHeader">
+        <a href="index.html" id="logo"> </a>
+         <nav>
+            <a href="index.html">
+                <h3 class="homeNav">Home</h3>
+            </a>
+            <a href="getPrivateData.html">
+                <h3 class="PersonalNav">Personal medical info</h3>
+            </a>
+            <a href="generalRanking.html">
+                <h3 class="GeneralNav">General info</h3>
+            </a>
+            <a href="searchDoc.html">
+                <h3 class="SearchNav">Search doctor nearby</h3>
+            </a>
+         </nav>
+     </header>
+	<body ng-controller="profileCtrl">
+	    <h1 class="text-center" source="loadInfo()">Hello, {{username}}</h1>
+	    <h2 class="text-center">your key: {{key}}</h2>
+		<h3 class="text-center">add to permission list</h3>
+		<form class="text-center">
+			<lable> enter email </lable>
+			<input type="text" ng-model="userEmail" name="userEmail"></input>
+			<lable>enter user key </lable>
+			<input type="text" ng-model="userKey" name="userKey"></input>
+			<button type="submit" ng-click="addUser()">add</button>
+	</form>
+		<h3 class="text-center">delete permission to a user from your list</h3>
+	<form class="text-center">
+		<lable> enter email </lable>
+		<input type="text" ng-model="delEmail" name="delEmail"></input>
+		<button type="submit" ng-click="deleteUser()">delete</button>
+	</form>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/angular/angular-resource.min.js"></script>
+    <script src="js/lib/angular/angular-route.min.js"></script>
+    <script src="js/lib/angular/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular/ng-tags-input.min.js"></script>
+    <script src="js/lib/angular/ng-file-upload-shim.min.js"></script>
+    <script src="js/lib/angular/ng-file-upload.min.js"></script>
+    <script src="js/appController.js"></script>
+</body>
+</html>
