@@ -61,38 +61,67 @@ exports.saveNewUser = function(request, response){
 
 exports.addPermission=function(request, response){
     var temp = [];
-    //temp.push(request.body.email,0);
-    user.find({email : request.body.email, key : request.body.key}, function(err, docs){
-    if(docs.length){
-
-      user.find({email : request.body.myemail} , function(err2, docs2){
-       // console.log(JSON.parse(docs2.permission));
-          //console.log(docs2[0].permission);;
-          var toAdd = 1;
-          for(key=0; key<docs2[0].permission.length; key++) {
-            if (docs2[0].permission[key]["perEmail"] == request.body.email) {
-              //console.log(docs2[0].permission[key]["perEmail"]);
-              console.log('exists');
-              toAdd=0;
-            }
+    //console.log("email"+request.body.email);
+    //console.log("myemail"+request.body.myemail);
+    var toAdd = 1;
+    user.find({email:request.body.myemail},function(err,document1){
+        //console.log("document   "+document[0].permission.length);
+        for(var i=0; i<document1[0].permission.length; i++)
+        {
+          if(document1[0].permission[i]["perEmail"] == request.body.email)
+          {
+            toAdd = 0;
+            console.log("bad");
           }
-          if(toAdd==1){
-            console.log('not in the list');
-            user.findOneAndUpdate(
-            {email:request.body.myemail},
-            {$push: {"permission": {perEmail: request.body.email}}},
-            {safe: true, upsert: true},
-            function(err, model) {
-              if(err)
-                console.log(err);
-            });
-          }
-        });
         }
-        else{
-          console.log("try again email or key does not exist");
+
+        if(toAdd == 1)
+        {
+            user.findOneAndUpdate(
+              {email:request.body.myemail},
+              {$push: {"permission": {perEmail: request.body.email}}},
+              {safe: true, upsert: true},
+              function(err, model) {
+                if(err)
+                  console.log(err);
+                else
+                  response.json("success");
+            });
         }
     });
+
+    //temp.push(request.body.email,0);
+    // user.find({email : request.body.email, key : request.body.key}, function(err, docs){
+    // if(docs.length){
+
+    //   user.find({email : request.body.myemail} , function(err2, docs2){
+    //    // console.log(JSON.parse(docs2.permission));
+    //       //console.log(docs2[0].permission);;
+    //       var toAdd = 1;
+    //       for(key=0; key<docs2[0].permission.length; key++) {
+    //         if (docs2[0].permission[key]["perEmail"] == request.body.email) {
+    //           //console.log(docs2[0].permission[key]["perEmail"]);
+    //           console.log('exists');
+    //           toAdd=0;
+    //         }
+    //       }
+    //       if(toAdd==1){
+    //         console.log('not in the list');
+    //         user.findOneAndUpdate(
+    //         {email:request.body.myemail},
+    //         {$push: {"permission": {perEmail: request.body.email}}},
+    //         {safe: true, upsert: true},
+    //         function(err, model) {
+    //           if(err)
+    //             console.log(err);
+    //         });
+    //       }
+    //     });
+    //     }
+    //     else{
+    //       console.log("try again email or key does not exist");
+    //     }
+    // });
 }
 
 
@@ -100,14 +129,16 @@ exports.deletePermission=function(request, response){
     user.find({email : request.body.myemail}, function(err, docs){
       for(key=0; key<docs[0].permission.length; key++) {
         if (docs[0].permission[key]["perEmail"] == request.body.email) {
-          console.log('need to delete');
+          //console.log('need to delete');
           user.findOneAndUpdate(
           {email:request.body.myemail},
           {$pull: {"permission": {perEmail: request.body.email}}},
           {safe: true, upsert: true},
           function(err, model) {
             if(err)
-            console.log(err);
+              console.log(err);
+            else
+              response.json("delete");
           });
         }
       }

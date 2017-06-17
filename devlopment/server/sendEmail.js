@@ -52,6 +52,7 @@ db.on('reconnected', function () {
   console.log(mytoday);
 
   myNoti.find({},function(err, docs){
+    console.log('in the find function');
     for(var i=0; i<docs.length; i++)
     {
       email = docs[i].email;
@@ -92,7 +93,7 @@ function sendit(email, recommendation)
 {
   console.log("sending email");
   sendmail({
-    from: 'mymedicalpro@gmail.com',
+    from: 'noatendler1@gmail.com',
     to: email,
     subject: 'Notification from my medical',
     html: recommendation,

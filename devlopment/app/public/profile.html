@@ -25,13 +25,13 @@
      </header>
 	<body ng-controller="profileCtrl">
 	    <h1 class="text-center" source="loadInfo()">Hello, {{username}}</h1>
-	    <h2 class="text-center">your key: {{key}}</h2>
+	    <!-- <h2 class="text-center">your key: {{key}}</h2> -->
 		<h3 class="text-center">add to permission list</h3>
 		<form class="text-center">
 			<lable> enter email </lable>
 			<input type="text" ng-model="userEmail" name="userEmail"></input>
-			<lable>enter user key </lable>
-			<input type="text" ng-model="userKey" name="userKey"></input>
+		<!-- 	<lable>enter user key </lable>
+			<input type="text" ng-model="userKey" name="userKey"></input> -->
 			<button type="submit" ng-click="addUser()">add</button>
 	</form>
 		<h3 class="text-center">delete permission to a user from your list</h3>

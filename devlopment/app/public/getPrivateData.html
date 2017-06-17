@@ -25,6 +25,10 @@
             <a href="searchDoc.html">
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
+            <a href="profile.html" id="profile">
+                <h5>profile</h5>
+            </a>
+            <h5  class="tooltiptext">click to view your profile</h5>
          </nav>
     </header>
 <body ng-init="list = true">
@@ -72,7 +76,9 @@
                     <img src="images/edit.png" class="editImg" ng-click="editData(index)">
                     <h1 class="titlePerDesk">{{index.Title}}</h1>
                     <section ng-repeat="i in index.Tags">
-                       <p class="tagDataPer">{{i.name}}</p>
+                      <section ng-repeat="j in i"> 
+                        <p class="tagDataPer">{{j.name}}</p>
+                      </section>
                     </section>
              </section>
              <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="details">
@@ -88,7 +94,9 @@
                     <img src="images/edit.png" class="editImg" ng-click="editData(index)">
                     <h1 class="titlePerDesk">{{index.Title}}</h1>
                     <section ng-repeat="i in index.Tags">
-                       <p class="tagDataPer">{{i.name}}</p>
+                        <section ng-repeat="j in i">
+                            <p class="tagDataPer">{{j.name}}</p>
+                        </section>
                     </section>
                     <p class="contentName">{{index.Info}}</p>
                     <h2 class="contentName">{{index.myDate}}</h2>

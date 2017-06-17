@@ -8,8 +8,6 @@ var emailCookie1 = $cookies.get('cookieEmail');
             var searchFilter;
             var allTags;
             
-
-          
             //display data only for online email
             for(var t=0; t<data.length ;t++)
             {
@@ -194,64 +192,30 @@ $scope.editData = function(valueEdit){
 
 
 mymedical.controller('searchController',['$scope','$http',function($scope,$http) {
-    var colsestDoc = [];
-
+// var element = document.getElementById('serachRes');
+// element.style.width="100";
+// element.style.height="400px";
+// element.innerHTML = "";
     $http.get("http://localhost:3000/doctors").success(function(myjson){       
 
     var mylat, mylng;
     var myName, myAddress;
-    $scope.input1 = null;
+    //$scope.input1 = null;
     var clickSubmit = 0;
-
-    // $scope.show = function(){
-      
-    //   location.reload();
-    //   document.getElementById("showButton").style.display="none";
-    //   document.getElementById("sendButton").style.display="block";
-      
-    // }
+          var hmo = document.getElementById("HMO").value;
+      var expertise = document.getElementById("expertise").value;
 
     $scope.checkSearch = function (val) {
-      // clickSubmit++;
-      var hmo = document.getElementById("HMO").value;
-      var expertise = document.getElementById("expertise").value;
-      console.log("in the function click");
-    //   if(clickSubmit == 2){
-    //   document.getElementById("sendButton").style.display="none";
-    //   document.getElementById("showButton").style.display="block";
-    //   clickSubmit = 0;
-    // }
-
-    function showResult(result) {
-      mylat=result.geometry.location.lat();
-      mylng=result.geometry.location.lng();
-      var listDoc = getDocAround(mylat,mylng);
-      console.log("got the list of doc"+listDoc);
-      $scope.docNearby = listDoc;
-    }
-
-    function getLatitudeLongitude(callback, address) {
-      Address = Address;
-      // Initialize the Geocoder
-      geocoder = new google.maps.Geocoder();
-      if (geocoder) {
-        geocoder.geocode({
-        'address': Address
-        }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                callback(results[0]);
-            }
-        });
-      }
-    }
-
-    console.log(val);
+    // element.innerHTML = "";
+    console.log(val); //this is tel aviv
     var Address = val;
     getLatitudeLongitude(showResult, Address);
 
+}
+    //this function get the doctor around the lat lang
     function getDocAround(mylat,mylng){
       console.log("in getDocAround");
-
+      var colsestDoc = [];
       var docArrayDis = Array();
       var docArrayAdd = Array();
       var docArrayName = Array();
@@ -259,14 +223,16 @@ mymedical.controller('searchController',['$scope','$http',function($scope,$http)
       var docArrayExp = Array();
       var docArrayhours = Array();
 
-      
+      //goes over the json we got from DB to get it details
       for(var j=0; j<myjson.length; j++)
       {
 
         var maxDic = 99999; 
         var p1 = new google.maps.LatLng(mylat, mylng);
         var p2 = new google.maps.LatLng(myjson[j].lat, myjson[j].lng);
+        //calcDistance from my point
         var x = calcDistance(p1, p2);
+        //add all the res to array
         docArrayDis.push(x);
         docArrayAdd.push(myjson[j].Address);
         docArrayName.push(myjson[j].name);
@@ -279,11 +245,12 @@ mymedical.controller('searchController',['$scope','$http',function($scope,$http)
         colsestDoc.push({distance:docArrayDis[i],addres:docArrayAdd[i],name:docArrayName[i],HMO:docArrayHMO[i],Expertise:docArrayExp[i],reception_hours:docArrayhours[i]});
       }
      
+      console.log('get closest Doc' + colsestDoc);
       // $scope.docNearby= [];
       var docAroundMe = [];
 
       colsestDoc.sort(function (a, b) {   
-        console.log("sorting my array by distance");
+        //console.log("sorting my array by distance");
         return a.distance - b.distance || a.Address - b.Address;
       });
         for(var j=0 ; j<colsestDoc.length ; j++){        
@@ -302,24 +269,48 @@ mymedical.controller('searchController',['$scope','$http',function($scope,$http)
           }
       }
     return docAroundMe;  
- };
-}      
+ };      
   //calculates distance between two points in km's
   function calcDistance(p1, p2) {
     console.log("in cal to check distance");
     return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2)/1000).toFixed(2);
   }
+  
+  function showResult(result) {
+    //var listDoc = " ";
+    mylat=result.geometry.location.lat();
+    mylng=result.geometry.location.lng();
+    listDoc = getDocAround(mylat,mylng);
+    console.log(listDoc);
+    $scope.docNearby = listDoc;
+  }
+
+    function getLatitudeLongitude(callback, address) {
+      console.log('getLatitudeLongitude');
+      var Address = address;
+      // Initialize the Geocoder
+      geocoder = new google.maps.Geocoder();
+      if (geocoder) {
+        geocoder.geocode({
+        'address': Address
+        }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                callback(results[0]);
+                //this callback calls the showResulat
+            }
+        });
+      }
+    }
  });
 }]);
 
 mymedical.controller('insertPersonalCtrl',['$scope','$http',function($scope,$http){   
-
-
-        $scope.clickme = function(){  
-                var data = {};
-                //tags = [];
-                console.log($scope.tags);     
-                data.email = $scope.email;
+  
+  $scope.clickme = function(){  
+    var data = {};
+    //tags = [];
+    console.log($scope.tags);     
+    data.email = $scope.email;
                 //data.tags = t;
               data.Title = $scope.Title;
                 data.Info = $scope.Info;
@@ -546,28 +537,67 @@ mymedical.controller('detailsCtrl',['$scope','$http','$cookies', function($scope
       saveInfo.Recommendation = $scope.Recommendation;
       saveInfo.mydate = today;
 
-      $http.post('http://localhost:3000/getKeywords',JSON.stringify(saveInfo)).then(function(tags){
-        $cookies.put('Tags', JSON.stringify(tags.data));
-        $cookies.put('cookieSave',JSON.stringify(saveInfo));
-        window.location ="insertTagsPermission.html";
-      })
+      // $http.post('http://localhost:3000/getKeywords',JSON.stringify(saveInfo)).then(function(tags){
+      //   $cookies.put('Tags', JSON.stringify(tags.data));
+         $cookies.put('cookieSave',JSON.stringify(saveInfo));
+         //window.location ="insertTagsPermission.html";
+      // });
+
 
   }
 }]);
 
 mymedical.controller('TagsPerCtrl',['$scope','$http','$cookies','dateFilter', function($scope,$http,$cookies,dateFilter){
-  $scope.myinfo = JSON.parse($cookies.get('cookieSave'));
-  var myinfo = JSON.parse($cookies.get('cookieSave'));
-  var myTags = JSON.parse($cookies.get('Tags'));
-  
-  var newArrayTags = Object.values(myTags)
-  $scope.Tags = newArrayTags;
+
+ 
+var myinfo;
+var myTags;
+
+  $(body).ready(function() {
+    console.log( "ready!" );
+     $scope.myinfo = JSON.parse($cookies.get('cookieSave'));
+      myinfo = JSON.parse($cookies.get('cookieSave'));
+      $http.post("http://localhost:3000/getKeywords",JSON.stringify(myinfo)).then(function(res){
+      console.log(res);
+      myTags = res.data;
+      var newArrayTags = Object.values(myTags)
+      $scope.Tags = newArrayTags;
+      });
+    });
+
+    $scope.addOtherUser = function() {
+      var element_per = document.getElementById('otherPermission');
+      var element_input = document.createElement("input");
+      element_input.id  = "inputAdd";
+      var element_btn = document.createElement("button");
+      element_btn.innerHTML = "add";
+      element_btn.className  = "addButton";
+      element_per.appendChild(element_input);
+      element_per.appendChild(element_btn);
+      element_btn.onclick = callfunction();
+    }
+
+  function callfunction()
+  {
+    var element_input = document.getElementById('inputAdd').value;
+    //console.log("element_input"+element_input);
+    var saveEmailPer = {};
+    saveEmailPer.email = element_input;
+    saveEmailPer.myemail = emailCookie;
+    //console.log(saveEmailPer);
+
+    $http.post('http://localhost:3000/addPerUser',JSON.stringify(saveEmailPer)).then(function(res){
+        window.location="insertTagsPermission.html";
+    });  
+  }
+
+
 
   var sendData ={};
   var emailCookie = $cookies.get('cookieEmail');
   sendData.email =emailCookie;
   var arrayPermission = [];
-;
+
 $http.post('http://localhost:3000/userInfo',JSON.stringify(sendData)).success(function(data){
   for(var i=0; i<data.length; i++)
   {
@@ -577,6 +607,8 @@ $http.post('http://localhost:3000/userInfo',JSON.stringify(sendData)).success(fu
     }
   }
   $scope.names = arrayPermission;
+  console.log('this is the arrayPermission');
+  console.log(arrayPermission+ "<br>");
 
   $scope.$watch('permission', function() {
   var getPremission = $scope.permission;
@@ -720,6 +752,8 @@ $scope.SaveNoti = function(val)
       modal.style.display = "none";
       $http.post('http://localhost:3000/addNotification',JSON.stringify(saveNoti)).then() 
     }
+
+    window.location ="http://localhost:8080/getPrivateData.html";
 }
 
 }]);
@@ -737,11 +771,14 @@ mymedical.controller('profileCtrl',['$scope','$http','$cookies', function($scope
       {
         console.log("adding user");
         addPermission.email = $scope.userEmail;
-        addPermission.key = $scope.userKey;
+        //addPermission.key = $scope.userKey;
         addPermission.myemail = emailCookie;
         console.log(addPermission);
 
-        $http.post('http://localhost:3000/addPerUser',JSON.stringify(addPermission)).then()
+        $http.post('http://localhost:3000/addPerUser',JSON.stringify(addPermission)).then(function(res){
+            alert("User successfully added");
+            window.location = "profile.html";
+        });
       }
 
       var deletePermission ={};
@@ -752,7 +789,10 @@ mymedical.controller('profileCtrl',['$scope','$http','$cookies', function($scope
         deletePermission.myemail = emailCookie;
         console.log(deletePermission);
 
-        $http.post('http://localhost:3000/deletePerUser',JSON.stringify(deletePermission)).then()
+        $http.post('http://localhost:3000/deletePerUser',JSON.stringify(deletePermission)).then(function(res){
+            alert("User deleted successfully");
+            window.location = "profile.html";
+        });
       }
 
        $http.post('http://localhost:3000/userInfo',JSON.stringify(user)).then(function(response){
@@ -1008,6 +1048,8 @@ var userRank ={};
         var error = document.getElementById('errorLog');
         error.innerHTML="please rank all categories";
       }
+
+      location.reload();
     }
   }
   
@@ -1091,10 +1133,17 @@ mymedical.controller('viewPersonalCtrl',['$scope','$http','$cookies', function($
 }]);
 
 mymedical.controller('editPersonalCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
-
+var etidTag = [];
     var myEdit = JSON.parse($cookies.get('cookieEdit'));
     $scope.myinfoEdit= myEdit;
-    $scope.Tags = myEdit.Tags;
+    for(var i=0;i<myEdit.Tags.length;i++){
+      for(var j=0;j<myEdit.Tags[i].length;j++)
+      {
+        etidTag.push(myEdit.Tags[i][j].name);
+      }
+    }
+  // console.log(etidTag);
+    $scope.Tags = etidTag;
     var data ={};
 
     var today = new Date();

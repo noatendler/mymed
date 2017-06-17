@@ -23,6 +23,9 @@
             <a href="searchDoc.html">
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
+            <a href="profile.html" id="profile">
+                <h5>profile</h5>
+            </a>
          </nav>
 </header>
   <section>
@@ -31,7 +34,7 @@
   <section class="topTitleDesk">
     <span class="topTitle">Personal medical info</span>
   </section>
-<body ng-controller="TagsPerCtrl">
+<body ng-controller="TagsPerCtrl" id="body">
   <br><br><br><br>
     <form>
     <h1 class="insertTitle">Please add Tags and Premission</h1>
@@ -53,7 +56,7 @@
         <p class="editPersonal">{{myinfo.Recommendation}}</p>
       </div>
       <label for="pwd" class="editTitle">Tags</label>
-      <tags-input ng-model="Tags" class="editPersonal" display-property="name" placeholder="Add a tag for you information" replace-spaces-with-dashes="false">
+      <tags-input ng-model="Tags" class="editPersonal" name="Tags" id="Tags" display-property="name" placeholder="Add a tag for you information" replace-spaces-with-dashes="false">
       <auto-complete source="loadTags($query)"
                      min-length="0"
                      load-on-focus="true"
@@ -67,9 +70,13 @@
       <input type="radio" name="permission" class="perButton" ng-model="permission" value="0" checked><label class="addPer">No</label><br>  
       <input type="radio" name="permission" class="perButton" ng-model="permission" value="1"><label class="addPer">Yes</label><br>
     <div ng-modle="userPermission" id="userPermission">
+      <h3 class="permissionTitle">Add a user to allow them to view the info item</h3>
       <section ng-repeat="per in names">
-        <input type="checkbox" ng-model="myChoice" ng-change="getChocie(names[$index])"  ng-true-value="1" ng-false-value="0"><lable>{{per}}</lable>
+        <input type="checkbox" ng-model="myChoice" ng-change="getChocie(names[$index])"  ng-true-value="1" ng-false-value="0" class="permissionName"><lable class="permissionLable">{{per}}</lable>
       </section>
+          <div ng-click="addOtherUser()" id="otherPermission">
+          <lable class="addTitle">add other user...</lable>
+        </div>
     </div>       
       <button type="submit" class="btn btn-default submitAddInfo" ng-click="addTagsPer()">Submit
       </button>

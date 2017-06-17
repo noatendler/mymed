@@ -19,6 +19,9 @@
             <a href="searchDoc.html">
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
+            <a href="profile.html" id="profile">
+                <h5>profile</h5>
+            </a>
          </nav>
     </header>
     <section>
@@ -55,10 +58,10 @@
       <br><br>
       <input ng-model="input1" id="input1" name="input1" class="controls" type="text" placeholder="Search Doctor">
       <input type="button" ng-click="checkSearch(input1)" value="send" id="sendButton">
-<!--       <input type="button" ng-click="show()" value="search again" id="showButton" style="display:none"> -->
     </form>
     <div id="map"></div>
     <h1 class="searchResult">Result:</h1>
+    <p id="serachRes">
     <div ng-repeat="i in docNearby">
       <h1>{{i.name}}</h1>
       <p>{{i.Address}}</p>
@@ -75,6 +78,7 @@
         <span ng-if="j.Saturday">Saturday:{{j.Saturday}}</span>
       </p>
     </div>
+    </p>
     <script>
      function initAutocomplete() { //initAutocomplete
         var map = new google.maps.Map(document.getElementById('map'), {

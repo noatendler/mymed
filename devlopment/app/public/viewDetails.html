@@ -21,6 +21,9 @@
             <a href="searchDoc.html">
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
+            <a href="profile.html" id="profile">
+                <h5>profile</h5>
+            </a>
          </nav>
     </header>
 <body>
@@ -41,8 +44,13 @@
                    <span class="contentName">{{myinfo.myDate}}</span>
                    <p class="contentName">{{myinfo.Info}}</p>
                    <section ng-repeat="i in myinfo.Tags">
-                       <p>{{myinfo.name}}</p>
+                       <section ng-repeat="j in i">
+                            <p class="tagDataPer">{{j.name}}</p>
+                       </section>
                    </section>
+                   <p class="contentName">{{myinfo.Recommendation}}</p>
+                   <p class="contentName">{{myinfo.Category}}</p>
+                   <img ng-src="{{myinfo.file}}">
         </section> 
     </main>
     <script src="js/lib/angular/angular.min.js"></script>

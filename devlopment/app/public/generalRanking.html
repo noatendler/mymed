@@ -22,6 +22,9 @@
             <a href="searchDoc.html">
                 <h3 class="SearchNav navBar">Search doctor nearby</h3>
             </a>
+            <a href="profile.html" id="profile">
+                <h5>profile</h5>
+            </a>
          </nav>
 </header>
 <body>
@@ -37,7 +40,6 @@
   </a>
   <section ng-controller="calCtrl">
 	 <section ng-repeat="doc in general">
-    <img src="images/see.png" class="seeGeneralImg" ng-click="viewCurrent(index)">
     <img src="images/like.jpg" class="rankButton" ng-click="rankDoc(doc.Entity,doc.name,doc.Expertise, doc.Address, doc.Ranking, doc.LastUpdate, doc.totaNumlRank, doc.myNumRank)">
     <label class="labelGeneral">Entity:</label>
 		<h1 class="generalData">{{doc.Entity}}</h1>
@@ -51,17 +53,18 @@
 		<h1 class="generalData">{{doc.Address}}</h1>
     <label class="labelGeneral">Reception hours:</label>
     <section ng-repeat="i in doc.reception_hours">
-      <h2 class="daysRank">Sunday: {{i.Sunday}}</h2>
+      <h2 class="daysRank" ng-if="i.Sunday !== undefined">Sunday: {{i.Sunday}}</h2>
       <br>
-      <h2 class="daysRank">Monday: {{i.Monday}}</h2>
+      <h2 class="daysRank" ng-if="i.Monday !== undefined
+      ">Monday: {{i.Monday}}</h2>
       <br>
-      <h2 class="daysRank">Tuesday: {{i.Tuesday}}</h2>
+      <h2 class="daysRank" ng-if="i.Tuesday !== undefined">Tuesday: {{i.Tuesday}}</h2>
       <br>
-      <h2 class="daysRank">Wednesday: {{i.Wednesday}}</h2>
+      <h2 class="daysRank" ng-if="i.Wednesday !== undefined">Wednesday: {{i.Wednesday}}</h2>
       <br>
-      <h2 class="daysRank">Thursday: {{i.Thursday}}</h2>
+      <h2 class="daysRank" ng-if="i.Thursday !== undefined">Thursday: {{i.Thursday}}</h2>
       <br>
-      <h2 class="daysRank">Friday: {{i.Friday}}</h2>
+      <h2 class="daysRank" ng-if="i.Friday !== undefined">Friday: {{i.Friday}}</h2>
     </section>
     <label class="labelGeneral">Ranking:</label>
 		<h1 class="generalData">{{doc.Ranking}}</h1>

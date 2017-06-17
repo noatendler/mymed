@@ -11,8 +11,8 @@ var data = require('../details/date.json');
 var moment = require('moment');
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 var natural_language_understanding = new NaturalLanguageUnderstandingV1({
-  'username': 'username',
-  'password': 'pass',
+  'username': '6b67cdbd-8e43-48a9-9e80-16f45128caac',
+  'password': 'kqUf2M10gsyN',
   'version_date': '2017-02-27'
 });
 
@@ -41,8 +41,12 @@ exports.getDataByUser = function(req, res){
       var info = docs[i];
       for(var j=0; j<info.permission.length; j++)
       {
-        if(info.permission[j] == req.body.emailUser)
+        for(var k=0; k<info.permission[j].length; k++)
+        {
+          if(info.permission[j][k].perEmail == req.body.emailUser)
           sendData.push(docs[i]);
+        }
+        
       }
     }
     console.log(sendData);
@@ -269,8 +273,9 @@ exports.addInfoNoTags = function(request, response){
                   console.error(error);
                 } else {
                   console.log("save");
-                  //response.redirect('http://localhost:8080/insertTagsPermission.html');
-                  response.json("save");
+
+                  response.redirect('http://localhost:8080/insertTagsPermission.html');
+                  //response.json("save");
                 }
               })
           });
@@ -281,6 +286,7 @@ exports.addInfoNoTags = function(request, response){
 
 exports.getTagsFromText= function(req, res)
 {
+  console.log('in getTagsFromText');
   var parameters = {
   'text': req.body.Recommendation,
   'features': {
@@ -305,16 +311,20 @@ natural_language_understanding.analyze(parameters, function(err, response) {
     var allkeys = jsonkey.keywords;
     for(var i=0; i<allkeys.length; i++)
     {
-      getKey[i] = {"name":allkeys[i].text};
+      getKey[i]={"name":allkeys[i].text};
     }
   }
   console.log(getKey);
   res.json(getKey);
 });
+
 }
 
 exports.addTagPer = function(req, res){
-  // console.log(req.body);
+// var insertPer = [];
+// var insertTag = [];
+
+  console.log('in addTagPer');
   var mydata = JSON.parse(JSON.stringify(data));
   var myKeys = Object.keys(mydata);
   //var myValue = Object.values(mydata);
@@ -396,8 +406,8 @@ for(var k=0; k<dateTime.length; k++)
 console.log(getDateNoti);
 
   var tagsName=[];
-  // var per = [];
-   var myemail = req.body.email;
+  var per = [];
+  var myemail = req.body.email;
 
   if(typeof(req.body.Tags)!=='undefined')
   {
@@ -407,29 +417,87 @@ console.log(getDateNoti);
       tagsName.push({"name":req.body.Tags[i].name});
     }
   }
-  // for(var j=0; j<req.body.Permission.length; j++)
-  // {
-  //  per.push({perEmail: req.body.Permission[j]});
-  // }
-console.log(req.body);
-// personal.update({email: req.body.email, Info: req.body.Info, Recommendation: req.body.Recommendation, Title: req.body.Title, myDate:req.body.mydate},{Tags: req.body.Tags, permission:req.body.Permission}, 
-//     function(err, num) {
-//       if(err)
-//         console.log(err);
-//       else
-//         console.log("updated"+num);
-//     });
+  for(var j=0; j<req.body.Permission.length; j++)
+  {
+   per.push({perEmail: req.body.Permission[j]});
+  }
+console.log(tagsName);
+console.log(per);
+
+
+
 // personal.find({email: req.body.email, Title:req.body.Title, Info: req.body.Info, myDate: req.body.mydate}, function(err, docsX){
-//   console.log(docsX);
-// })
-  personal.findOneAndUpdate(
+//   var tagsArray = [];
+//   var perArray = [];
+//     console.log('in the find fuctnion');
+//      for(var i=0;i<docsX.length;i++){
+//       for(var j=0;j<docsX[i].Tags.length;j++){
+//         var tempTag =docsX[i].Tags[j];
+//         for(var t=0; t<tempTag.length;t++)
+//         {
+//           tagsArray.push(tempTag[t].name);
+//         }
+//       }
+//     }
+
+//    //check if in array
+//    console.log('now in the DB' + tagsArray);
+//    for(var i=0;i<tagsName.length;i++)
+//    {
+//       if(tagsArray.indexOf(tagsName[i]) > -1){
+//          continue;        
+//       }
+//       else
+//       {
+//          insertTag.push(tagsName[i]);
+//       }
+//    }
+
+//     for(var i=0;i<docsX.length;i++){
+//       for(var j=0;j<docsX[i].permission.length;j++){
+//         var tempPer =docsX[i].permission[j];
+//         for(var t=0; t<tempPer.length;t++)
+//         {
+//           perArray.push(tempPer[t].name);
+//         }
+//       }
+//     }
+   
+//    //check if in array
+//    console.log('in the DB' + perArray);
+//    for(var i=0;i<perArray.length;i++)
+//    {
+//     for(var j=0;j<per.length;j++)
+//     {
+//       if(per[j] == perArray[i])
+//       {
+//         continue;
+//       }
+//       else
+//       {
+//         insertPer.push(per[j]);
+//       }
+//     }
+//    }
+//    console.log("+++++++++++++++++++++++++++++++");
+//     console.log(insertTag);
+//     console.log(insertPer);
+//     console.log("++++++++++++++++++++++++++");
+
+// });
+
+    personal.findOneAndUpdate(
     {email: req.body.email, Title:req.body.Title, Info: req.body.Info, myDate: req.body.mydate},
-    {$push: {"permission": req.body.Permission, "Tags": req.body.Tags}},
+    {$push: {"permission": per, "Tags": tagsName}},
     {safe: true},
     function(err, model) {
       if(err)
         console.log(err);
+      else
+        console.log(model);
     });
+
+
   taginsert.find({email: myemail}, function(err, docsTags){
     var tagtemp = [];
     if(docsTags.length == 0)

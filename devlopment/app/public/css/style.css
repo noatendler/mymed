@@ -592,7 +592,7 @@ html, body
 .rankButton
 {
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 450px;
   position: relative;
   top: 50px;
 }
@@ -666,7 +666,8 @@ html, body
 .submitAddInfo
 {
   margin-left: 324px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
 .insertTitle
 {
@@ -768,4 +769,53 @@ html, body
   margin-left: 480px;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+#profile
+{
+  float: right;
+  margin-right: 20px;
+  text-decoration: none;
+}
+.permissionName
+{
+  position: relative;
+  left: 325px;
+  top: 30px;
+}
+.permissionLable
+{
+  position: relative;
+  left: 330px;
+  top: 28px;
+}
+.permissionTitle
+{
+  font-size: 18px;
+  color: #2A2760;
+  margin-left: 330px;
+  margin-bottom: -25px;
+}
+.addTitle
+{
+  position: relative;
+  top: 30px;
+  left: 345px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.addTitle:hover
+{
+  color: red;
+}
+#inputAdd
+{
+  position: relative;
+  top: 30px;
+  left: 360px;
+}
+.addButton
+{
+  position: relative;
+  left: 380px;
+  top: 30px;
 }
