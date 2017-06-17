@@ -5,6 +5,7 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <link rel="stylesheet" href="css/style.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <header class="deskHeader">
         <a href="index.html" id="logo"> </a>
@@ -22,7 +23,7 @@
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5>profile</h5>
+                <h5 data-toggle="tooltip" title="Click to see your personal information">profile</h5>
             </a>
          </nav>
 </header>
@@ -34,33 +35,38 @@
   </section>
 <body ng-controller="detailsCtrl">
   <br><br><br><br>
-  <h2 class="insertTitle">Please insert info</h2>
+  <h2 class="insertTitle">Please insert personal medical information</h2>
     <form enctype="multipart/form-data" method="post" action="http://localhost:3000/addDataNoTags">
         <input type="text" class="form-control" id="emailInput" name="email" value={{showEmail}}>
       <div class="form-group">
-        <label for="pwd" class="editTitle">Title</label>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter a title for your information item">Document title</label>
         <input type="text" class="form-control editPersonal" id="pwd" name="Title"  ng-model="Title" required>
       </div> 
       <div class="form-group">
-        <label for="pwd" class="editTitle">Info</label>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Add information and detail about the information item">Add information</label>
         <input type="text" class="form-control editPersonal" id="pwd" name="Info" ng-model="Info" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle">Category</label>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Associate the information item into a category (e.g. general tests)">Category of item information</label>
         <input type="text" class="form-control editPersonal" id="pwd" name="Category" ng-model="Category" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle">File</label>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Attach the document that belongs to the information item">Document</label>
           <input type="file" id="file" class="btn btn-default fileButton" name="file" value="">
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle">Recommendation</label>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Write down the medical recommendations">The medical recommendations</label>
         <input type="text" class="form-control editPersonal" id="pwd" name="Recommendation" ng-model="Recommendation" required>
       </div>
       <input type="text" class="form-control" id="dateInput" name="mydate" value={{showDate}}>   
       <button type="submit" class="btn btn-default submitAddInfo" ng-click="personalSave()">Submit
       </button>
     </form>
+    <script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>
     <script src="js/lib/angular/angular-route.min.js"></script>

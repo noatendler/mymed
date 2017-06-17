@@ -26,7 +26,7 @@
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5>profile</h5>
+                <h5 data-toggle="tooltip" title="Click to see your personal information">profile</h5>
             </a>
             <h5  class="tooltiptext">click to view your profile</h5>
          </nav>
@@ -37,11 +37,13 @@
             <img src="images/personalImg.jpg" class="topImgDesk">
         </section>
         <section class="topTitleDesk">
-            <span class="topTitle">Personal medical info</span>
+            <span class="topTitle">Personal medical information</span>
         </section>
          <section ng-controller="getPersonalCtrl">
              <a href="insertDetailsNoTag.html" class="redirectAdd">
-                <span class="addInfoDesk">add info</span>
+                <span class="addInfoDesk">add personal</span>
+                <br>
+                <span class="addInfoSpan">information</span>
                 <img src="images/addInfo.png" class="addInfoImg">
              </a>
              <section id="tagsPersonal" ng-repeat="allTags in personalTag" >

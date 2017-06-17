@@ -131,6 +131,7 @@ html, body
   float: right;
   margin-top: 30px;  
   margin-right: 60px;
+  text-decoration: none;
 }
 .deskHeader
 {
@@ -225,10 +226,10 @@ html, body
 }
 .addInfoDesk
 {
-  font-size: 22px;
+  font-size: 18px;
   position: relative;
-  top: 30px;
-  left: 72px;
+  top: 33px;
+  left: 68px;
   color: #1D2108;
   text-decoration: none;
 }
@@ -242,7 +243,7 @@ html, body
 }
 .addInfoImg
 {
-  margin-top: -15px;  
+  margin-top: -45px;  
 }
 #filter
 {
@@ -473,10 +474,10 @@ html, body
 {
   display: none;
 }
-.editGeneral
+/*.editGeneral
 {
   display: none;
-}
+}*/
 /*login pag*/
 .loginTitle
 {
@@ -671,10 +672,12 @@ html, body
 }
 .insertTitle
 {
-  font-size: 25px;
-  color: #2A2760;
-  margin-top: -30px;
-  text-align: center;
+    font-size: 25px;
+    color: #2A2760;
+    margin-top: -30px;
+    text-align: center;
+    margin-right: 230px;
+    margin-bottom: 50px;
 }
 .addPer
 {
@@ -713,14 +716,14 @@ html, body
 }
 .entityGeneral
 {
-  margin-left: 10px;
+  margin-left: 90px;
   position: relative;
   top: -1px;
   width: 200px;
 }
 .hmoGeneral
 {
-  margin-left: 10px;
+  margin-left: 60px;
   width: 200px;
   position: relative;
   top: -3px;
@@ -810,12 +813,48 @@ html, body
 #inputAdd
 {
   position: relative;
-  top: 30px;
-  left: 360px;
+  top: 8px;
+  left: 460px;
 }
 .addButton
 {
   position: relative;
-  left: 380px;
-  top: 30px;
+  left: 650px;
+  top: -16px;
+}
+.hide
+{
+  display: none;
+}
+.generalInput
+{
+  width: 700px;
+  margin: auto;
+}
+.topTitleSpan
+{
+  font-size: 18px;
+  margin-top: 20px;
+}
+.addInfoSpan
+{
+    font-size: 18px;
+    position: relative;
+    top: 25px;
+    left: 80px;
+    color: #1D2108;
+    text-decoration: none;
+}
+.addInfoImgGe
+{
+  margin-top: -55px;
+}
+.addInfoDeskG
+{
+    font-size: 18px;
+    position: relative;
+    top: 33px;
+    left: 74px;
+    color: #1D2108;
+    text-decoration: none;
 }

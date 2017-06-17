@@ -201,6 +201,7 @@ if( checkfile===1 && checktags===1)
   {
     taginsert.find({email: myemail}, function(err, docsTags){
       var tagtemp = [];
+      console.log("docsTags" + docsTags);
 
       for(var t=0; t<docsTags.length; t++)
       {
@@ -221,13 +222,23 @@ if( checkfile===1 && checktags===1)
           {
             taginsert.findOneAndUpdate(
             {email:myemail},
-            {$push: {"tags": {name: mytags[j].name}}},
+            {$push: {"tags": {name: mytags[j].name, number:1}}},
             {safe: true, upsert: true},
             function(err, model) {
               if(err)
                 console.log(err);
             });
           }
+          else
+          {
+           taginsert.find({tags: {$elemMatch: {name: req.body.username}}, email:myemail}, function(error, myTagsDoc){
+              if(myTagsDoc.length)
+              {
+                console.log(myTagsDoc);
+              }
+           });
+          }
+
         }
     });
     usertags++;
@@ -528,17 +539,67 @@ console.log(per);
 
     for(var j=0; j<(tagsName).length ; j++)
     {
+      console.log("tagsName  " + tagsName[j].name);
           //console.log( ((tagtemp).indexOf(mytags[j].name) != -1));
           if(!((tagtemp).indexOf(tagsName[j].name) != -1))
           {
+            console.log("in the if");
             taginsert.findOneAndUpdate(
             {email:myemail},
-            {$push: {"tags": {name: tagsName[j].name}}},
+            {$push: {"tags": {name: tagsName[j].name, number:1}}},
             {safe: true, upsert: true},
             function(err, model) {
               if(err)
                 console.log(err);
             });
+          }
+          else
+          {
+            var nameTag = tagsName[j].name;
+            console.log("in the else");
+            taginsert.find({tags: {$elemMatch: {name: tagsName[j].name}}, email:myemail}, function(error, myTagsDoc){
+              if(myTagsDoc.length)
+              {
+                var getNumber;
+                for(var k=0; k<myTagsDoc[0].tags.length; k++)
+                {
+                  if(nameTag === myTagsDoc[0].tags[k].name)
+                  {
+                    console.log("goood");
+                    getNumber = myTagsDoc[0].tags[k].number;
+                  }
+                }
+                getNumber +=1;
+                console.log(getNumber);
+                console.log("before the update");
+                taginsert.findOneAndUpdate(
+                  {email:myemail,name:nameTag},
+                  {$push: {"tags": {number: getNumber}}},
+                  {safe: true, upsert: true},
+                  function(err, model) {
+                    if(err)
+                      console.log(err);
+                    else
+                      console.log("yayyy");
+                      //response.json("success");
+                });
+                // taginsert.update({email:myemail,name: nameTag}, {$set: {number:getNumber}},function(err,es1){
+                //   if(err)
+                //   {
+                //     console.log(err);
+                //   }
+                // });
+
+              //   taginsert.findOneAndUpdate(
+              //   {email:myemail, tags: {$elemMatch: {name: nameTag}}},
+              //   {$push: {"tags": {name: nameTag, number:getNumber}}},
+              //   {safe: true},
+              //   function(err, model) {
+              //     if(err)
+              //       console.log(err);
+              // });     
+              }
+           });       
           }
         }
       }

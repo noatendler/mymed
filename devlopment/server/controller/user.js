@@ -63,8 +63,16 @@ exports.addPermission=function(request, response){
     var temp = [];
     //console.log("email"+request.body.email);
     //console.log("myemail"+request.body.myemail);
-    var toAdd = 1;
-    user.find({email:request.body.myemail},function(err,document1){
+    console.log(request.body.email);
+    var userExist = 0 ;
+    user.find({email: request.body.email}, function(error,res){
+      console.log("in the user search function - looking for adding pre email");
+      console.log(res);
+      if(res.length)
+      {
+        var toAdd = 1;
+        console.log("exist");
+        user.find({email:request.body.myemail},function(err,document1){
         //console.log("document   "+document[0].permission.length);
         for(var i=0; i<document1[0].permission.length; i++)
         {
@@ -88,7 +96,15 @@ exports.addPermission=function(request, response){
                   response.json("success");
             });
         }
+
+      }); 
+      }
+      else{
+        console.log('user does not exist in the DB');
+        response.json("no");
+      }
     });
+  
 
     //temp.push(request.body.email,0);
     // user.find({email : request.body.email, key : request.body.key}, function(err, docs){

@@ -2,11 +2,12 @@
 <html ng-app="mymed">
 <head>
     <title>insert general data</title>
-      <link rel="stylesheet" href="css/style.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <link rel="stylesheet" href="css/ng-tags-input.min.css">
       <link rel="stylesheet" href="css/ng-tags-input.bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
 </head>
  <header class="deskHeader">
         <a href="index.html" id="logo"> </a>
@@ -24,7 +25,7 @@
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5>profile</h5>
+                <h5 data-toggle="tooltip" title="Click to see your personal information">profile</h5>
             </a>
          </nav>
      </header>
@@ -32,14 +33,14 @@
     <img src="images/general.jpg" class="topImgDesk">
   </section>
   <section class="topTitleDesk">
-    <span class="topGTitle">General info</span>
+    <span class="topGTitle">General information</span>
   </section>
 <body ng-controller="insertGeneralCtrl">
 <br><br><br><br>
     <form>
-    <h1 class="insertTitle">Please add general info</h1>
+    <h1 class="insertTitle">Please insert general mediacl information</h1>
       <div class="form-group">
-        <label for="pwd" class="editTitle">Entity</label>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select an entity from the list">Medical entity</label>
         <select class="entityGeneral" id="entitySelect" ng-model="entitySelect" name="entitySelect">
           <option value="Doctor">Doctor</option>
           <option value="Hospital">Hospital</option>
@@ -47,15 +48,15 @@
         </select>    
       </div> 
       <div class="form-group">
-        <label for="pwd" class="editTitle">Name</label>
-        <input type="text" class="form-control editGeneral" id="pwd" ng-model="name" name="name" required>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter the name of the medical entity, for example Dr. Rosen Moshe">Medical entity name</label>
+        <input type="text" class="generalInput form-control" id="pwd" ng-model="name" name="name" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle">Expertise</label>
-        <input type="text" class="form-control editGeneral" id="pwd" ng-model="Expertise" name="Expertise" required>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="enter in what the meducal entity specialized in(e.g. general dentistry)">Medical facility expertise</label>
+        <input type="text" class="generalInput form-control" id="pwd" ng-model="Expertise" name="Expertise" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle">HMO</label>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select from the list the name of medical entity">HMO</label>
         <select class="hmoGeneral" id="hmoSelect" ng-model="hmoSelect" name="hmoSelect">
           <option value="Maccabi">Maccabi</option>
           <option value="Clalit">Clalit</option>
@@ -64,11 +65,11 @@
         </select> 
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle">Address</label>
-        <input type="text"  class="form-control editGeneral" id="pwd" ng-model="Address" name="Address">
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter the address of the medical entity">Address of the medical entity</label>
+        <input type="text"  class="generalInput form-control" id="pwd" ng-model="Address" name="Address">
       </div>
       <div class="form-group">
-      <label for="pwd" class="editTitle">Reception hours</label>
+      <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select the reception hours">Reception hours</label>
       <br>
       <label for="pwd" class="insertGTitle">Sunday</label>
       <br>

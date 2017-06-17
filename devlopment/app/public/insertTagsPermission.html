@@ -24,7 +24,7 @@
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5>profile</h5>
+                <h5 data-toggle="tooltip" title="Click to see your personal information">profile</h5>
             </a>
          </nav>
 </header>
@@ -75,8 +75,10 @@
         <input type="checkbox" ng-model="myChoice" ng-change="getChocie(names[$index])"  ng-true-value="1" ng-false-value="0" class="permissionName"><lable class="permissionLable">{{per}}</lable>
       </section>
           <div ng-click="addOtherUser()" id="otherPermission">
-          <lable class="addTitle">add other user...</lable>
-        </div>
+            <lable class="addTitle">add other user...</lable>
+          </div>
+          <input type="text" name="newPer" value="" ng-model="newPer" id="inputAdd">
+          <button type="submit" class="addButton" id="buttonAdd" ng-click="callfunction()">add</button>
     </div>       
       <button type="submit" class="btn btn-default submitAddInfo" ng-click="addTagsPer()">Submit
       </button>

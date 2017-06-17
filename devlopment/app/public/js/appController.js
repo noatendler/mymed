@@ -565,19 +565,19 @@ var myTags;
       });
     });
 
+    var element_input = document.getElementById('inputAdd');
+    var element_btn = document.getElementById('buttonAdd');
+    console.log(element_input + " " + element_btn);
+    element_btn.style.display = "none";
+    element_input.style.display = "none"; 
+
     $scope.addOtherUser = function() {
-      var element_per = document.getElementById('otherPermission');
-      var element_input = document.createElement("input");
-      element_input.id  = "inputAdd";
-      var element_btn = document.createElement("button");
-      element_btn.innerHTML = "add";
-      element_btn.className  = "addButton";
-      element_per.appendChild(element_input);
-      element_per.appendChild(element_btn);
-      element_btn.onclick = callfunction();
+      console.log("click");
+      element_btn.style.display = "block";
+      element_input.style.display = "block";
     }
 
-  function callfunction()
+  $scope.callfunction = function()
   {
     var element_input = document.getElementById('inputAdd').value;
     //console.log("element_input"+element_input);
@@ -587,7 +587,14 @@ var myTags;
     //console.log(saveEmailPer);
 
     $http.post('http://localhost:3000/addPerUser',JSON.stringify(saveEmailPer)).then(function(res){
-        window.location="insertTagsPermission.html";
+        if(res.data === "success"){
+          console.log(res.data);
+          window.location="insertTagsPermission.html";
+         }
+        else
+        {
+          alert("user does not exist");
+        }
     });  
   }
 
