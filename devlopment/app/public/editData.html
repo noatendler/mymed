@@ -32,25 +32,22 @@
             <img src="images/personalImg.jpg" class="topImgDesk">
         </section>
         <section class="topTitleDesk">
-            <span class="topTitle">Personal medical info</span>
+            <span class="topTitle">Personal medical information</span>
         </section>
         <section ng-controller="editPersonalCtrl">
-             <a href="insertDetailsNoTag.html" class="redirectAdd">
-                <span class="addInfoDesk">add info</span>
-                <img src="images/addInfo.png" class="addInfoImg">
-             </a>
              <br><br><br><br><br><br>
+             <h2 class="editMainTitle">Edit your document</h2>
              <form ng-submit="submitEdit()">
-                 <label class="editTitle">Title:</label>
+                 <label class="editTitle" data-toggle="tooltip" title="choose a title to the document">Document title</label>
                  <input class="form-control editPersonal" id="Title" value="{{myinfoEdit.Title}}">
                  <br>
-                 <label class="editTitle">Info:</label>
+                 <label class="editTitle" data-toggle="tooltip" title="add information and details to the document">Document information</label>
                  <input class="form-control editPersonal" id="Info" value="{{myinfoEdit.Info}}">
                  <br>
-                 <label class="editTitle">Recommendation:</label>
+                 <label class="editTitle" data-toggle="tooltip" title="Note the recommendation from medical entity">The medical recommendations</label>
                  <input class="form-control editPersonal" id="Recommendation" id="pwd" value="{{myinfoEdit.Recommendation}}" >
                  <br>
-                 <label class="editTitle">Tags:</label>
+                 <label class="editTitle" data-toggle="tooltip" title="Select appropriate tags to the document">Tags</label>
                     <tags-input ng-model="Tags" class="editPersonal" name="Tags" id="Tags" display-property="name" replace-spaces-with-dashes="false">
                         <auto-complete source="loadTag($query)"
                              min-length="0"
@@ -61,7 +58,7 @@
                           </auto-complete>
                     </tags-input>
                   <br>
-                  <button type="submit" class="btn btn-default submitEdit">update
+                  <button type="submit" class="btn btn-default submitEdit" data-toggle="tooltip" title="update document">update
                   </button>
              </form>
             <script type="text/ng-template" id="my-custom-template">

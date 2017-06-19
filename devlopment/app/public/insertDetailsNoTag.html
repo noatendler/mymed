@@ -23,7 +23,7 @@
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your personal information">profile</h5>
+                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
             </a>
          </nav>
 </header>
@@ -40,15 +40,15 @@
         <input type="text" class="form-control" id="emailInput" name="email" value={{showEmail}}>
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter a title for your information item">Document title</label>
-        <input type="text" class="form-control editPersonal" id="pwd" name="Title"  ng-model="Title" required>
+        <input type="text" class="form-control editPersonal" id="pwd" name="Title"  ng-model="Title" placeholder="document title" required>
       </div> 
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="Add information and detail about the information item">Add information</label>
-        <input type="text" class="form-control editPersonal" id="pwd" name="Info" ng-model="Info" required>
+        <input type="text" class="form-control editPersonal" id="pwd" name="Info" ng-model="Info" placeholder="document information" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Associate the information item into a category (e.g. general tests)">Category of item information</label>
-        <input type="text" class="form-control editPersonal" id="pwd" name="Category" ng-model="Category" required>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Associate the information item into a category (e.g. general tests)">Category of the item</label>
+        <input type="text" class="form-control editPersonal" id="pwd" name="Category" ng-model="Category" placeholder="category" required>
       </div>
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="Attach the document that belongs to the information item">Document</label>
@@ -56,7 +56,7 @@
       </div>
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="Write down the medical recommendations">The medical recommendations</label>
-        <input type="text" class="form-control editPersonal" id="pwd" name="Recommendation" ng-model="Recommendation" required>
+        <input type="text" class="form-control editPersonal" id="pwd" name="Recommendation" ng-model="Recommendation" placeholder="the medical recommendations" required>
       </div>
       <input type="text" class="form-control" id="dateInput" name="mydate" value={{showDate}}>   
       <button type="submit" class="btn btn-default submitAddInfo" ng-click="personalSave()">Submit

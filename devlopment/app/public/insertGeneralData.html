@@ -25,7 +25,7 @@
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your personal information">profile</h5>
+                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
             </a>
          </nav>
      </header>
@@ -38,7 +38,7 @@
 <body ng-controller="insertGeneralCtrl">
 <br><br><br><br>
     <form>
-    <h1 class="insertTitle">Please insert general mediacl information</h1>
+    <h1 class="insertTitleG">Please insert general mediacl information</h1>
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select an entity from the list">Medical entity</label>
         <select class="entityGeneral" id="entitySelect" ng-model="entitySelect" name="entitySelect">
@@ -49,11 +49,11 @@
       </div> 
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter the name of the medical entity, for example Dr. Rosen Moshe">Medical entity name</label>
-        <input type="text" class="generalInput form-control" id="pwd" ng-model="name" name="name" required>
+        <input type="text" class="generalInput form-control" id="pwd" ng-model="name" name="name" placeholder="medical entity name" required>
       </div>
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="enter in what the meducal entity specialized in(e.g. general dentistry)">Medical facility expertise</label>
-        <input type="text" class="generalInput form-control" id="pwd" ng-model="Expertise" name="Expertise" required>
+        <input type="text" class="generalInput form-control" id="pwd" ng-model="Expertise" name="Expertise" placeholder="medical facility expertise" required>
       </div>
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select from the list the name of medical entity">HMO</label>
@@ -65,8 +65,8 @@
         </select> 
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter the address of the medical entity">Address of the medical entity</label>
-        <input type="text"  class="generalInput form-control" id="pwd" ng-model="Address" name="Address">
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter the address of the medical entity">The address of the medical entity</label>
+        <input type="text"  class="generalInput form-control" id="pwd" ng-model="Address" placeholder="the address of the medical entity" name="Address">
       </div>
       <div class="form-group">
       <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select the reception hours">Reception hours</label>

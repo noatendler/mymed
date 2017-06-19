@@ -65,5 +65,9 @@ app.post('/addNotification',multipartAction,personal.saveNotification);
 app.post('/updateGeneralData',general.updateGeneral);
 app.post('/delGeneral',general.delGeneral);
 app.post('/getKeywords',multipartAction, personal.getTagsFromText);
+app.post('/getAllDocs',multipartAction,personal.getAllDocumentByTag);
+app.post('/addNewTag',multipartAction,personal.addNewTag);
+//app.post('/removeTagMyTag',multipartAction,personal.removeTagMyTag);
+
 
 app.listen(port);

@@ -26,7 +26,7 @@
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your personal information">profile</h5>
+                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
             </a>
             <h5  class="tooltiptext">click to view your profile</h5>
          </nav>
@@ -72,36 +72,39 @@
              <br>
              <p>{{insertData}}</p>
              <br>
-             <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="list">
-                    <img src="images/see.png" class="seeImg" ng-click="viewCurrent(index)">
-                    <img src="images/delete.png" class="delImg" ng-click="deletePopUp(index)">
-                    <img src="images/edit.png" class="editImg" ng-click="editData(index)">
-                    <h1 class="titlePerDesk">{{index.Title}}</h1>
+             <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="list" class="detailsAndler">
+                    <img src="images/see.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
+                    <img src="images/delete.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <img src="images/edit.png" class="editImg" title="edit info" alt="edit info" ng-click="editData(index)">
+                    <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
                     <section ng-repeat="i in index.Tags">
+                    <span class="titlesTag">Tags</span>
                       <section ng-repeat="j in i"> 
                         <p class="tagDataPer">{{j.name}}</p>
                       </section>
                     </section>
              </section>
              <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="details">
-                    <img src="images/see.png" class="seeImg" ng-click="viewCurrent(index)">
-                    <img src="images/delete.png" class="delImg" ng-click="deletePopUp(index)">
-                    <img src="images/edit.png" class="editImg" ng-click="editData(index)">
-                    <h1 class="titlePerDesk">{{index.Title}}</h1>
-                    <h2 class="datePersonal">{{index.myDate}}</h2>
+                    <img src="images/see.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
+                    <img src="images/delete.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <img src="images/edit.png" class="editImg"  title="edit info" alt="edit info" ng-click="editData(index)">
+                    <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
+                    
+                    <h2 class="contentName"><span class="titles">Date of creation</span>{{index.myDate}}</h2>
              </section>
              <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="content"  class="sectionPrivate" >
-                    <img src="images/see.png" class="seeImg" ng-click="viewCurrent(index)">
-                    <img src="images/delete.png" class="delImg" ng-click="deletePopUp(index)">
-                    <img src="images/edit.png" class="editImg" ng-click="editData(index)">
-                    <h1 class="titlePerDesk">{{index.Title}}</h1>
+                    <img src="images/see.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
+                    <img src="images/delete.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <img src="images/edit.png" class="editImg" title="edit info" alt="edit info"  ng-click="editData(index)">
+                    <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
                     <section ng-repeat="i in index.Tags">
+                    <span class="titlesTag">Tags</span>
                         <section ng-repeat="j in i">
                             <p class="tagDataPer">{{j.name}}</p>
                         </section>
                     </section>
-                    <p class="contentName">{{index.Info}}</p>
-                    <h2 class="contentName">{{index.myDate}}</h2>
+                    <p class="contentName"><span class="titles">Document information</span>{{index.Info}}</p>
+                    <h2 class="contentName"><span class="titles">Date of creation</span>{{index.myDate}}</h2>
              </section>
              <section id="myModal" class="modal">
                 <section class="modal-content">

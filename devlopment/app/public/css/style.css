@@ -261,7 +261,7 @@ html, body
 }
 .seeImg
 {
-  margin-left: 370px;
+  margin-left: 490px;
   position: relative;
   top: 32px;
   cursor:pointer;
@@ -546,19 +546,24 @@ html, body
 }
 .tagDataPer
 {
-  color: #ffffff;
-  font-size: 20px;
-  margin-left: 20px;
-  display: inline;
-  background-color: #5bc0de;
-  border-radius: 4px;
-  padding: 3px;
+    color: #ffffff;
+    font-size: 15px;
+    margin-left: 190px;
+    display: inline-block;
+    background-color: #5bc0de;
+    border-radius: 4px;
+    padding: 3px;
+    position: relative;
+    top: -20px;
 }
 .datePersonal
 {
-  font-size: 20px;
-  margin-left: 20px;
-  color: #2A2760;
+    font-size: 20px;
+    /* margin-left: 20px; */
+    color: #2A2760;
+    position: relative;
+   /* left: -260px;*/
+    top: 23px;
 }
 .contentName
 {
@@ -566,6 +571,31 @@ html, body
   font-size: 20px;
   margin-left: 20px;
   width: 300px;
+}
+.contentRec
+{
+    color: #2A2760;
+    font-size: 20px;
+    position: relative;
+    margin-left: 410px;
+    top: 4px;
+
+}
+.contentInfo
+{
+    color: #2A2760;
+    font-size: 20px;
+    position: relative;
+    right: 500px;
+    top: 100px; 
+}
+.contentDate
+{
+    color: #2A2760;
+    font-size: 20px;
+    position: relative;
+       right: 115px;
+    top: 50px;
 }
 /*insert personal data*/
 .InsertPerT
@@ -593,7 +623,7 @@ html, body
 .rankButton
 {
   cursor: pointer;
-  margin-left: 450px;
+  margin-left: 380px;
   position: relative;
   top: 50px;
 }
@@ -645,6 +675,7 @@ html, body
 .submitEdit
 {
   margin-left: 324px;
+  margin-bottom: 30px;
 }
 .editTitle
 {
@@ -667,17 +698,17 @@ html, body
 .submitAddInfo
 {
   margin-left: 324px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   margin-top: 30px;
 }
 .insertTitle
 {
-    font-size: 25px;
+    font-size: 30px;
     color: #2A2760;
     margin-top: -30px;
     text-align: center;
-    margin-right: 230px;
-    margin-bottom: 50px;
+    margin-right: 130px;
+    margin-bottom: 30px;
 }
 .addPer
 {
@@ -857,4 +888,239 @@ html, body
     left: 74px;
     color: #1D2108;
     text-decoration: none;
+}
+.titles
+{
+  font-size: 20px;
+  margin-right: 40px;
+}
+.titlesTag{   
+   color: #2A2760;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 100px;
+    display: inline-block;
+}
+.titlesD{
+  font-size: 20px;
+    margin-top: 32px;
+    float: left;
+    margin-left: 20px;
+    display: inline-block;
+}
+.titleDetails{
+  display: inline-block;
+    float: left;
+    position: relative;
+    left: 110px;
+    color: #2A2760;
+    font-size: 30px;
+    top: 6px;
+}
+.dateDetails{
+    color: #2A2760;
+    font-size: 20px;
+    margin-right: 100px;
+    display: inline-block;
+    float: left;
+    position: relative;
+    top: 70px;
+    left: -240px;
+}
+.addInfoView
+{
+    position: relative;
+    top: 32px;
+    font-size: 20px;
+    left: 80px;
+}
+.addInfoSView
+{
+    font-size: 20px;
+    position: relative;
+    top: 25px;
+    left: 85px;
+}
+.titleView
+{
+    margin-left: 20px;
+    margin-top: 60px;
+    margin-right: 60px;
+    font-size: 25px;
+}
+.catView
+{
+     margin-left: 20px;
+    font-size: 25px;
+    position: relative;
+    top: -20px;
+    font-size: 25px;  
+}
+.DocView
+{
+      margin-left: 23px;
+    position: relative;
+    top: 20px;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+.contentDoc
+{
+    margin-left: 280px;
+    position: relative;
+    top: 30px;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+.recView
+{
+    margin-left: 20px;
+    font-size: 25px;
+    position: relative;
+    top: 80px;
+    font-size: 25px;
+    /* float: left; */
+    right: 905px;
+}
+.infoView
+{
+    margin-right: 60px;
+    font-size: 25px;
+    position: relative;
+    right: 600px;
+    top: 100px; 
+}
+.dateView
+{
+    margin-right: 60px;
+    font-size: 25px;
+    position: relative;
+    top: 50px;
+    right: 280px;
+}
+.tagDataPerView
+{
+color: #ffffff;
+    font-size: 15px;
+    display: inline-block;
+    background-color: #5bc0de;
+    border-radius: 4px;
+    padding: 3px;
+    position: relative;
+    top: -20px;
+    left: 410px;
+    float: left;
+    margin-right: 10px;
+}
+.titleViewTag
+{
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 120px;
+
+    font-size: 25px; 
+}
+.editMainTitle
+{
+      margin-top: -30px;
+    margin-left: 320px;
+    margin-bottom: 20px;
+    color: #2A2760;
+}
+.insertTitleTag
+{
+      color: #2A2760;
+    margin-top: -30px;
+    text-align: center;
+    margin-right: 260px;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+.insertTitleG
+{
+      font-size: 30px;
+    color: #2A2760;
+    margin-top: -30px;
+    text-align: center;
+    margin-right: 150px;
+    margin-bottom: 30px;
+}
+.editAdmin
+{
+  float: left;
+    margin-left: 20px;
+}
+.sideBySide
+{
+  float: left;
+  margin-right: -160px;  
+  width: 50%; 
+}
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: red; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+#myBtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+}
+.tagM
+{
+    float: left;
+    margin-left: 20PX;
+    margin-top: 50px
+}
+.inputTagM
+{
+      width: 300px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 40px;
+}
+#saveTag
+{
+    display: block;
+    margin-top: 120px;
+    margin-left: 30px;
+}
+#titleTag
+{
+      margin-left: 29px;
+}
+.getDoc
+{
+  cursor: pointer;
+}
+.holdPopUp{
+      font-size: 20px;
+    display: inline-block;
+    margin-left: 20px;
+}
+#linkData{
+    margin-left: 150px;
+    cursor: pointer;
+    font-size: 20px;
+    position: relative;
+    top: 50px;
+    margin-right: 30px;
+}
+#seeTag
+{
+      font-size: 20px;
+    margin-left: 20px;
+}
+#linkTitle{
+  position: relative;
+    top: -80px;
+    font-size: 20px;
 }

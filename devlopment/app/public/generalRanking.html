@@ -23,7 +23,7 @@
                 <h3 class="SearchNav navBar">Search doctor nearby</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your personal information">profile</h5>
+                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
             </a>
          </nav>
 </header>
@@ -41,10 +41,11 @@
     <img src="images/addInfo.png" class="addInfoImgGe">
   </a>
   <section ng-controller="calCtrl">
-	 <section ng-repeat="doc in general">
-    <img src="images/like.jpg" class="rankButton" ng-click="rankDoc(doc.Entity,doc.name,doc.Expertise, doc.Address, doc.Ranking, doc.LastUpdate, doc.totaNumlRank, doc.myNumRank)">
+  <button ng-click="topFunction()" id="myBtn" title="Go to top">Go Top</button>
+	 <section ng-repeat="doc in general" class="sideBySide">
+    <img src="images/like.jpg" class="rankButton" data-toggle="tooltip" title="Click to rate" ng-click="rankDoc(doc.Entity,doc.name,doc.Expertise, doc.Address, doc.Ranking, doc.LastUpdate, doc.totaNumlRank, doc.myNumRank)">
     <label class="labelGeneral">Entity:</label>
-		<h1 class="generalData">{{doc.Entity}}</h1>
+		<h1 class="generalData" style="width:150">{{doc.Entity}}</h1>
     <label class="labelGeneral">Name:</label>
 		<h1 class="generalData">{{doc.name}}</h1>
     <label class="labelGeneral">Expertise:</label>
@@ -70,8 +71,8 @@
     </section>
     <label class="labelGeneral">Ranking:</label>
 		<h1 class="generalData">{{doc.Ranking}}</h1>
-    <button ng-click="edit(doc)" ng-if="user()">edit</button>
-    <button ng-click="deleteDoc(doc)" ng-if="user()">delete</button>
+    <button ng-click="edit(doc)" ng-if="user()" class="btn btn-default editAdmin">edit info</button>
+    <button ng-click="deleteDoc(doc)" ng-if="user()" class="btn btn-default">delete info</button>
 		<!-- The Modal -->
 		<div id="myModal" class="modal">
 		  <!-- Modal content -->

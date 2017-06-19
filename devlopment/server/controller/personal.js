@@ -9,6 +9,7 @@ var ImageResize = require('node-image-resize');
 var notifi = require('../models/notificationSchema');
 var data = require('../details/date.json');
 var moment = require('moment');
+var Sync = require('sync');
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 var natural_language_understanding = new NaturalLanguageUnderstandingV1({
   'username': '6b67cdbd-8e43-48a9-9e80-16f45128caac',
@@ -417,6 +418,7 @@ for(var k=0; k<dateTime.length; k++)
 console.log(getDateNoti);
 
   var tagsName=[];
+  var tagsNamePersonal=[];
   var per = [];
   var myemail = req.body.email;
 
@@ -425,7 +427,8 @@ console.log(getDateNoti);
     for(var i=0; i<req.body.Tags.length; i++)
     {
       //console.log(req.body.Tags[i].name);
-      tagsName.push({"name":req.body.Tags[i].name});
+      tagsName.push({name:req.body.Tags[i].name, number:1});
+      tagsNamePersonal.push({name:req.body.Tags[i].name});
     }
   }
   for(var j=0; j<req.body.Permission.length; j++)
@@ -434,72 +437,19 @@ console.log(getDateNoti);
   }
 console.log(tagsName);
 console.log(per);
-
-
-
-// personal.find({email: req.body.email, Title:req.body.Title, Info: req.body.Info, myDate: req.body.mydate}, function(err, docsX){
-//   var tagsArray = [];
-//   var perArray = [];
-//     console.log('in the find fuctnion');
-//      for(var i=0;i<docsX.length;i++){
-//       for(var j=0;j<docsX[i].Tags.length;j++){
-//         var tempTag =docsX[i].Tags[j];
-//         for(var t=0; t<tempTag.length;t++)
-//         {
-//           tagsArray.push(tempTag[t].name);
-//         }
-//       }
-//     }
-
-//    //check if in array
-//    console.log('now in the DB' + tagsArray);
-//    for(var i=0;i<tagsName.length;i++)
-//    {
-//       if(tagsArray.indexOf(tagsName[i]) > -1){
-//          continue;        
-//       }
-//       else
-//       {
-//          insertTag.push(tagsName[i]);
-//       }
-//    }
-
-//     for(var i=0;i<docsX.length;i++){
-//       for(var j=0;j<docsX[i].permission.length;j++){
-//         var tempPer =docsX[i].permission[j];
-//         for(var t=0; t<tempPer.length;t++)
-//         {
-//           perArray.push(tempPer[t].name);
-//         }
-//       }
-//     }
-   
-//    //check if in array
-//    console.log('in the DB' + perArray);
-//    for(var i=0;i<perArray.length;i++)
-//    {
-//     for(var j=0;j<per.length;j++)
-//     {
-//       if(per[j] == perArray[i])
-//       {
-//         continue;
-//       }
-//       else
-//       {
-//         insertPer.push(per[j]);
-//       }
-//     }
-//    }
-//    console.log("+++++++++++++++++++++++++++++++");
-//     console.log(insertTag);
-//     console.log(insertPer);
-//     console.log("++++++++++++++++++++++++++");
-
-// });
-
+    // personal.findOneAndUpdate(
+    // {email: req.body.email, Info: docinfo, Recommendation: docrec, Title: doctitle},
+    // {$set: {"Tags": newTags1}},
+    // {safe: true},
+    // function(err, model) {
+    //   if(err)
+    //     console.log(err);
+    //   else
+    //     console.log(model);
+    // }); 
     personal.findOneAndUpdate(
     {email: req.body.email, Title:req.body.Title, Info: req.body.Info, myDate: req.body.mydate},
-    {$push: {"permission": per, "Tags": tagsName}},
+    {$push: {"permission": per, "Tags": tagsNamePersonal}},
     {safe: true},
     function(err, model) {
       if(err)
@@ -508,15 +458,18 @@ console.log(per);
         console.log(model);
     });
 
-
+//myemail hold coockie email
   taginsert.find({email: myemail}, function(err, docsTags){
     var tagtemp = [];
+    //check if not found save new one
     if(docsTags.length == 0)
     {
+      //console.log("not fount save new");
       var saveTag = new taginsert({
           email: myemail,
           tags: tagsName
       });
+      //console.log("saveTag  " + saveTag);
       saveTag.save(function(error, result) {
         if (error) {
           console.error(error);
@@ -526,24 +479,25 @@ console.log(per);
       });
     }
     else{
-      var tagtemp = [];
+      //already exist get add 1 to number and update
+      //var tagtemp = [];
       for(var t=0; t<docsTags.length; t++)
       {
         for(var k=0; k<(docsTags[t].tags).length ; k++)
         {
-          //console.log(docsTags[t].tags[k].name);
+          //console.log("docsTags[t].tags[k].name " + docsTags[t].tags[k].name);
           tagtemp.push(docsTags[t].tags[k].name);
         }
       }
-      //console.log(tagtemp); 
-
+      //console.log("tagtemp  " + tagtemp); 
+//tagtemp include all tags that need to add 1
     for(var j=0; j<(tagsName).length ; j++)
     {
-      console.log("tagsName  " + tagsName[j].name);
+      //console.log("tagsName  " + tagsName[j].name);
           //console.log( ((tagtemp).indexOf(mytags[j].name) != -1));
           if(!((tagtemp).indexOf(tagsName[j].name) != -1))
           {
-            console.log("in the if");
+            //console.log("in the if");
             taginsert.findOneAndUpdate(
             {email:myemail},
             {$push: {"tags": {name: tagsName[j].name, number:1}}},
@@ -556,7 +510,9 @@ console.log(per);
           else
           {
             var nameTag = tagsName[j].name;
-            console.log("in the else");
+            //console.log(tagsName[j].name);
+            //console.log("in the else");
+          Sync(function(){
             taginsert.find({tags: {$elemMatch: {name: tagsName[j].name}}, email:myemail}, function(error, myTagsDoc){
               if(myTagsDoc.length)
               {
@@ -565,24 +521,28 @@ console.log(per);
                 {
                   if(nameTag === myTagsDoc[0].tags[k].name)
                   {
-                    console.log("goood");
+                    //console.log("goood found a match");
                     getNumber = myTagsDoc[0].tags[k].number;
+                    //console.log("---------------");
+                    //console.log(myTagsDoc[0].tags[k].name);
+                    updateme(myTagsDoc[0].tags[k].name,getNumber+1);
                   }
                 }
-                getNumber +=1;
-                console.log(getNumber);
-                console.log("before the update");
-                taginsert.findOneAndUpdate(
-                  {email:myemail,name:nameTag},
-                  {$push: {"tags": {number: getNumber}}},
+                function updateme (setTag, setNum){
+                //console.log('in the update function');
+                  var setTag = {name: setTag, number: setNum};
+                  taginsert.findOneAndUpdate({email: myemail, 'tags.name': nameTag}, { $set : { 'tags.$': setTag} },
                   {safe: true, upsert: true},
-                  function(err, model) {
-                    if(err)
-                      console.log(err);
-                    else
-                      console.log("yayyy");
-                      //response.json("success");
-                });
+                  function (err, doc) {
+                      if (err) {
+                          console.log(err);
+                      } else {
+                          res.json(doc);
+                          console.log('did it');
+                      }
+                   });
+                }
+
                 // taginsert.update({email:myemail,name: nameTag}, {$set: {number:getNumber}},function(err,es1){
                 //   if(err)
                 //   {
@@ -599,7 +559,8 @@ console.log(per);
               //       console.log(err);
               // });     
               }
-           });       
+           }); 
+           })      
           }
         }
       }
@@ -610,6 +571,25 @@ console.log(per);
 }
 
 exports.delInfo = function(req, res){
+
+  //  console.log(req.body);
+  // var tagDelOne = [];
+
+  // for(var i=0; i<req.body.Tags.length; i++)
+  // {
+  //   console.log(req.body.Tags[i]);
+  //   // for(var j=0; j<req.body.Tags[i].length; j++)
+  //   // {
+  //    console.log(req.body.Tags[i].name);
+  //     tagDelOne.push({name: req.body.Tags[i].name,number:0});
+  //   //}
+  // }
+
+  // console.log("tagDelOne   " + tagDelOne );
+  // console.log("-----------------------");
+
+  
+
     personal.remove({email:req.body.email,Title:req.body.Title,Info:req.body.Info,Category:req.body.Category,Recommendation:req.body.Recommendation,myDate:req.body.myDate},function(err, docs){
       if(err){
         console.log(err);
@@ -630,39 +610,58 @@ exports.personalTags = function(req, res){
 
 exports.removeTag = function(req, res)
 {
-  
+  console.log("removeTag");
+  var newTags1 = [];
+  var newTags2 = [];
+  console.log(req.body);
+  var coockieTag = req.body.tag;
+  console.log("------------------------------------");
+Sync(function(){
   personal.find({email:req.body.email}, function(err, doc){
-  //var jsonDoc=JSON.stringify(doc);
-  console.log(doc.length);
+    console.log(doc);
+  console.log("------------------------------------");
+  var docinfo,docrec,doctitle;
   for(var j=0; j<doc.length; j++)
   {
-    //var jsonDoc =JSON.stringify(doc);
-    var newTags = [];
-    var oldTags= doc[j].Tags;
-    console.log(oldTags);
-
-     for(var i=0; i<oldTags.length; i++){
-      //console.log(oldTags[i].name);
-        if(oldTags[i].name != req.body.tag)
-          newTags.push(oldTags[i]);
+    //console.log("try    " + doc[j].Info);
+    doctitle = doc[j].Title;
+    docrec = doc[j].Recommendation;
+    docinfo = doc[j].Info;
+    doctags = doc[j].Tags;
+    for(var temp = 0 ; temp < (doc[j].Tags).length ; temp++)
+    {
+      for(var i=0 ; i<doc[j].Tags[temp].length; i++)
+      {
+          if(doc[j].Tags[temp][i].name != coockieTag)
+          {
+            newTags1.push({name:doc[j].Tags[temp][i].name});
+            // personal.update({email: req.body.email, Info: docinfo, Recommendation: docrec, Title: doctitle}
+            // , { "$pull": { "Tags": { "name": coockieTag } } }
+            // , { safe: true }, function(err, obj) {
+            //   if(err)
+            //     console.log(err);
+            //   else
+            //     console.log("success remove from personal");
+            // });
+          }
       }
-      for(var x=0; x<newTags.length; x++)
-        console.log(newTags[x].name);
-
-      personal.update({email: doc[j].email, Info: doc[j].Info, Recommendation: doc[j].Recommendation, Title: doc[j].Title},{Tags: newTags}, {multi: true}, 
-        function(err, num) {
-          if(err)
-            console.log(err);
-          else
-            console.log("updated "+num);
-        });
-          
+    }
+    console.log(newTags1);
+    console.log("********************************************");
+    personal.findOneAndUpdate(
+    {email: req.body.email, Info: docinfo, Recommendation: docrec, Title: doctitle},
+    {$set: {"Tags": newTags1}},
+    {safe: true},
+    function(err, model) {
+      if(err)
+        console.log(err);
+      else
+        console.log(model);
+    }); 
   }
-
-
-
 });
-  //console.log(req.body);
+});
+//remove from tags
   taginsert.update({email:req.body.email}
   , { "$pull": { "tags": { "name": req.body.tag } } }
   , { safe: true }, function(err, obj) {
@@ -695,6 +694,58 @@ exports.saveNotification = function(req, res)
         }
       });
 }
+exports.getAllDocumentByTag = function(req,res)
+{
+  console.log(req.body);
+  console.log("email    " + req.body.email);
+  console.log("tag     " + req.body.Tags);
+  var tagNameFind = req.body.Tags;
+  var resultDoc = [];
+  personal.find({email:req.body.email},function(err, docs){
+    for(var i=0; i<docs.length; i++)
+    {
+        //console.log(docs[i].Tags);
+        for(var j=0; j<docs[i].Tags.length; j++)
+        {
+          //console.log(docs[i].Tags[j]);
+          for(var t=0; t<docs[i].Tags[j].length; t++)
+          {
+            //console.log(docs[i].Tags[j][t].name);
+            if(docs[i].Tags[j][t].name == tagNameFind)
+            {
+              //console.log(docs[i]);
+              resultDoc.push(docs[i]);
+            }
+          }
+        }
+    }
+  console.log(resultDoc);
+  res.json(resultDoc);
+  });
+}
+
+//save new tag
+exports.addNewTag = function(req,res)
+{
+ // console.log(req.body);
+  var email = req.body.email;
+  var tag = req.body.Tags;
+console.log("email   " + email + " " + "Tags   " + tag);
+  
+  for(var i=0; i<tag.length; i++)
+  {
+    taginsert.findOneAndUpdate(
+            {email:email},
+            {$push: {"tags": {name: tag[i].name,number:1}}},
+            {safe: true, upsert: true},
+            function(err, model) {
+              if(err)
+                console.log(err);
+    });
+  }
+}
+
+
 /*
 exports.sendEmail = function(req , res)
 {

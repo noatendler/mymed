@@ -80,13 +80,15 @@ var emailCookie1 = $cookies.get('cookieEmail');
 
     $scope.removeTag = function(val)
     { 
+
+      console.log(val);
       var data ={};
       data.email = emailCookie1;
       data.tag = val;
       //console.log(val);
       $http.post('http://localhost:3000/removePersonalTag',JSON.stringify(data)).then()
-      location.reload();
-      data = {};
+      //location.reload();
+      //data = {};
     }
 
     var modal = document.getElementById("myModal");
@@ -94,10 +96,11 @@ var emailCookie1 = $cookies.get('cookieEmail');
    
     $scope.deletePopUp = function(value)
     {
+      console.log(value);
 
-      modal.style.display = "block";
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+       modal.style.display = "block";
+      // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
         modal.style.display = "none";
     }
 
@@ -116,8 +119,18 @@ var emailCookie1 = $cookies.get('cookieEmail');
       modal.style.display = "none";
     }
 
+    var dataToDelete={};
     $scope.deleteInfo = function(val){
-      $http.post('http://localhost:3000/deletePersonalInfo', JSON.stringify(val)).then()
+      dataToDelete.email = val.email;
+      dataToDelete.Title = val.Title;
+      dataToDelete.Info = val.Info;
+      dataToDelete.Category = val.Category;
+      dataToDelete.Tags = val.Tags;
+      dataToDelete.Recommendation = val.Recommendation;
+      dataToDelete.myDate = val.myDate;
+      //console.log("dataToDelete   " +JSON.stringify(dataToDelete));
+
+      $http.post('http://localhost:3000/deletePersonalInfo', JSON.stringify(dataToDelete)).then()
       modal.style.display = "none";
       location.reload();
     }
@@ -334,10 +347,12 @@ mymedical.controller('loginCtrl',['$scope','$http','$cookies', function($scope,$
         $http.post('http://localhost:3000/login', JSON.stringify(user)).then(function(res){
             if(res.data.val == 204)
             {
-                window.location = "index.html";
+              alert("login successfull");
+              window.location = "index.html";
             }
             else
             {
+              alert("the user does not exist please register");
               window.location = "register.html";
             }
         })
@@ -811,6 +826,23 @@ mymedical.controller('profileCtrl',['$scope','$http','$cookies', function($scope
 }]);
 
 mymedical.controller('calCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
+ //go top button when scroll
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementById("myBtn").style.display = "block";
+      } else {
+          document.getElementById("myBtn").style.display = "none";
+      }
+  }
+
+  $scope.topFunction = function()
+  {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
   $http.get('http://localhost:3000/doctors').then(function(doctors) {
         var temp = [];
         $scope.general = doctors.data;
