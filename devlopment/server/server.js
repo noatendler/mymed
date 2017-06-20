@@ -45,7 +45,7 @@ app.post('/addPersonal',multipartAction,personal.saveData);
 app.post('/login',multipartAction, user.findUser);
 app.post('/saveUser',multipartAction,user.saveNewUser);
 app.get('/doctors', doctors.getData);
-app.get('/getTags', tag.getTag);
+app.get('/getTags/:email', tag.getTag);
 app.post('/addPerUser', multipartAction, user.addPermission);
 app.post('/deletePerUser', multipartAction, user.deletePermission);
 app.post('/userInfo',multipartAction,user.getUserByEmail);
@@ -67,7 +67,10 @@ app.post('/delGeneral',general.delGeneral);
 app.post('/getKeywords',multipartAction, personal.getTagsFromText);
 app.post('/getAllDocs',multipartAction,personal.getAllDocumentByTag);
 app.post('/addNewTag',multipartAction,personal.addNewTag);
-//app.post('/removeTagMyTag',multipartAction,personal.removeTagMyTag);
+app.post('/removeTagMyTag',multipartAction,personal.removeTagMyTag);
+app.post('/addNewCategory',multipartAction,user.addNewCategory);
+app.post('/getCategory',multipartAction,user.getCategory);
+app.post('/getSubTags',multipartAction,personal.getSubTags);
 
 
 app.listen(port);

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
 user = require('../models/usersSchema');
+var category = require('../models/userCategory');
 //var setCookie = require('set-cookie');
 
 var cooikeEmail;
@@ -174,5 +175,90 @@ exports.getUsers = function(request, response){
   user.find({}, function(err, docs){
     response.json(docs);
 
+  });
+}
+
+//add new category to user
+exports.addNewCategory = function(req,res)
+{
+  console.log(req.body);
+  var myemail = req.body.email;
+  var cat = req.body.category[0].name;
+  var tag = req.body.tags;
+  var uniqueValue = [];
+  category.find({email:myemail,category:cat},function(err,doc){
+    if(doc.length)
+     {
+    console.log("doc    " + doc.length);
+     var myCurrentTags =[];
+     for(var i=0; i<doc[0].tags.length; i++)
+     {
+      //console.log(doc[0].tags[i]);
+          myCurrentTags.push({name:doc[0].tags[i].name});
+     }
+     var total = myCurrentTags;
+console.log("*****************************");
+     for(var t=0; t<myCurrentTags.length;t++)
+     {
+      for(k=0; k<tag.length; k++)
+      {
+        //console.log(tag[k].name);
+        if(tag[k].name == myCurrentTags[t].name)
+        {
+          if(uniqueValue.indexOf(tag[k].name) == -1)
+          {
+            uniqueValue.push({name:tag[k].name});
+          }
+        }
+        else
+        {
+          if(uniqueValue.indexOf(tag[k].name) == -1)
+          {
+            uniqueValue.push({name:tag[k].name}); 
+          }
+          if(uniqueValue.indexOf(myCurrentTags[t].name) == -1)
+          {
+           uniqueValue.push({name:myCurrentTags[t].name}); 
+          }
+        }
+      }
+     }
+  console.log("uniqueValue     " + uniqueValue);
+console.log("**********************************");
+        category.findOneAndUpdate({email: myemail,category:cat}, { $set : { 'tags': uniqueValue} },
+          {safe: true},
+            function (err, doc) {
+              if (err) {
+                  console.log(err);
+              } else {
+                  console.log('updated! :)');
+              }
+        });
+     }
+     else
+     {
+        var saveCat = new category({
+                email : myemail,
+                category : cat,
+                tags : tag
+        });
+        saveCat.save(function(error, result) {
+                if (error) {
+                  console.error(error);
+                } else {
+                  console.log("saved!");
+                }
+                //response.redirect('http://localhost:8080/index.html');
+                res.json(result);
+        });
+     }
+  });
+}
+
+exports.getCategory = function(req,res)
+{
+  console.log(req.body);
+  category.find({email:req.body.email}, function(err, docs){
+    res.json(docs);
   });
 }

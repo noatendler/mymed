@@ -1124,3 +1124,39 @@ color: #ffffff;
     top: -80px;
     font-size: 20px;
 }
+#categoryTitle
+{
+  color: #2A2760;
+  font-size: 30px;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+#category
+{
+    width: 400px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+#buttonCategory
+{
+    margin-left: 30px;
+    margin-top: 30px;
+}
+#subCategory
+{
+    color: #2A2760;
+    font-size: 25px;
+    margin-top: 90px;
+    margin-left: 30px;
+}
+#TagsCat{
+  width: 400px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+#selectedCat
+{
+      width: 230px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+}

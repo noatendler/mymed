@@ -33,22 +33,16 @@
     </header>
 <body>
     <main>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                     <a class="navbar-brand" href="#">Categories</a>
-                </div>
+        <section ng-controller="tagsCtrl" class="continer">
+            <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">All tags</a></li>
-                    <li><a href="#">Doctor 's visit tags</a></li>
-                    <li><a href="#">Test tags</a></li>
-                    <li><a href="">Create new tag</a></li>
+                    <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="newCategory()">Create new category</a></li>
+                    <li ng-class="{ active: isActive('/')}"><a ng-href="#" ng-click="allTags()">All tags</a></li>
+                    <li ng-class="{ active: isActive('/')}"><a ng-href="#" ng-click="newTag()">Create new tag</a></li>
                 </ul>
             </div>
-        </nav>
-        <section ng-controller="tagsCtrl" class="continer">
-            <button class="btn btn-default"  ng-click="allTags()" id="getAllTag">All tags</button>
-            <button class="btn btn-default" ng-click="newTag()" id="createTag">Create new tag</button>
+<!--             <button class="btn btn-default"  ng-click="allTags()" id="getAllTag">All tags</button>
+            <button class="btn btn-default" ng-click="newTag()" id="createTag">Create new tag</button> -->
             <label for="pwd" id="titleTag" class="editTitle" data-toggle="tooltip" title="add new tag to tags manager">Add new tag</label>
             <tags-input ng-model="Tags" class="inputTagM" name="Tags" id="Tags"  display-property="name" placeholder="Add new a tag" replace-spaces-with-dashes="false">
             </tags-input>
@@ -83,6 +77,25 @@
                         <img ng-src="{{file}}">
                 </section>
              </div>
+             <label id="categoryTitle" data-toggle="tooltip" title="add new category to tags manager">Please create new category</label>
+             <tags-input ng-model="category" class="inputTagM" name="category" id="category"  display-property="name" placeholder="Add new a category" replace-spaces-with-dashes="false">
+             <auto-complete source="loadCategory($query)"
+                             min-length="0"
+                             load-on-focus="true"
+                             load-on-empty="true"
+                             max-results-to-show="32"
+                             template="my-custom-template"></auto-complete>
+             </tags-input>
+             <label id="subCategory">Choose from the list tags to this category</label>
+             <tags-input ng-model="TagsCat" class="editPersonal" name="TagsCat" id="TagsCat" display-property="name" placeholder="Add a tag for your item" replace-spaces-with-dashes="false">
+             <auto-complete source="loadTags($query)"
+                             min-length="0"
+                             load-on-focus="true"
+                             load-on-empty="true"
+                             max-results-to-show="32"
+                             template="my-custom-template"></auto-complete>
+             </tags-input>
+             <button class="btn btn-default" id="buttonCategory">Add</button>
         </section>
     </main>
     <script type="text/ng-template" id="my-custom-template">

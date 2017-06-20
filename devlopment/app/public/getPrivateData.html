@@ -77,11 +77,9 @@
                     <img src="images/delete.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
                     <img src="images/edit.png" class="editImg" title="edit info" alt="edit info" ng-click="editData(index)">
                     <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
-                    <section ng-repeat="i in index.Tags">
                     <span class="titlesTag">Tags</span>
-                      <section ng-repeat="j in i"> 
-                        <p class="tagDataPer">{{j.name}}</p>
-                      </section>
+                    <section ng-repeat="i in index.Tags">
+                        <p class="tagDataPer">{{i.name}}</p>
                     </section>
              </section>
              <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="details">
@@ -97,11 +95,9 @@
                     <img src="images/delete.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
                     <img src="images/edit.png" class="editImg" title="edit info" alt="edit info"  ng-click="editData(index)">
                     <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
-                    <section ng-repeat="i in index.Tags">
                     <span class="titlesTag">Tags</span>
-                        <section ng-repeat="j in i">
-                            <p class="tagDataPer">{{j.name}}</p>
-                        </section>
+                    <section ng-repeat="i in index.Tags">
+                      <p class="tagDataPer">{{i.name}}</p>
                     </section>
                     <p class="contentName"><span class="titles">Document information</span>{{index.Info}}</p>
                     <h2 class="contentName"><span class="titles">Date of creation</span>{{index.myDate}}</h2>

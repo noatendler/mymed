@@ -47,8 +47,9 @@
         <input type="text" class="form-control editPersonal" id="pwd" name="Info" ng-model="Info" placeholder="document information" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Associate the information item into a category (e.g. general tests)">Category of the item</label>
-        <input type="text" class="form-control editPersonal" id="pwd" name="Category" ng-model="Category" placeholder="category" required>
+        <label for="pwd" class="editTitle" data-toggle="tooltip" title="choose from the list category to add to this item">Category of the item</label>
+        <select id="selectedCat" ng-model="selectedCat" ng-options="x for x in names">
+        <!-- <input type="text" class="form-control editPersonal" id="pwd" name="Category" ng-model="Category" placeholder="category" required> -->
       </div>
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="Attach the document that belongs to the information item">Document</label>

@@ -541,13 +541,27 @@ mymedical.controller('detailsCtrl',['$scope','$http','$cookies', function($scope
     } 
     today = dd+'/'+mm+'/'+yyyy;
     $scope.showDate = today;
- 
+    
+    //get category from db by email
+    var catData = {};
+    catData.email = emailCookie;
+    $http.post("http://localhost:3000/getCategory",JSON.stringify(catData)).then(function(res){
+      console.log(res.data);
+      var catNames = [];
+      for(var i=0; i<res.data.length; i++)
+      {
+        //console.log(res.data[i].category);
+        catNames.push(res.data[i].category);
+      }
+      $scope.names = catNames;
+    });    
+
     $scope.personalSave =function(){
       
       var saveInfo ={};
       saveInfo.email = emailCookie;
       saveInfo.Title = $scope.Title;
-      saveInfo.Category = $scope.Category;
+      saveInfo.Category = $scope.selectedCat;
       saveInfo.Info = $scope.Info;
       saveInfo.Recommendation = $scope.Recommendation;
       saveInfo.mydate = today;
@@ -666,15 +680,33 @@ var modal = document.getElementById('myModal');
 
   $scope.addTagsPer = function(){
     
+//get category sub tags
+//   var categoryName = myinfo.Category;
+//   var data = {};
+//   data.email = emailCookie;
+//   data.name = categoryName;
+//   var subCategory;
+//   $http.post('http://localhost:3000/getSubTags',JSON.stringify(data)).success(function(res){
+//       console.log(res[0].tags);
+//       subCategory = res[0].tags;
+//   });
+
+// //create one object from $scope.Tags and subCategory
+//   var twoObject = jQuery.extend(subCategory, $scope.Tags);
+//console.log("sub  " + two);
+// console.log("$scope.Tags   " + $scope.Tags);
+
     var tagsPer = {};
     tagsPer.email = emailCookie;
     tagsPer.Title = myinfo.Title;
     tagsPer.Info = myinfo.Info;
+    tagsPer.Category = myinfo.Category;
     tagsPer.Recommendation = myinfo.Recommendation;
     tagsPer.mydate = myinfo.mydate;
+    //tagsPer.Tags = twoObject;
     tagsPer.Tags = $scope.Tags;
     tagsPer.Permission = choice;
-    
+    //console.log("tagsPer   " + tagsPer);
     $http.post('http://localhost:3000/addPerTags',JSON.stringify(tagsPer)).then(function(docs){
     var notiDate = docs.data.date;
     var mytype = (typeof(notiDate));
@@ -741,11 +773,21 @@ var modal = document.getElementById('myModal');
     });
   }
 
+  //   $scope.loadTags = function($query) {
+  //   return $http.get('http://localhost:3000/getTags', { cache: true}).then(function(response) {
+  //     var tags = response.data;
+  //     return tags.filter(function(tag) {
+  //       return tag.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+  //     });
+  //   });
+  // };
+  
     $scope.loadTags = function($query) {
-    return $http.get('http://localhost:3000/getTags', { cache: true}).then(function(response) {
+    return $http.get('http://localhost:3000/getTags/'+emailCookie,{ cache: true}).then(function(response) {
       var tags = response.data;
       return tags.filter(function(tag) {
-        return tag.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+        return tag;
+        // return tag.name.toLowerCase().indexOf(tag.toLowerCase()) != -1;
       });
     });
   };
