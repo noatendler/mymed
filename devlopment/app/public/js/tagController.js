@@ -5,41 +5,36 @@ myTags.controller('tagsCtrl',['$scope','$http','$cookies',function($scope,$http,
   var emailCookie = $cookies.get('cookieEmail');
   var x= {};
   x.email = emailCookie;
-console.log(x);
+  console.log(x);
 
-//get all tags 
-    var h1_element = document.getElementById('seeTag');
-    var continerLink = document.getElementById('linkDocs');
-    var h2_element = document.createElement('h2');
-    var title_category = document.getElementById('categoryTitle');
-    var category_input = document.getElementById('category');
-    var button_Category = document.getElementById('buttonCategory');
-    var sub_category = document.getElementById('subCategory');
-    var TagsCat_input = document.getElementById('TagsCat');
-    var title = document.getElementById('titleTag');
-    var input = document.getElementById('Tags');
-    var btn_save = document.getElementById('saveTag');
-    var popUp = document.getElementById('myModal');
-    
-    popUp.style.display = "none";
-    h1_element.style.display = "none";
-    btn_save.style.display = "none";
-    title.style.display = "none";
-    input.style.display = "none";
-    TagsCat_input.style.display = "none";
-    sub_category.style.display = "none";
-    button_Category.style.display = "none";
-    category_input.style.display = "none";
-    title_category.style.display = "none";
-    h2_element.style.display = "none";
+  // var categorySub = document.getElementById('categorySub');
+  // categorySub.style.display = "none";
 
-//get all tags by user
-    $scope.allTags = function(){
+$scope.hideme = function(){
+
+  var categorySub = document.getElementById('categorySub');
+  categorySub.style.display = "none";    
+        document.getElementById('addNewTagId').style.display = "block";
+        document.getElementById('allTagsId').style.display = "block";
+        document.getElementById('createCategoryId').style.display = "block";
+}
+
     console.log("allTags");
-    h1_element.style.display = "block";
+    // title_category.innerHTML = '';
+    // category_input.innerHTML = '';
+    // sub_category.innerHTML = '';
+    // TagsCat_input.innerHTML = '';
+    // button_Category.innerHTML = '';
+    // title.innerHTML = '';
+    // input.innerHTML = '';
+    // subCategoryA.style.display = "none";
+    // btn_save.style.display = "none";
+    // button_Category.style.display = "none";
+    // h1_element.style.display = "block";
 
     var x = {};
     x.email = emailCookie; 
+
     $http.post('http://localhost:3000/getPersonalTags',JSON.stringify(x)).then(function(res){
      console.log(res);
 
@@ -56,27 +51,27 @@ console.log(x);
        }
        $scope.personalTag = myPersonalTags;
       });
-    }
+   // }
 
 
     var newTagVal = [];
 
 //add new tags
-    $scope.newTag = function()
-    {
-        h1_element.innerHTML = '';
+    // $scope.newTag = function()
+    // {
+        // h1_element.innerHTML = '';
         console.log("newTag");
     
         // tagC.style.display = "none";
-        title.style.display = "block";
-        input.style.display = "block";
-        btn_save.style.display = "block";
+        // title.style.display = "block";
+        // input.style.display = "block";
+        // btn_save.style.display = "block";
 
         document.getElementById("saveTag").onclick = function fun() {
             var newTags = $scope.Tags;
              saveTagFunc(newTags);
         }
-    }
+    //}
 
 //save tags in db
     function saveTagFunc(val)
@@ -87,7 +82,7 @@ console.log(x);
         data.Tags = val;
 
         $http.post('http://localhost:3000/addNewTag',JSON.stringify(data)).then(function(docs){
-                console.log(docs);
+            window.location = "tagsManager.html";
         });
     }
 
@@ -127,13 +122,13 @@ console.log(x);
     $scope.createPopUp = function(title,Info,myDate,file)
     {
         console.log('mmfmmfmfmmfm');
-            popUp.style.display = "block";
+            // popUp.style.display = "block";
             $scope.title = title;
             $scope.info = Info;
             $scope.date = myDate;
             $scope.file = file;
 
-            h2_element.style.display = "block";
+            // h2_element.style.display = "block";
             h2_element.id = "linkTitle";
             h2_element.innerHTML = "choose file from list and click on the link";
             //continerLink.appendChild(h2_element);
@@ -154,14 +149,14 @@ console.log(x);
     }
 
 //create new category
-    $scope.newCategory = function()
-    {
+    // $scope.newCategory = function()
+    // {
         //console.log("newCategory");
-        title_category.style.display = "block";
-        category_input.style.display = "block";
-        button_Category.style.display = "block";
-        sub_category.style.display = "block";
-        TagsCat_input.style.display = "block";
+        // title_category.style.display = "block";
+        // category_input.style.display = "block";
+        // button_Category.style.display = "block";
+        // sub_category.style.display = "block";
+        // TagsCat_input.style.display = "block";
 
         document.getElementById("buttonCategory").onclick = function fun() {
             var newCategory = $scope.category;
@@ -169,10 +164,10 @@ console.log(x);
              //console.log(newCategory);
             createNewCat(newCategory,newSubCat);
         }
-    }
+    //}
 
     $scope.loadTags = function($query) {
-        return $http.get('http://localhost:3000/getTags/'+emailCookie,{ cache: true}).then(function(response) {
+        return $http.get('http://localhost:3000/getTagsSeclect/'+emailCookie,{ cache: true}).then(function(response) {
             var tags = response.data;
             return tags.filter(function(tag) {
                 return tag;
@@ -212,18 +207,57 @@ console.log(x);
         data.email = emailCookie;
         data.tags = valTag;
         data.category = valCat;
-
         //console.log(data);
         $http.post('http://localhost:3000/addNewCategory',JSON.stringify(data)).then(function(res){
-            console.log("res cat    " + res.data);
-            ////create category on nav bar 
-            // if(res.data == "saved" || res.data == "create")
-            // {
-
-            // }
+            window.location = "tagsManager.html";
         });
 
     }
 
+    
+    //get navbar
+    var getCat = {};
+    getCat.email = emailCookie;
+    $http.post('http://localhost:3000/getCategory',JSON.stringify(getCat)).then(function(result){
+        var categoryNav = [];
+        for(var i=0;i<result.data.length;i++)
+        {
+            categoryNav.push(result.data[i].category);
+        }
+        
+        //add elements to navbar
+        $scope.nav = categoryNav;
+    });   
 
+        // document.getElementById('addNewTagId').style.display = "block";
+        // document.getElementById('allTagsId').style.display = "block";
+        // document.getElementById('createCategoryId').style.display = "block";
+    $scope.getSubCat = function(catName)
+    {
+        var categorySub = document.getElementById('categorySub');
+        categorySub.style.display = "block";   
+        //console.log(catName);
+        document.getElementById('addNewTagId').style.display = "none";
+        document.getElementById('allTagsId').style.display = "none";
+        document.getElementById('createCategoryId').style.display = "none";
+        // categorySub.style.display = "block";
+        var sub = {};
+        sub.email = emailCookie;
+        sub.category = catName;
+        $http.post('http://localhost:3000/getSubCategory',JSON.stringify(sub)).then(function(result){
+            //console.log(result.data);
+            var subCat = [];
+            for(var i=0; i<result.data.length; i++)
+            {
+               // console.log(result.data[i].tags);
+               for(var j=0; j<result.data[i].tags.length; j++)
+               {
+                    //console.log(result.data[i].tags[j].name);
+                    subCat.push(result.data[i].tags[j].text);
+               }
+            }
+            //console.log(subCat);
+            $scope.sub = subCat;
+        });
+    }
 }]);

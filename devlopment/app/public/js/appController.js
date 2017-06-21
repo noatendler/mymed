@@ -85,10 +85,9 @@ var emailCookie1 = $cookies.get('cookieEmail');
       var data ={};
       data.email = emailCookie1;
       data.tag = val;
-      //console.log(val);
-      $http.post('http://localhost:3000/removePersonalTag',JSON.stringify(data)).then()
-      //location.reload();
-      //data = {};
+      $http.post('http://localhost:3000/removePersonalTag',JSON.stringify(data)).then(function(res){
+          window.location = "getPrivateData.html";
+      });
     }
 
     var modal = document.getElementById("myModal");
@@ -622,7 +621,7 @@ var myTags;
          }
         else
         {
-          alert("user does not exist");
+          alert("can't add user");
         }
     });  
   }
@@ -681,29 +680,40 @@ var modal = document.getElementById('myModal');
   $scope.addTagsPer = function(){
     
 //get category sub tags
-//   var categoryName = myinfo.Category;
-//   var data = {};
-//   data.email = emailCookie;
-//   data.name = categoryName;
-//   var subCategory;
-//   $http.post('http://localhost:3000/getSubTags',JSON.stringify(data)).success(function(res){
-//       console.log(res[0].tags);
-//       subCategory = res[0].tags;
-//   });
+  var categoryName = myinfo.Category;
+  var data = {};
+  data.email = emailCookie;
+  data.name = categoryName;
+  console.log("dattaaaaaa  " + data);
+  var subCategory = [];
+  if(!categoryName == '')
+  {
+  $http.post('http://localhost:3000/getSubTags',JSON.stringify(data)).success(function(res){
+      console.log(res[0].tags);
+      for(var i=0 ;i<res[0].tags.length; i++)
+      {
+        //console.log(res[0].tags[i].text);
+        subCategory.push(res[0].tags[i].text);
+      }
+      callme(subCategory);
+  });
+  }
+  else{
+    callme("none");
+  }
 
-// //create one object from $scope.Tags and subCategory
-//   var twoObject = jQuery.extend(subCategory, $scope.Tags);
-//console.log("sub  " + two);
-// console.log("$scope.Tags   " + $scope.Tags);
-
+// console.log("subCategory "+ subCategory);
+function callme(sub){
+  console.log("in the call me function!");
     var tagsPer = {};
     tagsPer.email = emailCookie;
     tagsPer.Title = myinfo.Title;
     tagsPer.Info = myinfo.Info;
-    tagsPer.Category = myinfo.Category;
+    // tagsPer.Category = sub;
+    tagsPer.subTags = sub;
     tagsPer.Recommendation = myinfo.Recommendation;
     tagsPer.mydate = myinfo.mydate;
-    //tagsPer.Tags = twoObject;
+    // tagsPer.subTags = subCategory;
     tagsPer.Tags = $scope.Tags;
     tagsPer.Permission = choice;
     //console.log("tagsPer   " + tagsPer);
@@ -772,6 +782,7 @@ var modal = document.getElementById('myModal');
     } 
     });
   }
+  }
 
   //   $scope.loadTags = function($query) {
   //   return $http.get('http://localhost:3000/getTags', { cache: true}).then(function(response) {
@@ -786,8 +797,8 @@ var modal = document.getElementById('myModal');
     return $http.get('http://localhost:3000/getTags/'+emailCookie,{ cache: true}).then(function(response) {
       var tags = response.data;
       return tags.filter(function(tag) {
-        return tag;
-        // return tag.name.toLowerCase().indexOf(tag.toLowerCase()) != -1;
+        //return tag.toLowerCase();
+        return tag.toLowerCase().indexOf($query.toLowerCase()) != -1;
       });
     });
   };

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
 tags = require('../models/tagsSchema');
-userTags = require('../models/userTagSchema');
+var userTags = require('../models/userTagSchema');
 
 
 exports.getTag = function(req, res){
@@ -33,13 +33,24 @@ exports.getTag = function(req, res){
                 return total.indexOf(item) == pos;
             })
             res.json(uniqueNames);
-            // var uniqueTags = [];
-            // for(var i=0; uniqueNames.length; i++)
-            // {
-            //     uniqueTags.push({name:uniqueNames[i]});
-            // }
-            // console.log("uniqueTags    " + uniqueTags);
-            // res.json(uniqueTags);
         });
     })
+}
+
+exports.getTagsSeclect = function(req,res)
+{
+    var myTags = [];
+    userTags.find({email:req.params.email},function(err,docsUser){
+        if(docsUser.length)
+        {
+            for(var i=0; i<docsUser.length;i++)
+            {
+                for(var j=0; j<docsUser[i].tags.length;j++)
+                {
+                    myTags.push(docsUser[i].tags[j].name);
+                }
+            }
+            res.json(myTags);
+        }
+    });
 }

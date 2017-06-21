@@ -3,10 +3,14 @@ var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 var myNoti = require('./models/notificationSchema');
 var mongoose = require('mongoose');
+var CronJob = require('cron').CronJob;
 config = {
     mongoUrl:'mongodb://user:pass@ds133338.mlab.com:33338/mymed1'
 };
 
+
+new CronJob('00  14 * * *', function() {
+  console.log('You will see this message every second');
 function sendMail()
 {
   //The server option auto_reconnect is defaulted to true
@@ -72,6 +76,7 @@ db.on('reconnected', function () {
       if(mytoday === tempDate)
       {
         console.log("i'm in the if!");
+        console.log("docs[i].repeat " +docs[i].repeat);
         today.setDate(today.getDate() + Number(docs[i].repeat));
         newupdate = new Date(today);
         myNoti.update({email: email,Recommendation: recommendation},{dateNoti: newupdate}, 
@@ -106,7 +111,7 @@ var mailOptions = {
     from: '"MY MEDICAL " <mymedicalpro@gmail.com>', // sender address (who sends)
     to: email, // receiver
     subject: 'Notification', // Subject line
-    text: 'Hello world ', // plaintext body
+    text: '', // plaintext body
     html: recommendation
 };
 
@@ -120,6 +125,6 @@ transporter.sendMail(mailOptions, function(error, info){
 });
 
 }
-
-
 sendMail();
+}, null, true, 'America/Los_Angeles');
+
