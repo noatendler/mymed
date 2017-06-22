@@ -11,27 +11,32 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <header class="deskHeader">
-        <a href="index.html" id="logo"> </a>
-         <nav>
+        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+         <nav class="navBarPrivate">
             <a href="index.html">
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical info</h3>
+                <h3 class="PersonalNav">Personal medical infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General info</h3>
+                <h3 class="GeneralNav">General medical information</h3>
             </a>
             <a href="searchDoc.html">
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
-            <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
+            <a href="tagsManager.html">
+                <h3 class="SearchNav">Tags manager</h3>
             </a>
-            <h5  class="tooltiptext">click to view your profile</h5>
+            <a href="profile.html" id="profile">
+                <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
+            </a>
+            <a href="login.html" id="loginLink">
+                <span data-toggle="tooltip" title="Click to login">Login</span>
+            </a>
          </nav>
-    </header>
-<body ng-init="list = true">
+    </header> 
+<body ng-init="list = true" class="bodyHeandler">
     <main>
         <section>
             <img src="images/personalImg.jpg" class="topImgDesk">
@@ -44,8 +49,9 @@
                 <span class="addInfoDesk">add personal</span>
                 <br>
                 <span class="addInfoSpan">information</span>
-                <img src="images/addInfo.png" class="addInfoImg">
+                <img src="images/addButton.png" class="addInfoImg">
              </a>
+            <!-- <label class="tagsTitle">Items tags</label> -->
              <section id="tagsPersonal" ng-repeat="allTags in personalTag" >
                 <span ng-repeat="tag in allTags" class="tag label label-info">{{tag.name}}
                     <a>
@@ -57,7 +63,7 @@
              <img class="changeView" src="images/details.png" ng-click="details = true; list=false; content=false;">
              <img class="changeView" src="images/content.png" ng-click="content = true; list=false; details=false;">
              <span class="sortDateT">
-                 sort data:
+                 <span class="titleSort">sort data by:</span>
                  <select class="sortInfo" name="shortData" ng-model="shortData" id="shortData" ng-change="shortFunc()">
                     <option value="AZ">A to Z</option>
                     <option value="ZA">Z to A</option>
@@ -65,35 +71,36 @@
                     <option value="lastDate">Last</option>
                 </select>
              </span>
-             <h2 class="currentDesk">current view:</h2>
+             <h3 class="currentDesk">current view:</h3>
              <h2 class="currentDesk" id="mysearch">{{searchString}}</h2>
+             <label class="searchKeyword">Search item by keyword</label>
              <br>
              <input type="search" id="filter" name="searchString" ng-model="searchString" placeholder="change view by keyword">
              <br>
              <p>{{insertData}}</p>
              <br>
-             <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="list" class="detailsAndler">
-                    <img src="images/see.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
-                    <img src="images/delete.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
-                    <img src="images/edit.png" class="editImg" title="edit info" alt="edit info" ng-click="editData(index)">
+             <section class="detailsAndler" ng-show="list" ng-repeat="index in insertDataToDB | filter:searchString">
+                    <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
+                    <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <img src="images/pencil.png" class="editImg" title="edit info" alt="edit info" ng-click="editData(index)">
                     <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
                     <span class="titlesTag">Tags</span>
                     <section ng-repeat="i in index.Tags">
-                        <p class="tagDataPer">{{i.name}}</p>
-                    </section>
-             </section>
-             <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="details">
-                    <img src="images/see.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
-                    <img src="images/delete.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
-                    <img src="images/edit.png" class="editImg"  title="edit info" alt="edit info" ng-click="editData(index)">
+                        <span class="tagDataPer">{{i.name}}</span>
+                    </section>  
+            </section>          
+             <section ng-repeat="index in insertDataToDB | filter:searchString" class="detailsAndler"  ng-show="details">
+                    <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
+                    <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <img src="images/pencil.png" class="editImg"  title="edit info" alt="edit info" ng-click="editData(index)">
                     <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
                     
                     <h2 class="contentName"><span class="titles">Date of creation</span>{{index.myDate}}</h2>
              </section>
-             <section ng-repeat="index in insertDataToDB | filter:searchString" ng-show="content"  class="sectionPrivate" >
-                    <img src="images/see.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
-                    <img src="images/delete.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
-                    <img src="images/edit.png" class="editImg" title="edit info" alt="edit info"  ng-click="editData(index)">
+             <section ng-repeat="index in insertDataToDB | filter:searchString" class="detailsAndler" ng-show="content">
+                    <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
+                    <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <img src="images/pencil.png" class="editImg" title="edit info" alt="edit info"  ng-click="editData(index)">
                     <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
                     <span class="titlesTag">Tags</span>
                     <section ng-repeat="i in index.Tags">
@@ -111,7 +118,7 @@
                 </section> 
              </section>
              <br><br>
-             <button ng-click="getAllAccess()" class="btn btn-default accessButton">Get access user</button>
+             <button ng-click="getAllAccess()" class="btn btn-default accessButton">Access user</button>
                 <select ng-model="selectedName" id="selectedName" name="selectedName" value="" ng-options="access for access in names"></select>
                 <section ng-repeat ="i in getUserPer">
                     Title: {{i.Title}}

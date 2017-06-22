@@ -13,29 +13,35 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <header class="deskHeader">
-        <a href="index.html" id="logo"> </a>
-         <nav>
+        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+         <nav class="navBarPrivate">
             <a href="index.html">
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical info</h3>
+                <h3 class="PersonalNav">Personal medical infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General info</h3>
+                <h3 class="GeneralNav">General medical information</h3>
             </a>
             <a href="searchDoc.html">
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
+            <a href="tagsManager.html">
+                <h3 class="SearchNav">Tags manager</h3>
+            </a>
             <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
+                <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
+            </a>
+            <a href="login.html" id="loginLink">
+                <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
-    </header>
+    </header> 
 <body ng-init="allTags=true">
     <main>
         <section ng-controller="tagsCtrl">
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse" id="navBarSub">
                 <ul class="nav navbar-nav" id="navBar">
                     <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="hideme(); createCategory=true; allTags=false;  addNewTag=false; ">Create new category</a></li>
                     <li ng-class="{ active: isActive('/')}"><a ng-href="#" ng-click="hideme(); allTags=true; addNewTag=false;  createCategory=false; ">All tags</a></li>
@@ -45,18 +51,13 @@
                     <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="getSubCat(i)">{{i}}</a></li>
               </ul>
             </div>
-<!--             <div class="collapse navbar-collapse" id="dynamicNav">
-                <ul ng-repeat="i in nav" class="nav navbar-nav">
-                    <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="getSubCat(i)">{{i}}</a></li>
-                </ul>
-            </div> -->
             <section id="categorySub" style="display:block;">
             <div ng-repeat="j in sub" class="subCategoryA">
                 <i class="tag label label-info ng-binding ng-scope">{{j}}</i>
             </div>
             </section>
             <section ng-show="addNewTag" id="addNewTagId">
-            <label for="pwd" id="titleTag" class="editTitle" data-toggle="tooltip" title="add new tag to tags manager">Add new tag</label>
+            <label for="pwd" id="titleTagM" class="editTitle" data-toggle="tooltip" title="add new tag to tags manager">Add new tag</label>
             <tags-input ng-model="Tags" class="inputTagM" name="Tags" id="Tags"  display-property="name" placeholder="Add new a tag" replace-spaces-with-dashes="false">
             </tags-input>
             <button class="btn btn-default" id="saveTag">Save tag</button>
@@ -73,7 +74,8 @@
             <div id="linkDocs" ng-repeat="j in linkDataName">
                 <a href="#" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)">{{j.Title}}</a>
             </div>
-            <!-- The Modal -->
+<!--             <label id="linkTitle">choose file from list and click on the link</label>
+ -->            <!-- The Modal -->
             <div id="myModal" class="modal">
               <!-- Modal content -->
                 <section class="modal-content">

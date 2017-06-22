@@ -4,23 +4,29 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
-  <header class="deskHeader">
-        <a href="index.html" id="logo"> </a>
-         <nav>
+    <header class="deskHeader">
+        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+         <nav class="navBarPrivate">
             <a href="index.html">
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical info</h3>
+                <h3 class="PersonalNav">Personal medical infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General info</h3>
+                <h3 class="GeneralNav">General medical information</h3>
             </a>
             <a href="searchDoc.html">
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
-            <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
+            <a href="tagsManager.html">
+                <h3 class="SearchNav">Tags manager</h3>
+            </a>
+            <a href="profile.html" id="profileSearch">
+                <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
+            </a>
+            <a href="login.html" id="loginLink">
+                <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
     </header>
@@ -31,6 +37,7 @@
       <span class="topTitle">Search doctor nearby</span>
     </section>
   <body ng-controller="searchController" id="bo">
+    <h2 id="titleSeach">Please enter location, and filter with expertise and HMO </h2>
     <form>
       <label class="selectTitle">Select Expertise:</label>
       <select id="expertise">
@@ -47,7 +54,7 @@
         <option value="Psychiatrist" name="Psychiatrist">Psychiatrist</option>
       </select>
       <br><br>
-      <label class="selectTitle">Select HMO:</label>
+      <label class="selectTitleHMO">Select HMO:</label>
       <select id="HMO">
         <option value="all" name="all">all</option>
         <option value="Maccabi" name="Maccabi">Maccabi</option>
@@ -56,29 +63,33 @@
         <option value="Leumit" name="Leumit">Leumit</option>
       </select>
       <br><br>
-      <input ng-model="input1" id="input1" name="input1" class="controls" type="text" placeholder="Search Doctor">
+      <input ng-model="input1" id="input1" name="input1" class="controls" type="text" placeholder="Enter location">
       <input type="button" ng-click="checkSearch(input1)" value="send" id="sendButton">
     </form>
     <div id="map"></div>
     <h1 class="searchResult">Result:</h1>
-    <p id="serachRes">
-    <div ng-repeat="i in docNearby">
-      <h1>{{i.name}}</h1>
-      <p>{{i.Address}}</p>
-      <p>{{i.distance}}</p>
-      <p>{{i.HMO}}</p>
-      <p>{{i.Expertise}}</p>
-      <p ng-repeat="j in i.reception_hours">
-        <span ng-if="j.Sunday">Sunday:{{j.Sunday}}</span>
-        <span ng-if="j.Monday">Monday:{{j.Monday}}</span>
-        <span ng-if="j.Tuesday">Tuesday:{{j.Tuesday}}</span>
-        <span ng-if="j.Wednesday">Wednesday:{{j.Wednesday}}</span>
-        <span ng-if="j.Thursday">Thursday:{{j.Thursday}}</span>
-        <span ng-if="j.Friday">Friday:{{j.Friday}}</span>
-        <span ng-if="j.Saturday">Saturday:{{j.Saturday}}</span>
-      </p>
+    <div ng-repeat="i in docNearby" class="serachRes">
+      <h1 class="docNameSearch">{{i.name}}</h1>
+      <br>
+      <p>Distance from you:{{i.distance}}</p>
+      <br>
+      <p>HMO: {{i.HMO}}</p>
+      <br>
+      <p>Expertise: {{i.Expertise}}</p>
+      <br>
+      <span>Reception hours: </span>
+      <span ng-repeat="j in i.reception_hours"> 
+        <span ng-if="j.Sunday">Sunday: {{j.Sunday}}</span>
+        <span ng-if="j.Monday">, Monday: {{j.Monday}}</span>
+        <span ng-if="j.Tuesday">, Tuesday: {{j.Tuesday}}</span>
+        <span ng-if="j.Wednesday">, Wednesday: {{j.Wednesday}}</span>
+        <span ng-if="j.Thursday">, Thursday: {{j.Thursday}}</span>
+        <span ng-if="j.Friday">, Friday: {{j.Friday}}</span>
+        <span ng-if="j.Saturday">, Saturday: {{j.Saturday}}</span>
+      </span>
+      <br><br>
+      <p>Address: {{i.Address}}</p>
     </div>
-    </p>
     <script>
      function initAutocomplete() { //initAutocomplete
         var map = new google.maps.Map(document.getElementById('map'), {

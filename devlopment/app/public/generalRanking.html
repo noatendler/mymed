@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html ng-app="mymed">
 <head>
-	<title>general information</title>
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>general information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
        <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<header class="deskHeader">
-        <a href="index.html" id="logo"> </a>
-         <nav>
+    <header class="deskHeader">
+        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+         <nav class="navBarPrivate">
             <a href="index.html">
-                <h3 class="homeNav" id="navBar">Home</h3>
+                <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav navBar">Personal medical info</h3>
+                <h3 class="PersonalNav">Personal medical infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav navBar">General info</h3>
+                <h3 class="GeneralNav">General medical information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav navBar">Search doctor nearby</h3>
+                <h3 class="SearchNav">Search doctor nearby</h3>
+            </a>
+            <a href="tagsManager.html">
+                <h3 class="SearchNav">Tags manager</h3>
             </a>
             <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
+                <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
+            </a>
+            <a href="login.html" id="loginLink">
+                <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
-</header>
-<body>
+    </header> 
+<body class="bodyContent">
   <section>
     <img src="images/general.jpg" class="topImgDesk">
   </section>
@@ -41,73 +47,74 @@
     <img src="images/addInfo.png" class="addInfoImgGe">
   </a>
   <section ng-controller="calCtrl">
-  <button ng-click="topFunction()" id="myBtn" title="Go to top">Go Top</button>
-	 <section ng-repeat="doc in general" class="sideBySide">
-    <img src="images/like.jpg" class="rankButton" data-toggle="tooltip" title="Click to rate" ng-click="rankDoc(doc.Entity,doc.name,doc.Expertise, doc.Address, doc.Ranking, doc.LastUpdate, doc.totaNumlRank, doc.myNumRank)">
-    <label class="labelGeneral">Entity:</label>
-		<h1 class="generalData" style="width:150">{{doc.Entity}}</h1>
-    <label class="labelGeneral">Name:</label>
-		<h1 class="generalData">{{doc.name}}</h1>
-    <label class="labelGeneral">Expertise:</label>
-		<h1 class="generalData">{{doc.Expertise}}</h1>
-    <label class="labelGeneral">HMO:</label>
-		<h1 class="generalData">{{doc.HMO}}</h1>
-    <label class="labelGeneral">Address:</label>
-		<h1 class="generalData">{{doc.Address}}</h1>
-    <label class="labelGeneral">Reception hours:</label>
-    <section ng-repeat="i in doc.reception_hours">
-      <h2 class="daysRank" ng-if="i.Sunday !== undefined">Sunday: {{i.Sunday}}</h2>
-      <br>
-      <h2 class="daysRank" ng-if="i.Monday !== undefined
-      ">Monday: {{i.Monday}}</h2>
-      <br>
-      <h2 class="daysRank" ng-if="i.Tuesday !== undefined">Tuesday: {{i.Tuesday}}</h2>
-      <br>
-      <h2 class="daysRank" ng-if="i.Wednesday !== undefined">Wednesday: {{i.Wednesday}}</h2>
-      <br>
-      <h2 class="daysRank" ng-if="i.Thursday !== undefined">Thursday: {{i.Thursday}}</h2>
-      <br>
-      <h2 class="daysRank" ng-if="i.Friday !== undefined">Friday: {{i.Friday}}</h2>
-    </section>
+  <br>
+  <h2 class="searchTitle">Search entity:</h2>
+  <input type="search" id="filterDoc" name="searchString" ng-model="searchString" placeholder="enter your preference">
+  <i ng-click="topFunction()" id="myBtn" title="Go back to the top"></i>
+  <br><br><br>
+   <section ng-repeat="doc in general | filter:searchString">
+    <section class="medInfo" >
+    <h1 class="medTitle">{{doc.name}}</h1>
     <label class="labelGeneral">Ranking:</label>
-		<h1 class="generalData">{{doc.Ranking}}</h1>
+    <span class="generalData">{{doc.Ranking}}</span>
+    <img src="images/like.jpg" class="rankButton" data-toggle="tooltip" title="Click to rate" ng-click="rankDoc(doc.Entity,doc.name,doc.Expertise, doc.Address, doc.Ranking, doc.LastUpdate, doc.totaNumlRank, doc.myNumRank)">
+    <br>
+    <label class="labelGeneral">Expertise:</label>
+    <span class="medContent">{{doc.Expertise}}</span>
+    <br>
+    <label class="labelGeneral">HMO:</label>
+    <span class="medContent">{{doc.HMO}}</span>
+    <br>
+    <label class="labelGeneral">Reception hours:</label>
+    <span ng-repeat="i in doc.reception_hours">
+      <span class="daysRank" ng-if="i.Sunday !== undefined">Sunday: {{i.Sunday}}</span>
+      <span class="daysRank" ng-if="i.Monday !== undefined
+      ">, Monday: {{i.Monday}}</span>
+      <span class="daysRank" ng-if="i.Tuesday !== undefined">, Tuesday: {{i.Tuesday}}</span>
+      <span class="daysRank" ng-if="i.Wednesday !== undefined">, Wednesday: {{i.Wednesday}}</span>
+      <span class="daysRank" ng-if="i.Thursday !== undefined">, Thursday: {{i.Thursday}}</span>
+      <span class="daysRank" ng-if="i.Friday !== undefined">, Friday: {{i.Friday}}</span>
+    </span>
+    <br>
+    <label class="labelGeneral">Address:</label>
+    <span class="medContent">{{doc.Address}}</span>
     <button ng-click="edit(doc)" ng-if="user()" class="btn btn-default editAdmin">edit info</button>
     <button ng-click="deleteDoc(doc)" ng-if="user()" class="btn btn-default">delete info</button>
-		<!-- The Modal -->
-		<div id="myModal" class="modal">
-		  <!-- Modal content -->
-		  <section class="modal-content">
-		    <span class="close">&times;</span>
-		    	<p id="errorLog"></p>
-		    	<p class="popUpGeneral">Doctor: {{dataName}}</p>
-		    	<p class="popUpGeneral">current ranking: {{dataRank}}</p>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <section class="modal-content">
+        <span class="close">&times;</span>
+          <p id="errorLog"></p>
+          <span class="popUpTitle">{{dataName}}</span>
+          <span id="showMyRank"></span>
+          <br>
+          <span class="popUpGeneral">current ranking: {{dataRank}}</span>
+          <br>
           <span class="popUpGeneral">was updated in: {{lastUpdate}}</span>
           <br>
           <span class="popUpGeneral">Rank credibility: {{Credibility}}%</span>
-		    	<br>
+          <br>
           <p class="popUpGeneral">Address: {{dataAddress}}</p>
-	            <section id="showMyRank">
-   		        </section>
-   		        <br>
-   		        <br>
-   		        <p>Personal attention</p>
-   	           <section star-rating rating="PA" click="clickPA(param)">
-   	          </section>
-   	           <p>Professional</p>
-   	           <section star-rating rating="Pro" click="clickPro(param)">
-   	          </section>
-   	           <p>Availability to schedule an appointment</p>
-   	           <section star-rating rating="AV" click="clickAV(param)">
-   	          </section>
-   	           <p>Atmosphere in clinc</p>
-   	           <section star-rating rating="AT" click="clickAT(param)">
-   	          </section>
-   	           <p>Recommendation</p>
-   	           <section star-rating rating="Rec" click="clickRec(param)">
-   	          </section>
-   	          <input class="btn btn-default submitPopUp" type="submit" ng-click="sendRank()" value="save">
-		 </section>
-		 </div>
+              <br>
+              <p>Personal attention</p>
+               <section star-rating rating="PA" click="clickPA(param)">
+              </section>
+               <p>Professional</p>
+               <section star-rating rating="Pro" click="clickPro(param)">
+              </section>
+               <p>Availability to schedule an appointment</p>
+               <section star-rating rating="AV" click="clickAV(param)">
+              </section>
+               <p>Atmosphere in clinc</p>
+               <section star-rating rating="AT" click="clickAT(param)">
+              </section>
+               <p>Recommendation</p>
+               <section star-rating rating="Rec" click="clickRec(param)">
+              </section>
+              <input class="btn btn-default submitPopUp" type="submit" ng-click="sendRank()" value="save">
+     </section>
+     </div>
     <!-- The Modal -->
     <div id="deletePopup" class="modal">
       <!-- Modal content -->
@@ -120,9 +127,9 @@
           <button ng-click="delNo()">no</button>
       </section>
     </div>
-	 </section>
+   </section>
   </section>
-	<script src="js/lib/angular/angular.min.js"></script>
+  <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>
     <script src="js/lib/angular/angular-route.min.js"></script>
     <script src="js/lib/angular/angular-cookies.min.js"></script>

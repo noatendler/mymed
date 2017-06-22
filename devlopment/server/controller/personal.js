@@ -681,30 +681,27 @@ exports.saveNotification = function(req, res)
 }
 exports.getAllDocumentByTag = function(req,res)
 {
-  console.log(req.body);
-  console.log("email    " + req.body.email);
-  console.log("tag     " + req.body.Tags);
+ // console.log(req.body);
+ // console.log("email    " + req.body.email);
+  //console.log("tag     " + req.body.Tags);
   var tagNameFind = req.body.Tags;
   var resultDoc = [];
   personal.find({email:req.body.email},function(err, docs){
     for(var i=0; i<docs.length; i++)
     {
+      //console.log(docs[i]);
         //console.log(docs[i].Tags);
         for(var j=0; j<docs[i].Tags.length; j++)
         {
-          //console.log(docs[i].Tags[j]);
-          for(var t=0; t<docs[i].Tags[j].length; t++)
-          {
-            //console.log(docs[i].Tags[j][t].name);
-            if(docs[i].Tags[j][t].name == tagNameFind)
+           //console.log(docs[i].Tags[j].name);
+            if(docs[i].Tags[j].name == tagNameFind)
             {
               //console.log(docs[i]);
-              resultDoc.push(docs[i]);
+               resultDoc.push(docs[i]);
             }
-          }
         }
     }
-  console.log(resultDoc);
+  //console.log(resultDoc);
   res.json(resultDoc);
   });
 }

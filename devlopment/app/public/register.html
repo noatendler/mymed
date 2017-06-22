@@ -8,22 +8,31 @@
       <link rel="stylesheet" href="css/style.css">
 </head>
     <header class="deskHeader">
-        <a href="index.html" id="logo"> </a>
-         <nav>
+        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+         <nav class="navBarPrivate">
             <a href="index.html">
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical info</h3>
+                <h3 class="PersonalNav">Personal medical infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General info</h3>
+                <h3 class="GeneralNav">General medical information</h3>
             </a>
             <a href="searchDoc.html">
                 <h3 class="SearchNav">Search doctor nearby</h3>
             </a>
+            <a href="tagsManager.html">
+                <h3 class="SearchNav">Tags manager</h3>
+            </a>
+            <a href="profile.html" id="profile">
+                <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
+            </a>
+            <a href="login.html" id="loginLink">
+                <span data-toggle="tooltip" title="Click to login">Login</span>
+            </a>
          </nav>
-     </header>
+    </header> 
 <body ng-controller="registerCtrl">
     <form enctype="multipart/form-data">
     <h1 class="registerTitle">Please register</h1>
