@@ -14,16 +14,16 @@
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical infomation</h3>
+                <h3 class="PersonalNav">Personal Medical Infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General medical information</h3>
+                <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search doctor nearby</h3>
+                <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
             <a href="tagsManager.html">
-                <h3 class="SearchNav">Tags manager</h3>
+                <h3 class="SearchNav">Tags Manager</h3>
             </a>
             <a href="profile.html" id="profile">
                 <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
@@ -38,7 +38,7 @@
     <img src="images/general.jpg" class="topImgDesk">
   </section>
   <section class="topTitleDesk">
-    <span class="topTitle">General information</span>
+    <span class="topTitle" id="titleGMobile">General Information</span>
   </section>
   <a href="insertGeneralData.html" class="redirectAdd">
     <span class="addInfoDeskG">add general</span>
@@ -79,7 +79,7 @@
     <label class="labelGeneral">Address:</label>
     <span class="medContent">{{doc.Address}}</span>
     <button ng-click="edit(doc)" ng-if="user()" class="btn btn-default editAdmin">edit info</button>
-    <button ng-click="deleteDoc(doc)" ng-if="user()" class="btn btn-default">delete info</button>
+    <button ng-click="deleteDoc(doc)" ng-if="user()" class="btn btn-default deleteAdmin">delete info</button>
     <!-- The Modal -->
     <div id="myModal" class="modal">
       <!-- Modal content -->

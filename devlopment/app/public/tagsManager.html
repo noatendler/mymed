@@ -19,20 +19,20 @@
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical infomation</h3>
+                <h3 class="PersonalNav">Personal Medical Infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General medical information</h3>
+                <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search doctor nearby</h3>
+                <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
             <a href="tagsManager.html">
-                <h3 class="SearchNav">Tags manager</h3>
+                <h3 class="SearchNav">Tags Manager</h3>
             </a>
-            <a href="profile.html" id="profile">
+<!--             <a href="profile.html" id="profile">
                 <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
-            </a>
+            </a> -->
             <a href="login.html" id="loginLink">
                 <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
@@ -43,13 +43,13 @@
         <section ng-controller="tagsCtrl">
             <div class="collapse navbar-collapse" id="navBarSub">
                 <ul class="nav navbar-nav" id="navBar">
-                    <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="hideme(); createCategory=true; allTags=false;  addNewTag=false; ">Create new category</a></li>
                     <li ng-class="{ active: isActive('/')}"><a ng-href="#" ng-click="hideme(); allTags=true; addNewTag=false;  createCategory=false; ">All tags</a></li>
+                    <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="hideme(); createCategory=true; allTags=false;  addNewTag=false; ">Create new category</a></li>
                     <li ng-class="{ active: isActive('/')}"><a ng-href="#" ng-click="hideme(); addNewTag=true; allTags=false; createCategory=false; ">Create new tag</a></li>
                 </ul>
-                <ul ng-repeat="i in nav" class="nav navbar-nav">
+<!--                 <ul ng-repeat="i in nav" class="nav navbar-nav">
                     <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="getSubCat(i)">{{i}}</a></li>
-              </ul>
+              </ul> -->
             </div>
             <section id="categorySub" style="display:block;">
             <div ng-repeat="j in sub" class="subCategoryA">
@@ -63,21 +63,53 @@
             <button class="btn btn-default" id="saveTag">Save tag</button>
             </section>
             <section ng-show="allTags" id="allTagsId">
-            <h2 id="seeTag">click on tag label to see all document that belong to this tag</h2>
-            <section ng-repeat="i in personalTag" class="tagM tag label label-info ng-binding ng-scope" id="tagContiner">
-                <i ng-click="getDocument(i.name)" class="getDoc" data-toggle="tooltip" title="click to see all document that belong to this tag">{{i.name}}</i>
-                {{i.number}}
+            <section class="managerAllTags">
+                <span data-toggle="tooltip" title="the tag name">Tag Name</span>
+                <span data-toggle="tooltip" title="how many times the tag exist in items">Count</span>
+                <span data-toggle="tooltip" title="click in button to see items link">Show Me Data Items</span>
+                <span data-toggle="tooltip" title="click on button to remove tag from the list">Delete Tag</span>
+            </section>
+            <!-- <h2 id="seeTag">click on tag label to see all document that belong to this tag</h2> -->
+            <section ng-repeat="i in personalTag">
+                <p class="HoldTagName">{{i.name}}</p>
+                <span class="tagCount">{{i.number}}</span>
+                <button data-toggle="tooltip" title="click on button to remove tag from the list" ng-click="getDocument(i.name)" class="showItemTag">Show</button>
+               <!--  <i ng-click="getDocument(i.name)" class="getDoc" data-toggle="tooltip" title="click to see all document that belong to this tag">{{i.name}}</i>
+                {{i.number}} class="tagM tag label label-info ng-binding ng-scope"-->
                 <a>
-                  <i class="remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(i.name,i.number)"></i>
+                  <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(i.name,i.number)"></i>
                 </a>
             </section>
+            <section ng-repeat="i in nav">
+                 <p class="HoldTagName">{{i}}</p>
+                 <a>
+                   <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(i.name,i.number)"></i>
+                 </a>
+            </section>
+            <h3 id="clickTitle">Click on the link to</h3>
+            <span id="spanClick">show the item</span>
             <div id="linkDocs" ng-repeat="j in linkDataName">
-                <a href="#" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)">{{j.Title}}</a>
+                <a href="#" class="linkToDocs" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)">
+                    <p class="linkTitle">{{j.Title}}</p>
+                </a>
             </div>
+            <!--display item data-->
+            <section class="itemInfoM" id="itemInfoM">
+                <!-- <label>Document title</label> -->
+                <h1 class="holdTitleItem">{{title}}</h1>
+                <br>
+                <!-- <label>Date of creation</label> -->
+                <h3 class="holdPopUp">{{date}}</h3>
+                <br>
+               <!--  <label>Document information</label> -->
+                <p class="holdInfoItem">{{info}}</p>
+                <br>
+                <!-- <label>Document</label> -->
+                <img ng-src="{{file}}" class="holdImgItem">
+            </section>
 <!--             <label id="linkTitle">choose file from list and click on the link</label>
  -->            <!-- The Modal -->
-            <div id="myModal" class="modal">
-              <!-- Modal content -->
+<!--             <div id="myModal" class="modal">
                 <section class="modal-content">
                     <span class="close">&times;</span>
                         <p id="errorLog"></p>
@@ -93,15 +125,15 @@
                         <label>Document</label>
                         <img ng-src="{{file}}">
                 </section>
-             </div>
+             </div> -->
              </section>
              <section ng-show="createCategory" id="createCategoryId">
              <label id="categoryTitle" data-toggle="tooltip" title="add new category to tags manager">Please create new category / update exsiting one</label>
              <tags-input ng-model="category" class="inputTagM" name="category" id="category"  display-property="name" placeholder="Add new a category" replace-spaces-with-dashes="false">
              </tags-input>
-             <label id="subCategory">Choose from the list tags to this category</label>
+             <label id="subCategory" data-toggle="tooltip" title="Select a tag from the list to append it to the category">Select a tag from the list to append it to the category</label>
              <tags-input ng-model="TagsCat"
-                  class="editPersonal" name="TagsCat" id="TagsCat" 
+                  class="editPersonalManger" name="TagsCat" id="TagsCat" 
                 placeholder="Add a tag for your item" 
                 replace-spaces-with-dashes="false"
                 add-from-autocomplete-only="true">

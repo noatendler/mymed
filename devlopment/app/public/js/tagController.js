@@ -78,9 +78,13 @@ $scope.hideme = function(){
             });
         }
     }
-
+document.getElementById('clickTitle').style.display = "none";
+document.getElementById('spanClick').style.display ="none";
+document.getElementById('itemInfoM').style.display = "none";
     $scope.getDocument = function(tag)
     {
+        document.getElementById('spanClick').style.display = "block";
+        document.getElementById('clickTitle').style.display = "block";
         console.log("getDocument");
         //console.log(tag);
         var dataT = {};
@@ -97,6 +101,7 @@ $scope.hideme = function(){
             $scope.linkDataName = res1.data;
         });
     }
+   
 //document.getElementById('linkTitle').style.display = "none";
     $scope.createPopUp = function(title,Info,myDate,file)
     {
@@ -108,25 +113,25 @@ $scope.hideme = function(){
             $scope.file = file;
 
             console.log(" $scope.title  " +  $scope.title);
-
-            var modal = document.getElementById("myModal");
-            modal.style.display = "block";
-           // document.getElementById('linkTitle').style.display = "block";
+            document.getElementById('itemInfoM').style.display = "block";
+           //  var modal = document.getElementById("myModal");
+           //  modal.style.display = "block";
+           // // document.getElementById('linkTitle').style.display = "block";
  
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
+           //  // Get the <span> element that closes the modal
+           //  var span = document.getElementsByClassName("close")[0];
          
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
+           //  // When the user clicks on <span> (x), close the modal
+           //  span.onclick = function() {
+           //      modal.style.display = "none";
+           //  }
 
             // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }            
+            // window.onclick = function(event) {
+            //     if (event.target == modal) {
+            //         modal.style.display = "none";
+            //     }
+            // }            
     }
 
 //create new category

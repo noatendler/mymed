@@ -10,22 +10,23 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     </head>
     <header class="deskHeader">
-        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+    <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+    <div class="menu">
          <nav class="navBarPrivate">
             <a href="index.html">
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical infomation</h3>
+                <h3 class="PersonalNav">Personal Medical Infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General medical information</h3>
+                <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search doctor nearby</h3>
+                <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
             <a href="tagsManager.html">
-                <h3 class="SearchNav">Tags manager</h3>
+                <h3 class="SearchNav">Tags Manager</h3>
             </a>
             <a href="profile.html" id="profile">
                 <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
@@ -34,24 +35,41 @@
                 <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
+        </div>
+<!--         <input type="image" src="images/menu.png" id="amburger" ng-click="openMenu()">
+ --> 
+
+<!-- <nav role="navigation" class="navMobile">
+  <div id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+    <ul id="menuA">
+        <a href="getPrivateData.html"><li class="liA">Personal Medical Infomation</li></a>
+        <a href="generalRanking.html"><li  class="liA">General Medical Information</li></a>
+        <a href="searchDoc.html"><li  class="liA">Search Doctor Nearby</li></a>
+        <a href="login.html"><li  class="liA">Login</li></a>
+    </ul>
+  </div>
+</nav> -->
     </header> 
      <body>
         <a href="getPrivateData.html">
         <section class="ImgDesk">
-            <img src="images/personal.jpg" alt="personal info" title="personal info" class="mainImgDesk">
-            <h2 class="titleDesk">Personal medical information</h2>
+            <img src="images/personal.jpg" alt="personal info" title="personal info" class="mainImgDeskP">
+            <h2 class="titleDesk">Personal Medical Information</h2>
         </section>
         </a>
         <a href="generalRanking.html">
         <section class="ImgDesk">
             <img src="images/general.jpg" alt="general info" title="general info" class="mainImgDesk">
-            <h2 class="titleDeskG">General information</h2>
+            <h2 class="titleDeskG">General Information</h2>
         </section>
         </a>
         <a href="searchDoc.html">
         <section class="ImgDesk">
-            <img src="images/search.jpg" alt="search doctor" title="search doctor" class="mainImgDesk">
-            <h2 class="titleSearchDesk">Search doctor nearby</h2>
+            <img src="images/search.jpg" alt="search doctor" title="search doctor" class="mainImgDesk mainImgMobile">
+            <h2 class="titleSearchDesk">Search Doctor Nearby</h2>
         </section>
         </a>
      </body>

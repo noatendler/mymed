@@ -67,6 +67,7 @@ app.post('/updateGeneralData',general.updateGeneral);
 app.post('/delGeneral',general.delGeneral);
 app.post('/getKeywords',multipartAction, personal.getTagsFromText);
 app.post('/getAllDocs',multipartAction,personal.getAllDocumentByTag);
+app.get('/getAllTags/', tag.getAllTag);
 app.post('/addNewTag',multipartAction,personal.addNewTag);
 app.post('/removeTagMyTag',multipartAction,personal.removeTagMyTag);
 app.post('/addNewCategory',multipartAction,user.addNewCategory);

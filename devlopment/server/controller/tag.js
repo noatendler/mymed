@@ -37,6 +37,21 @@ exports.getTag = function(req, res){
     })
 }
 
+exports.getAllTag = function(req, res){
+    var doc1 = []; 
+
+    tags.find({},function(err, docs){
+        if(docs.length){
+            for(var i=0; i<docs.length; i++)
+            {
+                doc1.push({name:docs[i].name});
+            }
+            res.json(doc1);
+        }
+        else
+            res.json("error");
+    });
+}
 exports.getTagsSeclect = function(req,res)
 {
     var myTags = [];

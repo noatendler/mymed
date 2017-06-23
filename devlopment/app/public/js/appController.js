@@ -1,6 +1,23 @@
 var mymedical = angular.module("mymed",['ngRoute','ngCookies','ngTagsInput']);
 
 
+$( ".cross" ).hide();
+$( ".menu" ).hide();
+$( ".hamburger" ).click(function() {
+$( ".menu" ).slideToggle( "slow", function() {
+$( ".hamburger" ).hide();
+$( ".cross" ).show();
+});
+});
+
+$( ".cross" ).click(function() {
+$( ".menu" ).slideToggle( "slow", function() {
+$( ".cross" ).hide();
+$( ".hamburger" ).show();
+});
+});
+
+
 mymedical.controller('getPersonalCtrl',['$scope','$http','$cookies',function($scope,$http,$cookies) {
 var emailCookie1 = $cookies.get('cookieEmail');
 //http://localhost:3000/getPersonal
@@ -1239,16 +1256,26 @@ mymedical.controller('viewPersonalCtrl',['$scope','$http','$cookies', function($
 
 mymedical.controller('editPersonalCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
 var etidTag = [];
+var editPer = [];
     var myEdit = JSON.parse($cookies.get('cookieEdit'));
+    console.log(myEdit);
+    
     $scope.myinfoEdit= myEdit;
-    for(var i=0;i<myEdit.Tags.length;i++){
-      for(var j=0;j<myEdit.Tags[i].length;j++)
-      {
-        etidTag.push(myEdit.Tags[i][j].name);
-      }
+    for(var i=0;i<myEdit.Tags.length;i++)
+    {
+        etidTag.push(myEdit.Tags[i].name);
     }
-  // console.log(etidTag);
+    //console.log(etidTag);
     $scope.Tags = etidTag;
+
+    for(var i=0;i<myEdit.permission.length;i++)
+    {
+        editPer.push(myEdit.permission[i].perEmail);
+    }
+    
+    $scope.Per = editPer;
+    console.log(editPer);
+
     var data ={};
 
     var today = new Date();
@@ -1266,9 +1293,10 @@ var etidTag = [];
 
     today = dd+'/'+mm+'/'+yyyy;
 
+    //opened new path
     $scope.loadTag = function($query) {
-      //http://localhost:3000/getTags
-        return $http.get("https://mymed1.herokuapp.com/getTags", { cache: true}).then(function(response) {
+      //http://localhost:3000/getAllTags
+        return $http.get("http://localhost:3000/getAllTags", { cache: true}).then(function(response) {
       var tags = response.data;
       console.log();
         return tags.filter(function(tag) {
@@ -1282,7 +1310,16 @@ var etidTag = [];
       var recommendation = document.getElementById('Recommendation').value;
       var title = document.getElementById('Title').value;
 
+      var checkedItem = {};
+      checkedItem = ($("input:checkbox:not(:checked)"));
+      for(var i=0; i<checkedItem.length; i++){
+        console.log("scscscs");
+        console.log(checkedItem[i].value);
+      }
+      // console.log("checkedItem" + checkedItem);
      data.Tags = $scope.Tags;
+     data.Per = $scope.Per;
+     console.log("******************************"+data.Per);
      data.Info  = info;
      data.Recommendation  = recommendation;
      data.Title  = title;

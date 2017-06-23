@@ -52,17 +52,11 @@
                 <img src="images/addButton.png" class="addInfoImg">
              </a>
             <!-- <label class="tagsTitle">Items tags</label> -->
-             <section id="tagsPersonal" ng-repeat="allTags in personalTag" >
-                <span ng-repeat="tag in allTags" class="tag label label-info">{{tag.name}}
-                    <a>
-                        <i class="remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(tag.name)"></i>
-                    </a>
-                </span>
-             </section>
              <img class="changeView" src="images/list.png" ng-click="list = true; content = false; details = false;" >
              <img class="changeView" src="images/details.png" ng-click="details = true; list=false; content=false;">
              <img class="changeView" src="images/content.png" ng-click="content = true; list=false; details=false;">
-             <span class="sortDateT">
+             <br><br>;
+             <section class="sortDateT">
                  <span class="titleSort">sort data by:</span>
                  <select class="sortInfo" name="shortData" ng-model="shortData" id="shortData" ng-change="shortFunc()">
                     <option value="AZ">A to Z</option>
@@ -70,44 +64,59 @@
                     <option value="firstDate">First</option>
                     <option value="lastDate">Last</option>
                 </select>
-             </span>
-             <h3 class="currentDesk">current view:</h3>
-             <h2 class="currentDesk" id="mysearch">{{searchString}}</h2>
-             <label class="searchKeyword">Search item by keyword</label>
+             </section>
+<!--              <br>
+             <br>
+             <h3 class="currentDesk"></h3>
+             <h2 class="currentDesk" id="mysearch"></h2> -->
+             <span class="searchKeyword">Search item by keyword</span>
              <br>
              <input type="search" id="filter" name="searchString" ng-model="searchString" placeholder="change view by keyword">
              <br>
              <p>{{insertData}}</p>
+<!--              <br>
+             <p id="allTagsTilte">These are the tags in which you've tagged your information</p>
+            <section id="tagsPersonal" ng-repeat="allTags in personalTag" >
+                <span ng-repeat="tag in allTags" class="tag label label-info">{{tag.name}}
+                    <a>
+                        <i class="remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(tag.name)"></i>
+                    </a>
+                </span>
+             </section> -->
              <br>
              <section class="detailsAndler" ng-show="list" ng-repeat="index in insertDataToDB | filter:searchString">
-                    <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
-                    <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
-                    <img src="images/pencil.png" class="editImg" title="edit info" alt="edit info" ng-click="editData(index)">
-                    <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
-                    <span class="titlesTag">Tags</span>
-                    <section ng-repeat="i in index.Tags">
-                        <span class="tagDataPer">{{i.name}}</span>
-                    </section>  
-            </section>          
+                <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
+                <img src="images/pencil.png" class="editImg" title="edit info" alt="edit info" ng-click="editData(index)">
+                <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <h1 class="titlePerDesk"><span class="titles">  </span>{{index.Title}}</h1>
+                    <span class="titlesTag">Tags </span>
+                    <section class="displayTags" ng-repeat="i in index.Tags">
+                    <span class="tagDataPer">{{i.name}}</span>
+                    </section>
+                <div class="clear"></div>          
+            </section>
              <section ng-repeat="index in insertDataToDB | filter:searchString" class="detailsAndler"  ng-show="details">
                     <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
-                    <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
                     <img src="images/pencil.png" class="editImg"  title="edit info" alt="edit info" ng-click="editData(index)">
-                    <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
-                    
+                    <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <h1 class="titlePerDesk"><span class="titles"></span>{{index.Title}}</h1>
                     <h2 class="contentName"><span class="titles">Date of creation</span>{{index.myDate}}</h2>
+                <div class="clear"></div>        
              </section>
              <section ng-repeat="index in insertDataToDB | filter:searchString" class="detailsAndler" ng-show="content">
                     <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
-                    <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
                     <img src="images/pencil.png" class="editImg" title="edit info" alt="edit info"  ng-click="editData(index)">
-                    <h1 class="titlePerDesk"><span class="titles">Document title</span>{{index.Title}}</h1>
+                    <img src="images/trash.png" class="delImg" title="delete info" alt="delete info" ng-click="deletePopUp(index)">
+                    <h1 class="titlePerDesk"><span class="titles"></span>{{index.Title}}</h1>
                     <span class="titlesTag">Tags</span>
-                    <section ng-repeat="i in index.Tags">
+                    <section class="displayTags" ng-repeat="i in index.Tags">
                       <p class="tagDataPer">{{i.name}}</p>
                     </section>
-                    <p class="contentName"><span class="titles">Document information</span>{{index.Info}}</p>
-                    <h2 class="contentName"><span class="titles">Date of creation</span>{{index.myDate}}</h2>
+                    <br>
+                    <h2 class="contentName"><span class="titles"> Document information</span>{{index.Info}}</h2>
+                    <h2 class="contentName"><span class="titles">Date of creation</span>{{index.myDate}}</h2>                  
+                    <div class="clear"></div>        
+
              </section>
              <section id="myModal" class="modal">
                 <section class="modal-content">
@@ -118,23 +127,23 @@
                 </section> 
              </section>
              <br><br>
-             <button ng-click="getAllAccess()" class="btn btn-default accessButton">Access user</button>
-                <select ng-model="selectedName" id="selectedName" name="selectedName" value="" ng-options="access for access in names"></select>
-                <section ng-repeat ="i in getUserPer">
-                    Title: {{i.Title}}
-                    <br>
-                    Info: {{i.Info}}
-                    <br>
-                    Category: {{i.Category}}
-                    <bkr>
-                    <img ng-src="{{i.file}}">
-                    <br>
-                    Recommendation: {{i.Recommendation}}
-                    <br>
-                    Tags:
-                    <p ng-repeat ="a in i.Tags">
+             <p id="accessTitle">You can choose user from the list to see items that you have been tagged in</p>
+                <span id="getAccess">
+                    <select ng-model="selectedName" id="selectedName" name="selectedName" value="" ng-options="access for access in names"></select>
+                    <button ng-click="getAllAccess()" class="btn btn-default accessButton">Access user</button>
+                </span>
+                <section ng-repeat ="i in getUserPer" class="accesInfo">
+                    <h1 class="titleAccess">{{i.Title}}</h1>
+                    <h2 class="contentName"><span class="titles">Info: </span>{{i.Info}}</h2>
+                    <h2 class="contentName"><span class="titles">Category: </span>{{i.Category}}</h2>
+<!--                     <img ng-src="{{i.file}}">
+                    <br> -->
+                    <h2 class="contentName"><span class="titles">Recommendation: </span>{{i.Recommendation}}</h2>
+                    <span class="titlesTag">Tags</span>
+                    <section class"displayTags"><p class="tagDataPer" ng-repeat ="a in i.Tags">
                         {{a.name}}
                     </p>
+                    </section>
                 </section>
           </section>
     </main>

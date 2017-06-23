@@ -14,16 +14,16 @@
                 <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical infomation</h3>
+                <h3 class="PersonalNav">Personal Medical Infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General medical information</h3>
+                <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search doctor nearby</h3>
+                <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
             <a href="tagsManager.html">
-                <h3 class="SearchNav">Tags manager</h3>
+                <h3 class="SearchNav">Tags Manager</h3>
             </a>
             <a href="profile.html" id="profile">
                 <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
@@ -37,7 +37,7 @@
     <img src="images/personalImg.jpg" class="topImgDesk">
   </section>
   <section class="topTitleDesk">
-    <span class="topTitle">Personal medical info</span>
+    <span class="topTitle">Personal Medical Info</span>
   </section>
 <body ng-controller="detailsCtrl">
   <br><br><br><br>
@@ -54,11 +54,10 @@
       </div>
       <div class="form-group">
         <label for="pwd" class="editTitle" data-toggle="tooltip" title="choose from the list category to add to this item">Category of the item</label>
-        <select id="selectedCat" ng-model="selectedCat" ng-options="x for x in names">
-        <!-- <input type="text" class="form-control editPersonal" id="pwd" name="Category" ng-model="Category" placeholder="category" required> -->
+        <select id="selectedCat" ng-model="selectedCat" ng-options="x for x in names"></select>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Attach the document that belongs to the information item">Document</label>
+          <label for="pwd" class="editTitle" data-toggle="tooltip" title="Upload file that belongs to the information item">Attach file to the item</label>
           <input type="file" id="file" class="btn btn-default fileButton" name="file" value="">
       </div>
       <div class="form-group">
