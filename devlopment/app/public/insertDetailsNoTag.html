@@ -41,11 +41,11 @@
   </section>
 <body ng-controller="detailsCtrl">
   <br><br><br><br>
-  <h2 class="insertTitle">Please insert personal medical information</h2>
+  <h2 class="insertTitle insertTitleG">Please insert personal medical information</h2>
     <form enctype="multipart/form-data" method="post" action="https://mymed1.herokuapp.com/addDataNoTags">
         <input type="text" class="form-control" id="emailInput" name="email" value={{showEmail}}>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter a title for your information item">Document title</label>
+        <label for="pwd" class="editTitle" id="docTitleMobile" data-toggle="tooltip" title="Enter a title for your information item">Document title</label>
         <input type="text" class="form-control editPersonal" id="pwd" name="Title"  ng-model="Title" placeholder="document title" required>
       </div> 
       <div class="form-group">

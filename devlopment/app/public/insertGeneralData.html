@@ -36,7 +36,7 @@
          </nav>
     </header> 
   <section>
-    <img src="images/general.jpg" class="topImgDesk">
+    <img src="images/general.jpg" class="topImgDesk" id="topImgGMobile">
   </section>
   <section class="topTitleDesk">
     <span class="topGTitle">General information</span>
@@ -46,7 +46,7 @@
     <form>
     <h1 class="insertTitleG">Please insert general mediacl information</h1>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select an entity from the list">Medical entity</label>
+        <label for="pwd" class="editTitle" id="insertSubMobile" data-toggle="tooltip" title="Select an entity from the list">Medical entity</label>
         <select class="entityGeneral" id="entitySelect" ng-model="entitySelect" name="entitySelect">
           <option value="Doctor">Doctor</option>
           <option value="Hospital">Hospital</option>
@@ -54,15 +54,15 @@
         </select>    
       </div> 
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter the name of the medical entity, for example Dr. Rosen Moshe">Medical entity name</label>
+        <label for="pwd" class="editTitle" id="entityMobile" data-toggle="tooltip" title="Enter the name of the medical entity, for example Dr. Rosen Moshe">Medical entity name</label>
         <input type="text" class="generalInput form-control" id="pwd" ng-model="name" name="name" placeholder="medical entity name" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="enter in what the meducal entity specialized in(e.g. general dentistry)">Medical facility expertise</label>
+        <label for="pwd" class="editTitle" id="expertiseMobile" data-toggle="tooltip" title="enter in what the meducal entity specialized in(e.g. general dentistry)">Medical facility expertise</label>
         <input type="text" class="generalInput form-control" id="pwd" ng-model="Expertise" name="Expertise" placeholder="medical facility expertise" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select from the list the name of medical entity">HMO</label>
+        <label for="pwd" class="editTitle" id="hmoMobile" data-toggle="tooltip" title="Select from the list the name of medical entity">HMO</label>
         <select class="hmoGeneral" id="hmoSelect" ng-model="hmoSelect" name="hmoSelect">
           <option value="Maccabi">Maccabi</option>
           <option value="Clalit">Clalit</option>
@@ -71,55 +71,55 @@
         </select> 
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="Enter the address of the medical entity">The address of the medical entity</label>
+        <label for="pwd" class="editTitle" id="addressMobile" data-toggle="tooltip" title="Enter the address of the medical entity">The address of the medical entity</label>
         <input type="text"  class="generalInput form-control" id="pwd" ng-model="Address" placeholder="the address of the medical entity" name="Address">
       </div>
       <div class="form-group">
-      <label for="pwd" class="editTitle" data-toggle="tooltip" title="Select the reception hours">Reception hours</label>
+      <label for="pwd" class="editTitle" id="hourMobile" data-toggle="tooltip" title="Select the reception hours">Reception hours</label>
       <br>
-      <label for="pwd" class="insertGTitle">Sunday</label>
+      <label for="pwd" class="insertGTitle hoursMobile">Sunday</label>
       <br>
-        <label class="fromTitle">From</label>
+        <label class="fromTitle fromMobile">From</label>
           <input type="time" id="SundayHoursFrom" ng-model="SundayHoursFrom" name="SundayHoursFrom" value="">
         <label>Until</label>
           <input type="time" id="SundayHoursUntil" ng-model="SundayHoursUntil" name="SundayHoursUntil" value="">
       <br><br>
-      <label for="pwd" class="insertGTitle">Monday</label>
+      <label for="pwd" class="insertGTitle hoursMobile">Monday</label>
         <br>
-        <label for="pwd" class="fromTitle">from</label>
+        <label for="pwd" class="fromTitle fromMobile">from</label>
           <input type="time" id="MondayHoursFrom" ng-model="MondayHoursFrom" name="MondayHoursFrom">
         <label>Until</label>
           <input type="time" id="MondayHoursUntil" ng-model="MondayHoursUntil" name="MondayHoursUntil">
           <br><br>
-      <label for="pwd" class="insertGTitle">Tuesday</label>
+      <label for="pwd" class="insertGTitle hoursMobile">Tuesday</label>
         <br>
-        <label for="pwd" class="fromTitle">from</label>
+        <label for="pwd" class="fromTitle fromMobile">from</label>
           <input type="time" id="TuesdayHoursFrom" ng-model="TuesdayHoursFrom" name="TuesdayHoursFrom">
         <label>Until</label>
           <input type="time" id="TuesdayHoursUntil" ng-model="TuesdayHoursUntil" name="TuesdayHoursUntil">
           <br><br>
-      <label for="pwd" class="insertGTitle">Wednesday</label>
+      <label for="pwd" class="insertGTitle hoursMobile">Wednesday</label>
         <br>
-        <label for="pwd" class="fromTitle">from</label>
+        <label for="pwd" class="fromTitle fromMobile">from</label>
           <input type="time" id="WednesdayHoursFrom" ng-model="WednesdayHoursFrom" name="WednesdayHoursFrom">
         <label>Until</label>
           <input type="time" id="WednesdayHoursUntil" ng-model="WednesdayHoursUntil" name="WednesdayHoursUntil">
           <br><br>
-      <label for="pwd" class="insertGTitle">Thursday</label>
+      <label for="pwd" class="insertGTitle hoursMobile">Thursday</label>
         <br>
-        <label for="pwd" class="fromTitle">from</label>
+        <label for="pwd" class="fromTitle fromMobile">from</label>
           <input type="time" id="ThursdayHoursFrom" ng-model="ThursdayHoursFrom" name="ThursdayHoursFrom">
         <label>Until</label>
           <input type="time" id="ThursdayHoursUntil" ng-model="ThursdayHoursUntil" name="ThursdayHoursUntil">
           <br><br>
-      <label for="pwd" class="insertGTitle">Friday</label>
+      <label for="pwd" class="insertGTitle hoursMobile">Friday</label>
         <br>
-        <label for="pwd" class="fromTitle">from</label>
+        <label for="pwd" class="fromTitle fromMobile">from</label>
           <input type="time" id="FridayHoursFrom" ng-model="FridayHoursFrom" name="FridayHoursFrom">
         <label>Until</label>
           <input type="time" id="FridayHoursUntil" ng-model="FridayHoursUntil" name="FridayHoursUntil">
       <br><br>
-      <button type="submit" class="btn btn-default submitAddInfo" ng-click="saveGeneral()">Submit</button>
+      <button type="submit" class="btn btn-default submitAddInfo fromMobile" ng-click="saveGeneral()">Submit</button>
       </div>
     </form>
     <script>

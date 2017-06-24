@@ -30,9 +30,6 @@
             <a href="tagsManager.html">
                 <h3 class="SearchNav">Tags Manager</h3>
             </a>
-<!--             <a href="profile.html" id="profile">
-                <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
-            </a> -->
             <a href="login.html" id="loginLink">
                 <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
@@ -47,15 +44,7 @@
                     <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="hideme(); createCategory=true; allTags=false;  addNewTag=false; ">Create new category</a></li>
                     <li ng-class="{ active: isActive('/')}"><a ng-href="#" ng-click="hideme(); addNewTag=true; allTags=false; createCategory=false; ">Create new tag</a></li>
                 </ul>
-<!--                 <ul ng-repeat="i in nav" class="nav navbar-nav">
-                    <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="getSubCat(i)">{{i}}</a></li>
-              </ul> -->
             </div>
-            <section id="categorySub" style="display:block;">
-            <div ng-repeat="j in sub" class="subCategoryA">
-                <i class="tag label label-info ng-binding ng-scope">{{j}}</i>
-            </div>
-            </section>
             <section ng-show="addNewTag" id="addNewTagId">
             <label for="pwd" id="titleTagM" class="editTitle" data-toggle="tooltip" title="add new tag to tags manager">Add new tag</label>
             <tags-input ng-model="Tags" class="inputTagM" name="Tags" id="Tags"  display-property="name" placeholder="Add new a tag" replace-spaces-with-dashes="false">
@@ -69,30 +58,24 @@
                 <span data-toggle="tooltip" title="click in button to see items link">Show Me Data Items</span>
                 <span data-toggle="tooltip" title="click on button to remove tag from the list">Delete Tag</span>
             </section>
-            <!-- <h2 id="seeTag">click on tag label to see all document that belong to this tag</h2> -->
-            <section ng-repeat="i in personalTag">
-                <p class="HoldTagName">{{i.name}}</p>
-                <span class="tagCount">{{i.number}}</span>
-                <button data-toggle="tooltip" title="click on button to remove tag from the list" ng-click="getDocument(i.name)" class="showItemTag">Show</button>
-               <!--  <i ng-click="getDocument(i.name)" class="getDoc" data-toggle="tooltip" title="click to see all document that belong to this tag">{{i.name}}</i>
-                {{i.number}} class="tagM tag label label-info ng-binding ng-scope"-->
-                <a>
-                  <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(i.name,i.number)"></i>
-                </a>
-            </section>
-            <section ng-repeat="i in nav">
-                 <p class="HoldTagName">{{i}}</p>
-                 <a>
-                   <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(i.name,i.number)"></i>
-                 </a>
-            </section>
+    <div ng-repeat="tagPerCat in tagsToFilter() | filter:filterTags">
+        <p class="HoldTagName">{{tagPerCat.category}}</p>
+        <div ng-repeat="tag in sub | filter:{category: tagPerCat.category}">
+            <p class="subNameTag">{{tag.name}} <span class="tagCount">{{tag.number}}</span></p>  
+            <button data-toggle="tooltip" title="click on button to show tag details" ng-click="getDocument(tag.name)" class="showItemTag">Show</button>
+            <a>
+                <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(tag.name,tag.number)"></i>
+            </a> 
+        </div>        
+    </div>
             <h3 id="clickTitle">Click on the link to</h3>
             <span id="spanClick">show the item</span>
-            <div id="linkDocs" ng-repeat="j in linkDataName">
-                <a href="#" class="linkToDocs" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)">
-                    <p class="linkTitle">{{j.Title}}</p>
+            <ul id="linkDocs" ng-repeat="j in linkDataName">
+                <li><a href="#" class="linkToDocs" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)">
+                    <span class="linkTitle">{{j.Title}}</span>         
                 </a>
-            </div>
+                </li>
+            </ul>
             <!--display item data-->
             <section class="itemInfoM" id="itemInfoM">
                 <!-- <label>Document title</label> -->
@@ -132,15 +115,13 @@
              <tags-input ng-model="category" class="inputTagM" name="category" id="category"  display-property="name" placeholder="Add new a category" replace-spaces-with-dashes="false">
              </tags-input>
              <label id="subCategory" data-toggle="tooltip" title="Select a tag from the list to append it to the category">Select a tag from the list to append it to the category</label>
-             <tags-input ng-model="TagsCat"
-                  class="editPersonalManger" name="TagsCat" id="TagsCat" 
-                placeholder="Add a tag for your item" 
-                replace-spaces-with-dashes="false"
-                add-from-autocomplete-only="true">
-             <auto-complete source="loadTags($query)" 
-                     min-length="0" 
-                     debounce-delay="0"
-                     max-results-to-show="10"></auto-complete>
+                   <tags-input ng-model="TagsCat" class="editPersonalManger" name="TagsCat" id="TagsCat" display-property="name" placeholder="Add a tag for your item" replace-spaces-with-dashes="false">
+              <auto-complete source="loadTags($query)"
+                             min-length="0"
+                             load-on-focus="true"
+                             load-on-empty="true"
+                             max-results-to-show="32"
+                             template="my-custom-template"></auto-complete>
             </tags-input>
              <button class="btn btn-default" id="buttonCategory">Add</button>
             </section>

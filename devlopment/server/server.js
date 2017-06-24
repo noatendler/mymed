@@ -74,5 +74,10 @@ app.post('/addNewCategory',multipartAction,user.addNewCategory);
 app.post('/getCategory',multipartAction,user.getCategory);
 app.post('/getSubTags',multipartAction,personal.getSubTags);
 app.post('/getSubCategory',multipartAction,user.getSubCategory);
+app.post('/getCategoryByUser',multipartAction,user.getCategoryByUser);
+app.post('/getCatAndSubBySub',multipartAction,user.getCatAndSubBySub);
+app.post('/getSubCateygoryEmail',multipartAction,user.getSubCateygoryEmail);
+
+
 
 app.listen(port);

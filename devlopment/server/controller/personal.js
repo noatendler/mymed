@@ -21,17 +21,90 @@ var natural_language_understanding = new NaturalLanguageUnderstandingV1({
 
 exports.updatePersonal = function(req,res)
 {
-  personal.update({email: req.body.email, Info: req.body.oldInfo, Recommendation: req.body.oldRec, Title: req.body.oldTitle},{Tags: req.body.Tags, Info: req.body.Info, Recommendation:req.body.Recommendation, Title: req.body.Title,myDate:req.body.myDate}, {multi: true}, 
+  
+    var newTags = req.body.Tags;
+    var oldTags = req.body.beforeTags;
+    var toDel = [];
+    var toAdd = [];
+    var toArray = [];
+
+    for(var i=0; i<newTags.length; i++)
+    {
+      toArray.push(newTags[i].name); 
+    }
+    for(var j=0; j<oldTags.length; j++)
+    {
+      if(toArray.indexOf(oldTags[j])==-1)
+        toDel.push(oldTags[j]);
+    }
+    for(var j=0; j<toArray.length; j++)
+    {
+      if(oldTags.indexOf(toArray[j])==-1)
+        toAdd.push(toArray[j]);
+    }
+    // console.log("toDel "+toDel);
+    // console.log("toAdd "+toAdd);
+    var updateTagsPersonal = [];
+    taginsert.find({email: req.body.email}, function(err, currentTags){
+        for(var i=0; i< currentTags[0].tags.length; i++)
+        {
+          var tagName = currentTags[0].tags[i].name; 
+          var newNum = currentTags[0].tags[i].number;
+          var found = 0;
+
+          if(toDel.indexOf(tagName) >-1)
+          {
+            found=1;
+            console.log('found a match to del '+tagName);
+            newNum -=1;
+            updateTagsPersonal.push({name: tagName, number:newNum});
+          }
+          else
+          {
+            if(toAdd.indexOf(tagName) > -1)
+            {
+              found=1
+              console.log('found a match to add EXIST '+tagName);
+              newNum +=1;
+              updateTagsPersonal.push({name: tagName, number:newNum});
+              var myPosition = toAdd.indexOf(tagName);
+              toAdd.splice(myPosition,1); 
+            }
+          }
+          if(found==0)
+          {
+            console.log('ADDING OLD '+tagName);
+            updateTagsPersonal.push({name: tagName, number:newNum});
+          }
+
+          if(i == currentTags[0].tags.length-1)
+          {
+            console.log("toAdd "+toAdd);
+            for(var temp=0; temp<toAdd.length; temp++)
+            {
+              if(updateTagsPersonal.indexOf(toAdd[temp]) == -1)
+                updateTagsPersonal.push({name:toAdd[temp], number:1});
+            }
+          }
+        }
+
+  taginsert.update({email: req.body.email},{tags:updateTagsPersonal}, {multi: false}, 
         function(err, num) {
           if(err)
             console.log(err);
           else
             console.log("updated "+num);
         }); 
-  //console.log(req.body);
+  });
 
+  personal.update({email: req.body.email, Info: req.body.oldInfo, Recommendation: req.body.oldRec, Title: req.body.oldTitle},{Tags: req.body.Tags, Info: req.body.Info, Recommendation:req.body.Recommendation, Title: req.body.Title,myDate:req.body.myDate, permission:req.body.Per}, {multi: true}, 
+        function(err, num) {
+          if(err)
+            console.log(err);
+          else
+            console.log("updated "+num);
+        }); 
 }
-
  // sendUser.emailAccess = selectUser;
  //        sendUser.emailUser = emailCookie;
 exports.getDataByUser = function(req, res){
@@ -63,9 +136,9 @@ exports.getData = function(req, res){
 };
 
 var client = knox.createClient({
-    key: 'AKIAJEGUYTCV6V5XQFZA'
-    , secret: '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'
-    , bucket: 'mymedicalshenkar'
+    key: 'my key'
+    , secret: 'my secret'
+    , bucket: 'my bucket'
 });
 
 function hasher(){
@@ -425,7 +498,7 @@ for(var k=0; k<dateTime.length; k++)
       tagsNamePersonal.push({name:req.body.subTags[t]});
     }
   }
-  if(typeof(req.body.Tags)!=='undefined')
+  if(typeof(req.body.Tags)!='undefined')
   {
     for(var i=0; i<req.body.Tags.length; i++)
     {
@@ -438,24 +511,9 @@ for(var k=0; k<dateTime.length; k++)
   {
    per.push({perEmail: req.body.Permission[j]});
   }
-//console.log("___________________________________");
-//console.log(tagsName);
-//console.log("_____________________________________");
-//console.log(per);
-//console.log("______________________________");
-    // personal.findOneAndUpdate(
-    // {email: req.body.email, Info: docinfo, Recommendation: docrec, Title: doctitle},
-    // {$set: {"Tags": newTags1}},
-    // {safe: true},
-    // function(err, model) {
-    //   if(err)
-    //     console.log(err);
-    //   else
-    //     console.log(model);
-    // }); 
     personal.findOneAndUpdate(
     {email: req.body.email, Title:req.body.Title, Info: req.body.Info, myDate: req.body.mydate},
-    {$set: {"permission": per, "Tags": tagsNamePersonal}},
+    {$set: {"permission": per, "Tags": tagsNamePersonal, "Category":req.body.Category}},
     {safe: true},
     function(err, model) {
       if(err)
@@ -463,6 +521,12 @@ for(var k=0; k<dateTime.length; k++)
       else
         console.log(model);
     });
+    var cat = [];
+    if(typeof(req.body.Category) != 'undefined')
+    {
+      console.log('******************************&&&&&&&&77');
+      cat = {name:req.body.Category, number:1};
+    }
 
 //myemail hold coockie email
   taginsert.find({email: myemail}, function(err, docsTags){
@@ -473,7 +537,8 @@ for(var k=0; k<dateTime.length; k++)
       //console.log("not fount save new");
       var saveTag = new taginsert({
           email: myemail,
-          tags: tagsName
+          tags: tagsName,
+          Category: cat
       });
       //console.log("saveTag  " + saveTag);
       saveTag.save(function(error, result) {
@@ -495,7 +560,19 @@ for(var k=0; k<dateTime.length; k++)
           tagtemp.push(docsTags[t].tags[k].name);
         }
       }
-      //console.log("tagtemp  " + tagtemp); 
+
+      //need to check if Category already exist
+      updateCatNumber=1;
+      console.log(docsTags[0].Category);
+      for(var temp=0; temp<docsTags[0].Category.length; temp++)
+      {
+        if(docsTags[0].Category[temp].name == req.body.Category)
+        {
+          updateCatNumber = docsTags[0].Category[temp].number;
+          updateCatNumber +=1;
+        }
+      }
+
 //tagtemp include all tags that need to add 1
  Sync(function(){
   var addNumTag = [];
@@ -522,7 +599,40 @@ for(var k=0; k<dateTime.length; k++)
           }
 
         }
-        //console.log("****************************");
+
+          console.log("req.body.Category "+req.body.Category);
+          if(updateCatNumber >1)
+          {
+          var setCat = {name: req.body.Category, number: updateCatNumber};
+            taginsert.findOneAndUpdate({email: myemail, 'Category.name': req.body.Category}, { $set : { 'Category.$': setCat} },
+              {safe: true},
+              function (err, doc) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log('updated! :)');
+                }
+            });
+            }
+            else
+            {
+            if(typeof(req.body.Category) != 'undefined'){
+              console.log("in the function82828");
+            var setCat = {name: req.body.Category, number: 1};
+              taginsert.findOneAndUpdate({email: myemail}, { $push : { 'Category': setCat} },
+                {safe: true},
+                function (err, doc) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log('updated! :)');
+                  }
+              });
+              }
+            }
+
+        console.log("addNumTag     " + addNumTag);
+        console.log("****************************");
         if (addNumTag.length >0)
         {
           taginsert.find({email:myemail}, function(error, myTagsDoc){
@@ -552,8 +662,9 @@ for(var k=0; k<dateTime.length; k++)
                   console.log('updated! :)');
                 }
             });
-          }
         }
+           
+          }
        });
       }
       res.json({"date":getDateNoti});
@@ -601,7 +712,16 @@ for(var k=0; k<dateTime.length; k++)
         }
     });      
   }
-
+    personal.remove({email:req.body.email,Title:req.body.Title,Info:req.body.Info,Category:req.body.Category,Recommendation:req.body.Recommendation,myDate:req.body.myDate},function(err, docs){
+          // console.log("docs "+docs);
+          // res.json(docs);
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log("success");
+      }
+    });
 }
 exports.personalTags = function(req, res){
   console.log(req.body.email);

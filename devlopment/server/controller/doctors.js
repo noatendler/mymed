@@ -12,7 +12,7 @@ exports.getData = function(req, res){
 }
 
 exports.getCalRank = function(req,res){
-	//console.log(req.body);
+	console.log(req.body);
 	var saveRank = new cal({
 		insertDate: req.body.insertDate,
         Entity: req.body.entity,
@@ -41,11 +41,14 @@ var totalRank = 0;
 var allDocRank=0;
 var numUserRank =0;
 function calRank(req,temp){
-	
+    console.log("in cal rank function");
+	//console.log(req,temp);
 	cal.find({}, function(error, allRank){
-		allDocRank = allRank.length;
-	});
+        //console.log("cal find  " + allRank.length);
 
+		allDocRank = allRank.length;
+	
+//console.log("allDocRank   " + allDocRank);
 	//console.log(req);
 	//console.log(sumCal);	
 	cal.find({name: req.name,Address: req.address,Entity:req.entity,Expertise: req.expertise},function(err,docs){
@@ -75,13 +78,14 @@ function calRank(req,temp){
 				totalRank += sumCal[j]; 
 			}
 			totalRank/=(sumCal.length);
+             var totalRankRound = totalRank.toFixed(2);
 			//console.log("total length "+ sumCal.length);
 			//res.json(sumCal);
-			//console.log("totalRank "+totalRank);
+	console.log("totalRank "+totalRankRound);
 		doctors.findOneAndUpdate(
     	{name: req.name, Entity:req.entity, Address: req.address,
 		Expertise: req.expertise},
-            {$set: {Ranking:totalRank, LastUpdate:req.insertDate,myNumRank:numUserRank}},
+            {$set: {Ranking:totalRankRound, LastUpdate:req.insertDate,myNumRank:numUserRank}},
             {safe: true, upsert: true},
             function(err, model) {
               if(err)
@@ -96,6 +100,7 @@ function calRank(req,temp){
 		        console.log("updated "+num);
 		    });	
 		});
+    });
 	totalRank=0;
 
 }

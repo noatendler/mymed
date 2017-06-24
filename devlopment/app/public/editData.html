@@ -69,11 +69,13 @@
                     </tags-input>
                   <br>
     <!--             <div ng-modle="userPermission" id="userPermission"> -->
-                   <label class="editTitle" data-toggle="tooltip" title="add information and details to the document">Permission</label>
+                   <label id="TitlePer" class="editTitle" data-toggle="tooltip" title="add information and details to the document" ng-init="currentAcess()">Permission</label>
                   <section ng-repeat="perEmail in Per">
                     <input type="checkbox" name="myChoice" ng-model="myChoice" value={{perEmail}} class="permissionName" ng-checked="true"><lable class="permissionLable">{{perEmail}}</lable>
                   </section>
               <button type="submit" class="btn btn-default submitEdit">update
+                  </button>
+                  <button type="submit" class="btn btn-default backEdit" value="Back" onclick="window.history.back()">back
                   </button>
              </form>
             <script type="text/ng-template" id="my-custom-template">

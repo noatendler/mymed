@@ -4,7 +4,8 @@ var schema = mongoose.Schema;
 
 var userTagSchema = new schema({
   email: {type:String},
-  tags:[]
+  tags:[],
+  Category:[]
 },{collection: 'mytags'});
 
 

@@ -10,13 +10,6 @@ $( ".cross" ).show();
 });
 });
 
-$( ".cross" ).click(function() {
-$( ".menu" ).slideToggle( "slow", function() {
-$( ".cross" ).hide();
-$( ".hamburger" ).show();
-});
-});
-
 
 mymedical.controller('getPersonalCtrl',['$scope','$http','$cookies',function($scope,$http,$cookies) {
 var emailCookie1 = $cookies.get('cookieEmail');
@@ -704,6 +697,7 @@ var modal = document.getElementById('myModal');
   $scope.addTagsPer = function(){
     
 //get category sub tags
+
   var categoryName = myinfo.Category;
   var data = {};
   data.email = emailCookie;
@@ -713,12 +707,12 @@ var modal = document.getElementById('myModal');
   //http://localhost:3000/getSubTags
   if(!categoryName == '')
   {
-  $http.post("https://mymed1.herokuapp.com/getSubTags",JSON.stringify(data)).success(function(res){
+  $http.post("http://localhost:3000/getSubTags",JSON.stringify(data)).success(function(res){
       console.log(res[0].tags);
       for(var i=0 ;i<res[0].tags.length; i++)
       {
         //console.log(res[0].tags[i].text);
-        subCategory.push(res[0].tags[i].text);
+        subCategory.push(res[0].tags[i].name);
       }
       callme(subCategory);
   });
@@ -734,16 +728,16 @@ function callme(sub){
     tagsPer.email = emailCookie;
     tagsPer.Title = myinfo.Title;
     tagsPer.Info = myinfo.Info;
-    // tagsPer.Category = sub;
+    tagsPer.Category = categoryName;
     tagsPer.subTags = sub;
     tagsPer.Recommendation = myinfo.Recommendation;
     tagsPer.mydate = myinfo.mydate;
     // tagsPer.subTags = subCategory;
     tagsPer.Tags = $scope.Tags;
     tagsPer.Permission = choice;
-    //console.log("tagsPer   " + tagsPer);
+    console.log("tagsPer   " + tagsPer.categoryName);
     //http://localhost:3000/addPerTags
-    $http.post("https://mymed1.herokuapp.com/addPerTags",JSON.stringify(tagsPer)).then(function(docs){
+    $http.post("http://localhost:3000/addPerTags",JSON.stringify(tagsPer)).then(function(docs){
     var notiDate = docs.data.date;
     var mytype = (typeof(notiDate));
     $scope.date = new Date();
@@ -926,6 +920,7 @@ mymedical.controller('calCtrl',['$scope','$http','$cookies', function($scope,$ht
 //http://localhost:3000/doctors
   $http.get("https://mymed1.herokuapp.com/doctors").then(function(doctors) {
         var temp = [];
+       // console.log("doctors.data   " + doctors.data.);
         $scope.general = doctors.data;
         
     });
@@ -1004,7 +999,6 @@ var userRank ={};
     userRank.entity = entity;
     userRank.expertise =expertise;
 
-
     // Get the modal
     console.log("im in the right function");
 
@@ -1031,8 +1025,9 @@ var userRank ={};
     while (star.hasChildNodes()) {
         star.removeChild(star.lastChild);
     }
-
-
+console.log("*****************************");
+console.log("Math.round(rank)   " +Math.round(rank));
+console.log("*****************************");
     switch(Math.round(rank)){
       case 0:
       {
@@ -1143,8 +1138,10 @@ var userRank ={};
         console.log("ranking of personal recommendation " + param );
         userRank.recommendation = param;
     };
+
     $scope.sendRank= function()
     {
+      console.log("sendRank");
       var today = new Date();
       var dd = today.getDate();
       var mm = today.getMonth()+1; //January is 0!
@@ -1157,13 +1154,16 @@ var userRank ={};
         if(mm<10) {
             mm='0'+mm
         } 
-
+        // console.log("***************************");
+        // console.log('userRank.attention    ' +  userRank.attention );
         today = dd+'/'+mm+'/'+yyyy;
         userRank.insertDate = today;
       if(userRank.attention!=null && userRank.proffessional!=null && userRank.availability!=null
         && userRank.atmosphere!=null && userRank.recommendation!=null){
+        console.log("userRank   " + userRank);
         //http://localhost:3000/getOneRank
-        $http.post("https://mymed1.herokuapp.com/getOneRank", userRank);
+        //https://mymed1.herokuapp.com/getOneRank
+         $http.post("http://localhost:3000/getOneRank", userRank);
         modal.style.display = "none";   
       }
       else{
@@ -1253,7 +1253,6 @@ mymedical.controller('viewPersonalCtrl',['$scope','$http','$cookies', function($
     //console.log("trying to get");
     console.log(typeof($scope.myinfo));
 }]);
-
 mymedical.controller('editPersonalCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
 var etidTag = [];
 var editPer = [];
@@ -1267,6 +1266,7 @@ var editPer = [];
     }
     //console.log(etidTag);
     $scope.Tags = etidTag;
+    var perviousTag = etidTag;
 
     for(var i=0;i<myEdit.permission.length;i++)
     {
@@ -1274,7 +1274,19 @@ var editPer = [];
     }
     
     $scope.Per = editPer;
-    console.log(editPer);
+    //console.log(editPer);
+
+    if(editPer.length == 0)
+    {
+      document.getElementById('TitlePer').style.display = "none";
+    }
+    var choice = [];
+    $scope.currentAcess=function(){
+      for(var i=0; i<editPer.length; i++){
+      choice.push(editPer[i]);
+    }
+  }
+
 
     var data ={};
 
@@ -1310,16 +1322,23 @@ var editPer = [];
       var recommendation = document.getElementById('Recommendation').value;
       var title = document.getElementById('Title').value;
 
+      var notChoosen=[];
       var checkedItem = {};
       checkedItem = ($("input:checkbox:not(:checked)"));
       for(var i=0; i<checkedItem.length; i++){
-        console.log("scscscs");
-        console.log(checkedItem[i].value);
+        notChoosen.push(checkedItem[i].value);
       }
-      // console.log("checkedItem" + checkedItem);
+
+    var newPer =[];
+     for(var j=0; j<choice.length; j++){
+      if(notChoosen.indexOf(choice[j])== -1){
+          newPer.push({perEmail:choice[j]});    
+      }
+     }
+
+     data.beforeTags = perviousTag;
      data.Tags = $scope.Tags;
-     data.Per = $scope.Per;
-     console.log("******************************"+data.Per);
+     data.Per = newPer;
      data.Info  = info;
      data.Recommendation  = recommendation;
      data.Title  = title;
@@ -1329,15 +1348,12 @@ var editPer = [];
      data.oldTitle = myEdit.Title;
      data.myDate = today;
     console.log("submit");
-
+//https://mymed1.herokuapp.com/updatePersonalData
 //http://localhost:3000/updatePersonalData
-  $http.post("https://mymed1.herokuapp.com/updatePersonalData",JSON.stringify(data)).then()
+  $http.post("http://localhost:3000/updatePersonalData",JSON.stringify(data)).then()
   
-  }
-
-
+  } 
 }]);
-
 mymedical.controller('insertGeneralCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
 
 

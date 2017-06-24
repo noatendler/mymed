@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
 user = require('../models/usersSchema');
 var category = require('../models/userCategory');
+var myTag = require('../models/userTagSchema');
 //var setCookie = require('set-cookie');
 
 var cooikeEmail;
@@ -310,6 +311,49 @@ exports.getCategory = function(req,res)
 exports.getSubCategory = function(req,res)
 {
     category.find({email:req.body.email,category:req.body.category}, function(err, docs){
+       res.json(docs);
+    });
+}
+
+exports.getCategoryByUser = function(req,res)
+{
+  console.log(req.body);
+  myTag.find({email:req.body.email},function(err,doc){
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(doc);
+        // console.log('updated! :)');
+      }
+  });
+}
+
+exports.getCatAndSubBySub =function(req,res)
+{
+    category.find({email:req.body.email}, function(err, docs){
+       console.log("********************99999");
+       //console.log(docs);
+       console.log("********************99999");
+       for(var i=0; i<docs.length; i++)
+       {
+          //console.log(docs[i].tags);
+          for(var j=0; j<docs[i].tags.length; j++)
+          {
+            //console.log(docs[i].tags[j].text);
+            if(docs[i].tags[j].text == req.body.sub)
+            {
+              //console.log(docs[i].tags[j].text);
+              console.log(docs[i]);
+            }
+          }
+       }
+       //res.json(docs);
+    });
+}
+
+exports.getSubCateygoryEmail  = function(req,res)
+{
+    category.find({email:req.body.email}, function(err, docs){
        res.json(docs);
     });
 }

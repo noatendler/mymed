@@ -13,6 +13,40 @@ a
     font-family: Comfortaa;
     src: url(../fonts/Comfortaa-Regular.ttf);
 }
+.viewTitle
+{
+  margin-right: 200px; 
+  text-align: center;
+  position: relative;
+  padding-left: 200px;
+  color: #2A2760;
+}
+/*noa*/
+#viewSection
+{
+  background-color: #FFFFFF;
+  width: 90%;
+  height: 1200px;
+  margin-top: 25px;
+}
+.viewName
+{
+    font-size: 22px;
+    color: #2A2760;
+    font-weight: bold;
+    margin-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.contentCat
+{
+    color: #2A2760;
+    font-size: 16px;
+    position: relative;
+    margin-left: 10px;
+    top: 120px;
+}
+
 #navBar:active
 {
  color: #2A2760;
@@ -78,6 +112,10 @@ html, body
   font-family: Roboto;
   font-size: 13px;
   font-weight: 300;
+}
+.tt
+{
+  margin-left: 40px;
 }
 #input
 {
@@ -253,12 +291,12 @@ html, body
 }
 .addInfoDesk
 {
-  font-size: 18px;
-  position: relative;
-  top: 33px;
-  left: 68px;
-  color: #1D2108;
-  text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    top: 40px;
+    left: 46%;
+    color: #1D2108;
+    text-decoration: none;
 }
 .currentDesk
 {
@@ -278,7 +316,8 @@ html, body
 }
 .addInfoImg
 {
-  margin-top: -45px;  
+  margin-top: -60px;
+  width: 100px; 
 }
 #filter
 {
@@ -617,27 +656,24 @@ color: #ffffff;
 .contentRec
 {
     color: #2A2760;
-    font-size: 20px;
+    font-size: 16px;
     position: relative;
-    margin-left: 410px;
-    top: 4px;
-
+    top: 90px;
+    right: 130px;
 }
 .contentInfo
 {
-    color: #2A2760;
-    font-size: 20px;
+   color: #2A2760;
+    font-size: 16px;
     position: relative;
-    right: 500px;
-    top: 100px; 
+    top: 40px;
+    margin-left: 10px;
 }
 .contentDate
 {
     color: #2A2760;
-    font-size: 20px;
-    position: relative;
-       right: 115px;
-    top: 50px;
+    font-size: 16px;
+    margin-left: 10px;
 }
 /*insert personal data*/
 .InsertPerT
@@ -965,8 +1001,8 @@ color: #ffffff;
 {
     font-size: 18px;
     position: relative;
-    top: 25px;
-    left: 80px;
+    top: 35px;
+    left: 51%;
     color: #1D2108;
     text-decoration: none;
 }
@@ -1052,75 +1088,87 @@ color: #ffffff;
 /*****/
 .catView
 {
-    margin-left: 2%;
-    font-size: 25px;
+    font-size: 18px;
+    color: #2A2760;
+    font-weight: bold;
     position: relative;
-    font-size: 25px; 
+    top: 120px;
+    margin-left: 10px;
 }
 .DocView
 {
-      margin-left: 23px;
+    font-size: 18px;
+    color: #2A2760;
+    font-weight: bold;
     position: relative;
-    top: 20px;
-    font-size: 25px;
-    margin-bottom: 30px;
+    top: 180px;
+    margin-left: 10px;
 }
 .contentDoc
 {
-    margin-left: 280px;
+    color: #2A2760;
+    font-size: 16px;
     position: relative;
-    top: 30px;
-    font-size: 25px;
-    margin-bottom: 30px;
+    margin-left: 10px;
+    top: 150px;
+    width:70%;
+    height:70%;
 }
 .recView
 {
-    margin-left: 20px;
-    font-size: 25px;
+    font-size: 18px;
+    color: #2A2760;
+    font-weight: bold;
     position: relative;
-    top: 80px;
-    font-size: 25px;
-    /* float: left; */
-    right: 905px;
+    top: 90px;
+    right: 130px;
 }
 .infoView
 {
-    margin-right: 60px;
-    font-size: 25px;
+    font-size: 18px;
+    color: #2A2760;
+    font-weight: bold;
     position: relative;
-    top: 100px; 
-    right: 47%;
+    top: 40px;
+    margin-left: 10px;
 }
 /***/
 .dateView
 {
-    font-size: 25px;
-    position: relative;
-    top: 50px;
- right: 23.5%;
-
+    font-size: 18px;
+    margin-left: 10px;
+    color: #2A2760;
+    font-weight: bold;
 }
 .tagDataPerView
 {
-color: #ffffff;
+    color: #ffffff;
     font-size: 15px;
     display: inline-block;
     background-color: #5bc0de;
     border-radius: 4px;
     padding: 3px;
     position: relative;
-    top: -20px;
-    left: 410px;
+    left: 110px;
     float: left;
     margin-right: 10px;
+    top: 55px;
 }
 .titleViewTag
 {
-    display: inline-block;
-    margin-left: 2.1%;
-    margin-top: 120px;
-
-    font-size: 25px; 
+    font-size: 18px;
+    color: #2A2760;
+    font-weight: bold;
+    position: relative;
+    margin-left: 10px;
+    top: 80px;
+}
+#viewSection
+{
+  background-color: #FFFFFF;
+  width: 90%;
+  height: 1200px;
+  margin-top: 25px;
 }
 .editMainTitle
 {
@@ -1224,7 +1272,7 @@ color: #ffffff;
     width: 180px;
     color: #2A2760;
     float: right;
-    margin-top: -493px;
+    margin-top: -656px;
     margin-right: 3%;
 }
 #spanClick
@@ -1233,7 +1281,7 @@ color: #ffffff;
     width: 180px;
     color: #2A2760;
     float: right;
-    margin-top: -470px;
+    margin-top: -640px;
     margin-right: 1%;
 }
 .holdTitleItem
@@ -1264,9 +1312,9 @@ color: #ffffff;
 }
 .linkTitle
 {
-    margin-top: 80px;
     position: relative;
-    left: 28px;
+    left: 72%;
+    top: -80px;
 }
 #categoryTitle
 {
@@ -1528,30 +1576,37 @@ font-size:16px;
     border-color: darkgray;
     width: 68%;
 }
+.subNameTag
+{
+    margin-top: 50px;
+    margin-left: 15%;
+    border-bottom: 1px solid;
+    border-color: darkgray;
+    width: 66%;
+}
 .tagCount
 {
-    margin-left: 22%;
+    margin-left: 23%;
     font-size: 20px;
     position: relative;
-    top: -20px;
+    top: -1px;
 }
 .removeTag
 {
     float: right;
-    margin-right: 25%;
-    margin-top: -20px;
+    margin-right: 24%;
+    margin-top: -40px;
 }
 .showItemTag
 {
-    padding: 5px;
     border-radius: 3px;
     background-color: #2A2760;
     color: #ffffff;
     padding-right: 20px;
     padding-left: 20px;
-    margin-left: 16%;
+    margin-left: 39%;
     position: relative;
-    top: -33px;
+    top: -47px;
 }
 .linkToDocs
 {
@@ -1579,6 +1634,121 @@ font-size:16px;
 }
 /*mobile*/
 @media (max-width:500px){
+#insertSubMobile
+{
+  font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px;
+}  
+#docTitleMobile
+{
+  font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px;
+}
+.entityGeneral
+{
+  margin-left: 12%;
+  position: relative;
+  width: 150px;
+}
+#entityMobile
+{
+   font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px; 
+}
+#hmoMobile
+{
+     font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px; 
+}
+#expertiseMobile
+{
+     font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px;
+}
+#hourMobile
+{
+         font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px;
+}
+.fromMobile
+{
+           font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px;
+}
+.hoursMobile
+{
+       font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px;
+}
+#addressMobile
+{
+       font-size: 15px;
+  color: #2A2760;
+  margin-left: 14%;
+  margin-top: -3px;
+}
+.hmoGeneral
+{
+  margin-left: 27%;
+  width: 30%;
+  position: relative;
+  top: -1px;
+}
+.generalInput
+{
+  width: 72%;
+  margin: auto;
+}
+#topImgGMobile
+{
+    width: 100%;
+    height: 190px;
+    position: relative;
+
+}
+.topGTitle
+{
+  color: #ffffff;
+  font-size: 15px;
+  margin-left: 30%;
+  font-weight: bold;
+  position: relative;
+  top: 17px;
+} 
+.editTitle
+{
+  font-size: 16px;
+  color: #2A2760;
+  margin-left: 30%;
+}
+
+.insertTitleG
+{
+    font-size: 15px;
+    color: #2A2760;
+    margin-top: -30px;
+    text-align: center;
+    margin-right: 4%;
+    margin-bottom: 30px;
+}
+
+
 #myBtn {
   display: none;
   position: fixed;
@@ -1606,12 +1776,12 @@ font-size:16px;
 
 .addInfoSpan
 {
-    font-size: 13px;
+    font-size: 18px;
     position: relative;
     top: 25px;
-    left: 55%;
+    left: 80px;
     color: #1D2108;
-    text-decoration: none;
+    text-decoration: none;;
 }
 
 .addInfoDeskG
@@ -1942,11 +2112,10 @@ left: 35%;
   background-image: url('../images/logo.png');
   width: 300px;
   height: 60px;
-  margin:0 auto;
   position: relative;
-  float: left;
-  margin-left: 1%;
+  margin:0px auto;
   top: 10%;
+  left: 18%;
   background-repeat: no-repeat;
 }
 body{
@@ -2077,4 +2246,36 @@ body{
     margin-left: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+.viewTitle
+{
+  margin-right: 200px; 
+  text-align: center;
+  position: relative;
+  padding-left: 200px;
+  color: #2A2760;
+}
+#viewSection
+{
+  background-color: #FFFFFF;
+  width: 90%;
+  height: 1200px;
+  margin-top: 25px;
+}
+.viewName
+{
+    font-size: 22px;
+    color: #2A2760;
+    font-weight: bold;
+    margin-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.contentCat
+{
+    color: #2A2760;
+    font-size: 16px;
+    position: relative;
+    margin-left: 10px;
+    top: 120px;
 }

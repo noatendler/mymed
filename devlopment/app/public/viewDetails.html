@@ -41,29 +41,35 @@
             <span class="topTitle">Personal medical information</span>
         </section>
         <section ng-controller="viewPersonalCtrl">
-            <a href="insertDetailsNoTag.html" class="redirectAdd">
+<!--             <a href="insertDetailsNoTag.html" class="redirectAdd">
                 <span class="addInfoView">add personal</span>
                 <br>
                 <span class="addInfoSView">information</span>
                 <img src="images/addInfo.png" class="addInfoImg">
-            </a>
+            </a> -->
             <br>
-                <span class="titleView">Document title</span>
-                <span class="titlePerDesk">{{myinfo.Title}}</span>
-                <span class="dateView">Date of creation</span>
+            <h1 class="viewTitle">You Are Viewing {{myinfo.Title}}</h1><br><br>
+            <section id="viewSection">
+                <h1 class="viewName">{{myinfo.Title}}</h1>
+                <br>
+                <label class="dateView">Date Of Creation</label>
                 <span class="contentDate">{{myinfo.myDate}}</span>
-                <span class="infoView">Document information</span>
+                <br>
+                <label class="infoView">Document Information</label>
                    <span class="contentInfo">{{myinfo.Info}}</span>
-                   <span class="titleViewTag">Tags</span>
+                   <br>
+                   <label class="titleViewTag">Tags</label>
                    <section ng-repeat="i in myinfo.Tags">
                             <span class="tagDataPerView">{{i.name}}</span>
                        </section>
-                   </section>
-                   <span class="recView">The medical recommendations</span>
-                   <p class="contentRec">{{myinfo.Recommendation}}</p>
-                   <span class="catView">Category of item information</span>
-                   <p class="contentRec">{{myinfo.Category}}</p>
-                   <span class="DocView">Document</span>
+                    <br>
+                   <label class="recView">The medical recommendations</label>
+                   <span class="contentRec">
+                   {{myinfo.Recommendation}}</span>
+                   <br>
+                   <label class="catView">Category of item information</label>
+                   <span class="contentCat">{{myinfo.Category}}</span>
+                   <br>
                    <img  class="contentDoc" ng-src="{{myinfo.file}}">
         </section> 
     </main>
