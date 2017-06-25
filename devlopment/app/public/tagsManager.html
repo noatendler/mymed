@@ -81,7 +81,7 @@
             <h3 id="clickTitle">Click on the link to</h3>
             <span id="spanClick">show the item</span>
             <div id="linkDocs" ng-repeat="j in linkDataName">
-                <a href="#" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)">
+                <a href="#" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)" class="clickToView">
                     <span class="linkTitle">{{j.Title}}</span>        
                 </a>
             </div>
@@ -121,7 +121,7 @@
              </section>
              <section ng-show="createCategory" id="createCategoryId">
              <label id="categoryTitle" data-toggle="tooltip" title="add new category to tags manager">Please create new category / update exsiting one</label>
-             <tags-input ng-model="category" class="inputTagM" name="category" id="category"  display-property="name" placeholder="Add new a category" replace-spaces-with-dashes="false">
+             <tags-input ng-model="category" class="inputTagM" name="category" id="category"  display-property="name" placeholder="Add new a category" replace-spaces-with-dashes="false" max-tags="1">
              </tags-input>
              <label id="subCategory" data-toggle="tooltip" title="Select a tag from the list to append it to the category">Select a tag from the list to append it to the category</label>
                    <tags-input ng-model="TagsCat" class="editPersonalManger" name="TagsCat" id="TagsCat" display-property="name" placeholder="Add a tag for your item" replace-spaces-with-dashes="false">

@@ -1,6 +1,5 @@
 var mymedical = angular.module("mymed",['ngRoute','ngCookies','ngTagsInput']);
 
-
 $( ".cross" ).hide();
 $( ".menu" ).hide();
 $( ".hamburger" ).click(function() {
@@ -142,7 +141,7 @@ var emailCookie1 = $cookies.get('cookieEmail');
       //console.log("dataToDelete   " +JSON.stringify(dataToDelete));
 //http://localhost:3000/deletePersonalInfo
 //https://mymed2.herokuapp.com/deletePersonalInfo
-      $http.post("http://localhost:3000/deletePersonalInfo", JSON.stringify(dataToDelete)).then(function(res){
+      $http.post("https://mymed2.herokuapp.com/deletePersonalInfo", JSON.stringify(dataToDelete)).then(function(res){
           modal.style.display = "none";
           window.location = "getPrivateData.html";
       });
@@ -852,7 +851,7 @@ $scope.SaveNoti = function(val)
       $http.post("https://mymed2.herokuapp.com/addNotification",JSON.stringify(saveNoti)).then() 
     }
 
-    window.location ="http://localhost:8080/getPrivateData.html";
+    window.location ="getPrivateData.html";
 }
 
 }]);
@@ -1165,7 +1164,7 @@ console.log("*****************************");
         console.log("userRank   " + userRank);
         //http://localhost:3000/getOneRank
         //https://mymed2.herokuapp.com/getOneRank
-         $http.post("http://localhost:3000/getOneRank", userRank);
+         $http.post("https://mymed2.herokuapp.com/getOneRank", userRank);
         modal.style.display = "none";   
       }
       else{
@@ -1353,7 +1352,7 @@ var editPer = [];
 //https://mymed1.herokuapp.com/updatePersonalData
 //http://localhost:3000/updatePersonalData
 //https://mymed2.herokuapp.com/updatePersonalData
-  $http.post("http://localhost:3000/updatePersonalData",JSON.stringify(data)).then(function(res){
+  $http.post("https://mymed2.herokuapp.com/updatePersonalData",JSON.stringify(data)).then(function(res){
       if(res)
       {
         window.location = "getPrivateData.html";
@@ -1422,7 +1421,7 @@ mymedical.controller('insertGeneralCtrl',['$scope','$http','$cookies', function(
      data.LastUpdate = today;
 //http://localhost:3000/getGeneralData
 //https://mymed2.herokuapp.com/getGeneralData
-  $http.post("http://localhost:3000/getGeneralData",JSON.stringify(data)).then()
+  $http.post("https://mymed2.herokuapp.com/getGeneralData",JSON.stringify(data)).then()
   
   }
 

@@ -12,7 +12,7 @@ a
 @font-face {
     font-family: Comfortaa;
     src: url(../fonts/Comfortaa-Regular.ttf);
-}
+} 
 .viewTitle
 {
   margin-right: 200px; 
@@ -352,7 +352,7 @@ html, body
 .seeImg
 {
     cursor: pointer;
-    width: 35px;
+    width: 30px;
     float: right;
     margin-top: 7px;
     margin-right: 10px;
@@ -361,7 +361,7 @@ html, body
 .delImg
 {
     cursor: pointer;
-    width: 20px;
+    width: 17px;
     float: right;
     margin-top: 10px;
     margin-right: 10px;
@@ -371,7 +371,7 @@ html, body
     float: right;
     margin-top: 10px;
     cursor: pointer;
-    width: 50px;
+    width: 40px;
 }
 .titlePerDesk
 {
@@ -1146,7 +1146,7 @@ color: #ffffff;
     font-weight: bold;
     position: relative;
     top: 90px;
-    right: 180px;
+    right: 20%;
 }
 .infoView
 {
@@ -1659,6 +1659,28 @@ font-size:16px;
 }
 /*mobile*/
 @media (max-width:500px){
+/*.recViewMobile
+{
+  position: relative;
+  left: -240px;
+}
+.contentRec
+{
+    color: #2A2760;
+    font-size: 15px;
+    position: relative;
+    top: 115px;
+    right :42%;
+}*/
+.spanViewTitle
+{
+  display: inline;
+  font-size: 15px;
+  color: #2A2760;
+  position: relative;
+  left: 57%;
+  top: -17px;
+}
 .addTitle
 {
   position: relative;
@@ -2153,7 +2175,7 @@ display: none;
     font-size: 15px;
     text-align: center;
     font-weight: bold;
-    margin-left: 25%;
+    margin-left: 23%;
     position: relative;
     top: 10px;
 }
@@ -2331,7 +2353,7 @@ display: none;
   position: relative;
   margin:0px auto;
   top: 10%;
-  left: 18%;
+  left: 15%;
   background-repeat: no-repeat;
 }
 body{
@@ -2466,11 +2488,10 @@ body{
 }
 .viewTitle
 {
-  margin-right: 200px; 
-  text-align: center;
+  display: inline;
   position: relative;
-  padding-left: 200px;
   color: #2A2760;
+  margin-left: -18%;
 }
 #viewSection
 {

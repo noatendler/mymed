@@ -98,7 +98,7 @@ document.getElementById('itemInfoM').style.display = "none";
         //https://mymed1.herokuapp.com/getAllDocs
         //http://localhost:3000/getAllDocs
         //https://mymed2.herokuapp.com/getAllDocs
-        $http.post("http://localhost:3000/getAllDocs",JSON.stringify(dataT)).then(function(res1){
+        $http.post("https://mymed2.herokuapp.com/getAllDocs",JSON.stringify(dataT)).then(function(res1){
             console.log("all document");
             console.log(res1.data);
             $scope.linkDataName = res1.data;
@@ -192,7 +192,7 @@ document.getElementById('itemInfoM').style.display = "none";
         console.log(data);
        //http://localhost:3000/addNewCategory
        //https://mymed2.herokuapp.com/addNewCategory
-        $http.post("http://localhost:3000/addNewCategory",JSON.stringify(data)).then(function(res){
+        $http.post("https://mymed2.herokuapp.com/addNewCategory",JSON.stringify(data)).then(function(res){
             window.location = "tagsManager.html";
         });
 

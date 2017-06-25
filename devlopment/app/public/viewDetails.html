@@ -19,7 +19,8 @@
                 <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search Doctor Nearby</h3>
+                <h3 class="SearchNav">Search Doctor
+                 Nearby</h3>
             </a>
             <a href="tagsManager.html">
                 <h3 class="SearchNav">Tags Manager</h3>
@@ -48,7 +49,7 @@
                 <img src="images/addInfo.png" class="addInfoImg">
             </a> -->
             <br>
-            <h1 class="viewTitle">You Are Viewing {{myinfo.Title}}</h1><br><br>
+            <h1 class="viewTitle">You Are Viewing<span class="spanViewTitle"> {{myinfo.Title}}</span></h1><br><br>
             <section id="viewSection">
                 <h1 class="viewName">{{myinfo.Title}}</h1>
                 <br>
@@ -63,7 +64,7 @@
                             <span class="tagDataPerView">{{i.name}}</span>
                        </section>
                     <br>
-                   <label class="recView">The medical recommendations</label>
+                   <label class="recView recViewMobile">The medical recommendations</label>
                    <span class="contentRec">
                    {{myinfo.Recommendation}}</span>
                    <br>
