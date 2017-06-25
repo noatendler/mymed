@@ -68,14 +68,23 @@
             </a> 
         </div>        
     </div>
+    <div ng-repeat="t in tagF">
+        <p class="HoldTagName">{{t.name}}
+            <span class="tagCount">{{t.number}}</span>
+        </p>
+        
+        <button data-toggle="tooltip" title="click on button to show tag details" ng-click="getDocument(t.name)" class="showItemTag">Show</button>
+        <a>
+            <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(t.name,t.number)"></i>
+        </a> 
+    </div>
             <h3 id="clickTitle">Click on the link to</h3>
             <span id="spanClick">show the item</span>
-            <ul id="linkDocs" ng-repeat="j in linkDataName">
-                <li><a href="#" class="linkToDocs" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)">
-                    <span class="linkTitle">{{j.Title}}</span>         
+            <div id="linkDocs" ng-repeat="j in linkDataName">
+                <a href="#" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)">
+                    <span class="linkTitle">{{j.Title}}</span>        
                 </a>
-                </li>
-            </ul>
+            </div>
             <!--display item data-->
             <section class="itemInfoM" id="itemInfoM">
                 <!-- <label>Document title</label> -->

@@ -92,8 +92,9 @@ exports.updatePersonal = function(req,res)
         function(err, num) {
           if(err)
             console.log(err);
-          else
+          else{
             console.log("updated "+num);
+          }
         }); 
   });
 
@@ -101,9 +102,11 @@ exports.updatePersonal = function(req,res)
         function(err, num) {
           if(err)
             console.log(err);
-          else
+          else{
             console.log("updated "+num);
+          }
         }); 
+ res.json("updated details");
 }
  // sendUser.emailAccess = selectUser;
  //        sendUser.emailUser = emailCookie;
@@ -136,9 +139,9 @@ exports.getData = function(req, res){
 };
 
 var client = knox.createClient({
-    key: 'my key'
-    , secret: 'my secret'
-    , bucket: 'my bucket'
+    key: 'key'
+    , secret: 'secret'
+    , bucket: 'mybucket'
 });
 
 function hasher(){
@@ -722,6 +725,7 @@ for(var k=0; k<dateTime.length; k++)
         console.log("success");
       }
     });
+    res.json("sucess to remove data");
 }
 exports.personalTags = function(req, res){
   console.log(req.body.email);
@@ -822,8 +826,9 @@ exports.getAllDocumentByTag = function(req,res)
         }
     }
   //console.log(resultDoc);
-  res.json(resultDoc);
+    res.json(resultDoc);
   });
+
 }
 
 //save new tag

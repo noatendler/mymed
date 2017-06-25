@@ -8,19 +8,17 @@ myTags.controller('tagsCtrl',['$scope','$http','$cookies',function($scope,$http,
   console.log(x);
 
 $scope.hideme = function(){
-
-  var categorySub = document.getElementById('categorySub');
-  categorySub.style.display = "none";    
-        document.getElementById('addNewTagId').style.display = "block";
-        document.getElementById('allTagsId').style.display = "block";
-        document.getElementById('createCategoryId').style.display = "block";
+console.log("in hide me");   
+  document.getElementById('addNewTagId').style.display = "block";
+  document.getElementById('allTagsId').style.display = "block";
+  document.getElementById('createCategoryId').style.display = "block";
 }
 
     var x = {};
     x.email = emailCookie; 
 //http://localhost:3000/getPersonalTags
 //https://mymed1.herokuapp.com/getPersonalTags
-    $http.post("http://localhost:3000/getPersonalTags",JSON.stringify(x)).then(function(res){
+    $http.post("https://mymed2.herokuapp.com/getPersonalTags",JSON.stringify(x)).then(function(res){
      console.log(res);
 
        var temp = res.data;
@@ -46,6 +44,7 @@ $scope.hideme = function(){
 
         document.getElementById("saveTag").onclick = function fun() {
             var newTags = $scope.Tags;
+             //console.log($scope.Tags);
              saveTagFunc(newTags);
         }
 
@@ -58,7 +57,7 @@ $scope.hideme = function(){
         data.Tags = val;
 //http://localhost:3000/addNewTag
 //https://mymed1.herokuapp.com/addNewTag
-        $http.post("http://localhost:3000/addNewTag",JSON.stringify(data)).then(function(docs){
+        $http.post("https://mymed2.herokuapp.com/addNewTag",JSON.stringify(data)).then(function(docs){
             window.location = "tagsManager.html";
         });
     }
@@ -75,7 +74,7 @@ $scope.hideme = function(){
             data.tag = tagName;
             //http://localhost:3000/removeTagMyTag
             //https://mymed1.herokuapp.com/removeTagMyTag
-            $http.post("http://localhost:3000/removeTagMyTag",JSON.stringify(data)).then(function(res){
+            $http.post("https://mymed2.herokuapp.com/removeTagMyTag",JSON.stringify(data)).then(function(res){
                     console.log("res  " + res);
                     window.location = "tagsManager.html";
             });
@@ -98,10 +97,10 @@ document.getElementById('itemInfoM').style.display = "none";
         //http://localhost:3000/getAllDocs
         //https://mymed1.herokuapp.com/getAllDocs
         //http://localhost:3000/getAllDocs
-        //https://mymed1.herokuapp.com/getAllDocs
+        //https://mymed2.herokuapp.com/getAllDocs
         $http.post("http://localhost:3000/getAllDocs",JSON.stringify(dataT)).then(function(res1){
             console.log("all document");
-            console.log(res1);
+            console.log(res1.data);
             $scope.linkDataName = res1.data;
         });
     }
@@ -143,12 +142,13 @@ document.getElementById('itemInfoM').style.display = "none";
             var newCategory = $scope.category;
             var newSubCat = $scope.TagsCat;
             console.log($scope.TagsCat);
+            console.log($scope.category);
             createNewCat(newCategory,newSubCat);
         }
 
     $scope.loadTags = function($query) {
       //http://localhost:3000/getTags/
-    return $http.get("https://mymed1.herokuapp.com/getTags/"+emailCookie,{ cache: true}).then(function(response) {
+    return $http.get("https://mymed2.herokuapp.com/getTags/"+emailCookie,{ cache: true}).then(function(response) {
       var tags = response.data;
       return tags.filter(function(tag) {
         //return tag.toLowerCase();
@@ -162,7 +162,7 @@ document.getElementById('itemInfoM').style.display = "none";
         data.email = emailCookie;
         //http://localhost:3000/getPersonalTags
         //https://mymed1.herokuapp.com/getPersonalTags
-        return $http.post("http://localhost:3000/getPersonalTags",JSON.stringify(data)).then(function(response) {
+        return $http.post("https://mymed2.herokuapp.com/getPersonalTags",JSON.stringify(data)).then(function(response) {
             console.log(response.data);
             var tags = [];
             for(var i=0; i<response.data.length; i++)
@@ -189,8 +189,9 @@ document.getElementById('itemInfoM').style.display = "none";
         data.email = emailCookie;
         data.tags = valTag;
         data.category = valCat;
+        console.log(data);
        //http://localhost:3000/addNewCategory
-       //https://mymed1.herokuapp.com/addNewCategory
+       //https://mymed2.herokuapp.com/addNewCategory
         $http.post("http://localhost:3000/addNewCategory",JSON.stringify(data)).then(function(res){
             window.location = "tagsManager.html";
         });
@@ -207,8 +208,10 @@ document.getElementById('itemInfoM').style.display = "none";
     var subCategory = [];
     var subCatNum = [];
     var tagsNoSub = [];
+    var finalTags = [];
+    //http://localhost:3000/getSubCateygoryEmail
 
-     $http.post("http://localhost:3000/getSubCateygoryEmail",JSON.stringify(getCat)).then(function(result){
+     $http.post("https://mymed2.herokuapp.com/getSubCateygoryEmail",JSON.stringify(getCat)).then(function(result){
         for(var i=0; i<result.data.length; i++){
            // console.log(result.data[i]);
            categoryAndSub.push(result.data[i]);
@@ -216,7 +219,7 @@ document.getElementById('itemInfoM').style.display = "none";
     
     //http://localhost:3000/getCategory
     //https://mymed1.herokuapp.com/getCategory
-        $http.post("http://localhost:3000/getCategoryByUser",JSON.stringify(getCat)).then(function(result){
+        $http.post("https://mymed2.herokuapp.com/getCategoryByUser",JSON.stringify(getCat)).then(function(result){
            for(var i=0; i<result.data.length; i++)
            {
              myCategories.push(result.data[i].Category);
@@ -244,6 +247,10 @@ document.getElementById('itemInfoM').style.display = "none";
                                 //console.log('belongs to '+ myTags[j].name);
                                 subCatNum.push({category:categoryAndSub[k].category,name:myTags[j].name,number:myTags[j].number});
                              }
+                             else
+                             {
+                                finalTags.push({name:myTags[j].name,number:myTags[j].number});
+                             }
                            }
                         }
                         if(isSet==0)
@@ -252,6 +259,8 @@ document.getElementById('itemInfoM').style.display = "none";
                             tagsNoSub.push({name: myTags[j].name, number: myTags[j].number});       
                         }
                     }
+                    // console.log("tagsNoSub   " + subCatNum);
+                    $scope.tagF = tagsNoSub;
                     $scope.sub = subCatNum;
                     $scope.tag = tagsNoSub;
 
@@ -278,7 +287,7 @@ document.getElementById('itemInfoM').style.display = "none";
         sub.category = catName;
         //http://localhost:3000/getSubCategory
         //https://mymed1.herokuapp.com/getSubCategory
-        $http.post("http://localhost:3000/getSubCategory",JSON.stringify(sub)).then(function(result){
+        $http.post("https://mymed2.herokuapp.com/getSubCategory",JSON.stringify(sub)).then(function(result){
             
             var subCat = [];
             for(var i=0; i<result.data.length; i++)

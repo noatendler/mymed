@@ -33,7 +33,7 @@ exports.saveGeneralData = function(req , res){
             longitude = res[i].longitude;
         }
         console.log(latitude+" "+longitude);
-        var saveGeneralData = new doc({
+        var saveGeneralData = new doctors({
         Entity: req.body.Entity,
         name: req.body.name,
         Expertise: req.body.Expertise,
@@ -51,7 +51,8 @@ exports.saveGeneralData = function(req , res){
         if (error) {
             console.error(error);
         } else {
-            console.log("save");
+            result.json("save");
+            //console.log("save");
         }
     });
 
@@ -68,6 +69,7 @@ console.log(req.body);
           if(err)
             console.log(err);
           else
+            res.json("updated");
             console.log("updated "+num);
  });
 }
@@ -79,6 +81,7 @@ exports.delGeneral = function(req , res)
         console.log(err);
       }
       else{
+        res.json("success");
         console.log("success");
       }
     });

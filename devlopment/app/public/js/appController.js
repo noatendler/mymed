@@ -14,7 +14,7 @@ $( ".cross" ).show();
 mymedical.controller('getPersonalCtrl',['$scope','$http','$cookies',function($scope,$http,$cookies) {
 var emailCookie1 = $cookies.get('cookieEmail');
 //http://localhost:3000/getPersonal
-    $http.get("https://mymed1.herokuapp.com/getPersonal").success(function(data){
+    $http.get("https://mymed2.herokuapp.com/getPersonal").success(function(data){
             var myData = [];
             var searchFilter;
             var allTags;
@@ -78,7 +78,7 @@ var emailCookie1 = $cookies.get('cookieEmail');
   var x= {};
   x.email = emailCookie1;
   //http://localhost:3000/getPersonalTags
-    $http.post("https://mymed1.herokuapp.com/getPersonalTags",JSON.stringify(x)).then(function(res){
+    $http.post("https://mymed2.herokuapp.com/getPersonalTags",JSON.stringify(x)).then(function(res){
        var temp = res.data;
        var myPersonalTags = [];
        for(var i=0; i<temp.length ; i++)
@@ -97,7 +97,7 @@ var emailCookie1 = $cookies.get('cookieEmail');
       data.email = emailCookie1;
       data.tag = val;
       //http://localhost:3000/removePersonalTag
-      $http.post("https://mymed1.herokuapp.com/removePersonalTag",JSON.stringify(data)).then(function(res){
+      $http.post("https://mymed2.herokuapp.com/removePersonalTag",JSON.stringify(data)).then(function(res){
           window.location = "getPrivateData.html";
       });
     }
@@ -141,15 +141,17 @@ var emailCookie1 = $cookies.get('cookieEmail');
       dataToDelete.myDate = val.myDate;
       //console.log("dataToDelete   " +JSON.stringify(dataToDelete));
 //http://localhost:3000/deletePersonalInfo
-      $http.post("https://mymed1.herokuapp.com/deletePersonalInfo", JSON.stringify(dataToDelete)).then()
-      modal.style.display = "none";
-      location.reload();
+//https://mymed2.herokuapp.com/deletePersonalInfo
+      $http.post("http://localhost:3000/deletePersonalInfo", JSON.stringify(dataToDelete)).then(function(res){
+          modal.style.display = "none";
+          window.location = "getPrivateData.html";
+      });
     }
 var emailCookie = $cookies.get('cookieEmail');
    var userPermission=[];
       //get all users 
 //http://localhost:3000/userInformation
-      $http.get("https://mymed1.herokuapp.com/userInformation").success(function(data){
+      $http.get("https://mymed2.herokuapp.com/userInformation").success(function(data){
             
         //check who have premision to this user
         
@@ -191,7 +193,7 @@ var emailCookie = $cookies.get('cookieEmail');
         sendUser.emailAccess = selectUser;
         sendUser.emailUser = emailCookie;
         //http://localhost:3000/getPersonalByEmail
-        $http.post("https://mymed1.herokuapp.com/getPersonalByEmail", JSON.stringify(sendUser)).then(function(docs)
+        $http.post("https://mymed2.herokuapp.com/getPersonalByEmail", JSON.stringify(sendUser)).then(function(docs)
         {
           console.log(docs.data);
           $scope.getUserPer = docs.data;
@@ -222,7 +224,7 @@ mymedical.controller('searchController',['$scope','$http',function($scope,$http)
 // element.style.height="400px";
 // element.innerHTML = "";
 //http://localhost:3000/doctors
-    $http.get("https://mymed1.herokuapp.com/doctors").success(function(myjson){       
+    $http.get("https://mymed2.herokuapp.com/doctors").success(function(myjson){       
 
     var mylat, mylng;
     var myName, myAddress;
@@ -357,7 +359,7 @@ mymedical.controller('loginCtrl',['$scope','$http','$cookies', function($scope,$
         $cookies.put('cookieEmail',value);
         console.log(value);
 //http://localhost:3000/login
-        $http.post("https://mymed1.herokuapp.com/login", JSON.stringify(user)).then(function(res){
+        $http.post("https://mymed2.herokuapp.com/login", JSON.stringify(user)).then(function(res){
             if(res.data.val == 204)
             {
               alert("login successfull");
@@ -381,7 +383,7 @@ mymedical.controller('registerCtrl',['$scope','$http','$cookies', function($scop
         user.userName = $scope.userName;
         $cookies.put('cookieEmail',valEmail);
         //http://localhost:3000/saveUser
-        $http.post("https://mymed1.herokuapp.com/saveUser", JSON.stringify(user)).then(function(res){
+        $http.post("https://mymed2.herokuapp.com/saveUser", JSON.stringify(user)).then(function(res){
           if(res.data.val == 204)
           {
             window.location = "index.html";
@@ -560,7 +562,7 @@ mymedical.controller('detailsCtrl',['$scope','$http','$cookies', function($scope
     var catData = {};
     catData.email = emailCookie;
     //http://localhost:3000/getCategory
-    $http.post("https://mymed1.herokuapp.com/getCategory",JSON.stringify(catData)).then(function(res){
+    $http.post("https://mymed2.herokuapp.com/getCategory",JSON.stringify(catData)).then(function(res){
       console.log(res.data);
       var catNames = [];
       for(var i=0; i<res.data.length; i++)
@@ -602,7 +604,7 @@ var myTags;
      $scope.myinfo = JSON.parse($cookies.get('cookieSave'));
       myinfo = JSON.parse($cookies.get('cookieSave'));
       //http://localhost:3000/getKeywords
-      $http.post("https://mymed1.herokuapp.com/getKeywords",JSON.stringify(myinfo)).then(function(res){
+      $http.post("https://mymed2.herokuapp.com/getKeywords",JSON.stringify(myinfo)).then(function(res){
       console.log(res);
       myTags = res.data;
       var newArrayTags = Object.values(myTags)
@@ -631,7 +633,7 @@ var myTags;
     saveEmailPer.myemail = emailCookie;
     //console.log(saveEmailPer);
 //http://localhost:3000/addPerUser
-    $http.post("https://mymed1.herokuapp.com/addPerUser",JSON.stringify(saveEmailPer)).then(function(res){
+    $http.post("https://mymed2.herokuapp.com/addPerUser",JSON.stringify(saveEmailPer)).then(function(res){
         if(res.data === "success"){
           console.log(res.data);
           window.location="insertTagsPermission.html";
@@ -650,7 +652,7 @@ var myTags;
   sendData.email =emailCookie;
   var arrayPermission = [];
 //http://localhost:3000/userInfo
-$http.post("https://mymed1.herokuapp.com/userInfo",JSON.stringify(sendData)).success(function(data){
+$http.post("https://mymed2.herokuapp.com/userInfo",JSON.stringify(sendData)).success(function(data){
   for(var i=0; i<data.length; i++)
   {
     for(var j=0; j<(data[i].permission).length; j++)
@@ -707,7 +709,7 @@ var modal = document.getElementById('myModal');
   //http://localhost:3000/getSubTags
   if(!categoryName == '')
   {
-  $http.post("http://localhost:3000/getSubTags",JSON.stringify(data)).success(function(res){
+  $http.post("https://mymed2.herokuapp.com/getSubTags",JSON.stringify(data)).success(function(res){
       console.log(res[0].tags);
       for(var i=0 ;i<res[0].tags.length; i++)
       {
@@ -737,7 +739,7 @@ function callme(sub){
     tagsPer.Permission = choice;
     console.log("tagsPer   " + tagsPer.categoryName);
     //http://localhost:3000/addPerTags
-    $http.post("http://localhost:3000/addPerTags",JSON.stringify(tagsPer)).then(function(docs){
+    $http.post("https://mymed2.herokuapp.com/addPerTags",JSON.stringify(tagsPer)).then(function(docs){
     var notiDate = docs.data.date;
     var mytype = (typeof(notiDate));
     $scope.date = new Date();
@@ -815,7 +817,7 @@ function callme(sub){
   
     $scope.loadTags = function($query) {
       //http://localhost:3000/getTags/
-    return $http.get("https://mymed1.herokuapp.com/getTags/"+emailCookie,{ cache: true}).then(function(response) {
+    return $http.get("https://mymed2.herokuapp.com/getTags/"+emailCookie,{ cache: true}).then(function(response) {
       var tags = response.data;
       return tags.filter(function(tag) {
         //return tag.toLowerCase();
@@ -847,7 +849,7 @@ $scope.SaveNoti = function(val)
       }
       modal.style.display = "none";
       //http://localhost:3000/addNotification
-      $http.post("https://mymed1.herokuapp.com/addNotification",JSON.stringify(saveNoti)).then() 
+      $http.post("https://mymed2.herokuapp.com/addNotification",JSON.stringify(saveNoti)).then() 
     }
 
     window.location ="http://localhost:8080/getPrivateData.html";
@@ -872,7 +874,7 @@ mymedical.controller('profileCtrl',['$scope','$http','$cookies', function($scope
         addPermission.myemail = emailCookie;
         console.log(addPermission);
 //http://localhost:3000/addPerUser
-        $http.post("https://mymed1.herokuapp.com/addPerUser",JSON.stringify(addPermission)).then(function(res){
+        $http.post("https://mymed2.herokuapp.com/addPerUser",JSON.stringify(addPermission)).then(function(res){
             alert("User successfully added");
             window.location = "profile.html";
         });
@@ -886,13 +888,13 @@ mymedical.controller('profileCtrl',['$scope','$http','$cookies', function($scope
         deletePermission.myemail = emailCookie;
         console.log(deletePermission);
 //http://localhost:3000/deletePerUser
-        $http.post("https://mymed1.herokuapp.com/deletePerUser",JSON.stringify(deletePermission)).then(function(res){
+        $http.post("https://mymed2.herokuapp.com/deletePerUser",JSON.stringify(deletePermission)).then(function(res){
             alert("User deleted successfully");
             window.location = "profile.html";
         });
       }
 //http://localhost:3000/userInfo
-       $http.post("https://mymed1.herokuapp.com/userInfo",JSON.stringify(user)).then(function(response){
+       $http.post("https://mymed2.herokuapp.com/userInfo",JSON.stringify(user)).then(function(response){
           console.log(response.data);
           var userDetails = response.data;
            $scope.key = userDetails[0].key;
@@ -918,7 +920,7 @@ mymedical.controller('calCtrl',['$scope','$http','$cookies', function($scope,$ht
     document.documentElement.scrollTop = 0;
   }
 //http://localhost:3000/doctors
-  $http.get("https://mymed1.herokuapp.com/doctors").then(function(doctors) {
+  $http.get("https://mymed2.herokuapp.com/doctors").then(function(doctors) {
         var temp = [];
        // console.log("doctors.data   " + doctors.data.);
         $scope.general = doctors.data;
@@ -970,7 +972,7 @@ mymedical.controller('calCtrl',['$scope','$http','$cookies', function($scope,$ht
       $scope.delYes= function(){
         deletemodal.style.display = "none";
         //http://localhost:3000/delGeneral
-        $http.post("https://mymed1.herokuapp.com/delGeneral",JSON.stringify(doc));
+        $http.post("https://mymed2.herokuapp.com/delGeneral",JSON.stringify(doc));
       }
 
       $scope.delNo = function(){
@@ -1162,7 +1164,7 @@ console.log("*****************************");
         && userRank.atmosphere!=null && userRank.recommendation!=null){
         console.log("userRank   " + userRank);
         //http://localhost:3000/getOneRank
-        //https://mymed1.herokuapp.com/getOneRank
+        //https://mymed2.herokuapp.com/getOneRank
          $http.post("http://localhost:3000/getOneRank", userRank);
         modal.style.display = "none";   
       }
@@ -1308,7 +1310,7 @@ var editPer = [];
     //opened new path
     $scope.loadTag = function($query) {
       //http://localhost:3000/getAllTags
-        return $http.get("http://localhost:3000/getAllTags", { cache: true}).then(function(response) {
+        return $http.get("https://mymed2.herokuapp.com/getAllTags", { cache: true}).then(function(response) {
       var tags = response.data;
       console.log();
         return tags.filter(function(tag) {
@@ -1350,9 +1352,14 @@ var editPer = [];
     console.log("submit");
 //https://mymed1.herokuapp.com/updatePersonalData
 //http://localhost:3000/updatePersonalData
-  $http.post("http://localhost:3000/updatePersonalData",JSON.stringify(data)).then()
-  
-  } 
+//https://mymed2.herokuapp.com/updatePersonalData
+  $http.post("http://localhost:3000/updatePersonalData",JSON.stringify(data)).then(function(res){
+      if(res)
+      {
+        window.location = "getPrivateData.html";
+      }
+  });
+  }
 }]);
 mymedical.controller('insertGeneralCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
 
@@ -1414,7 +1421,8 @@ mymedical.controller('insertGeneralCtrl',['$scope','$http','$cookies', function(
      data.address = convertAddress;
      data.LastUpdate = today;
 //http://localhost:3000/getGeneralData
-  $http.post("https://mymed1.herokuapp.com/getGeneralData",JSON.stringify(data)).then()
+//https://mymed2.herokuapp.com/getGeneralData
+  $http.post("http://localhost:3000/getGeneralData",JSON.stringify(data)).then()
   
   }
 
@@ -1470,7 +1478,7 @@ mymedical.controller('editGeneralCtrl',['$scope','$http','$cookies', function($s
     //console.log(data);
 
 //http://localhost:3000/updateGeneralData
-  $http.post("https://mymed1.herokuapp.com/updateGeneralData",JSON.stringify(data)).then()
+  $http.post("https://mymed2.herokuapp.com/updateGeneralData",JSON.stringify(data)).then()
   
   }
       

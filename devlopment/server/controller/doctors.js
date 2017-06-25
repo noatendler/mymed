@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
 doctors = require('../models/doctorsSchema');
-cal = require('../models/calSchema');
+var cal = require('../models/calSchema');
 
 
 exports.getData = function(req, res){
@@ -35,6 +35,7 @@ exports.getCalRank = function(req,res){
         	//res.redirect('http://localhost:3000/calculateRanking',req.body);
         }
 	});
+res.json("save rank");
 }
 
 var totalRank = 0;

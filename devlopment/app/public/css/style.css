@@ -199,12 +199,20 @@ html, body
     font-size: 20px;
     margin-right: 30px;
 }
+.homeNav:hover
+{
+  background-color: #F7F6F6; 
+}
 .PersonalNav
 {
     display: inline-block;
     color: #2A2760;
     font-size: 20px;
     margin-right: 30px;
+}
+.PersonalNav:hover
+{
+  background-color: #F7F6F6;
 }
 .GeneralNav
 {
@@ -213,12 +221,20 @@ html, body
     font-size: 20px;
     margin-right: 30px;
 }
+.GeneralNav:hover
+{
+  background-color: #F7F6F6; 
+}
 .SearchNav
 {
     display: inline-block;
     color: #2A2760;
     font-size: 20px;
     margin-right: 30px;
+}
+.SearchNav:hover
+{  
+  background-color: #F7F6F6; 
 }
 #logo
 {
@@ -659,7 +675,7 @@ color: #ffffff;
     font-size: 16px;
     position: relative;
     top: 90px;
-    right: 130px;
+    right: 170px;
 }
 .contentInfo
 {
@@ -1006,6 +1022,15 @@ color: #ffffff;
     color: #1D2108;
     text-decoration: none;
 }
+.addInfoSpanG
+{
+     font-size: 18px;
+    position: relative;
+    top: 35px;
+    left: 50%;
+    color: #1D2108;
+    text-decoration: none; 
+}
 .addInfoImgGe
 {
   margin-top: -55px;
@@ -1015,7 +1040,7 @@ color: #ffffff;
     font-size: 18px;
     position: relative;
     top: 33px;
-    left: 74px;
+    left: 47%;
     color: #1D2108;
     text-decoration: none;
 }
@@ -1121,7 +1146,7 @@ color: #ffffff;
     font-weight: bold;
     position: relative;
     top: 90px;
-    right: 130px;
+    right: 180px;
 }
 .infoView
 {
@@ -1515,7 +1540,7 @@ font-size:16px;
   margin-left: 10px;
   margin-top:30px;
   background-color: #ffffff;
-  width:100%;
+  width:99%;
 }
 .docNameSearch
 {
@@ -1634,6 +1659,199 @@ font-size:16px;
 }
 /*mobile*/
 @media (max-width:500px){
+.addTitle
+{
+  position: relative;
+  top: 30px;
+  left: 15%;
+  font-size: 15px;
+  cursor: pointer;
+}  
+.permissionLable
+{
+  position: relative;
+  left: 15%;
+  top: 28px;
+}  
+.permissionName
+{
+  position: relative;
+  left: 14%;
+  top: 30px;
+}  
+.permissionTitle
+{
+  font-size: 15px;
+  color: #2A2760;
+  margin-left: 15%;
+  margin-bottom: -25px;
+}  
+.GeneralNav
+{
+  display: none;
+}  
+#selectedName
+{
+  float: left;
+  width: 20%;
+  margin-left: 5%;
+} 
+#accessTitle
+{
+  font-size:15px;
+  margin-left:2%;
+}  
+.searchKeyword {
+    position: relative;
+    color: #2A2760;
+    float: left;
+    top: 45px;
+    left: 1%;
+    font-size: 15px;
+}  
+#filter {
+    padding: 5px 5px 4px 3px;
+    border: 1px solid #D6D6D6;
+    font-size: 14px;
+    position: relative;
+    top: 20px;
+    left: -23%;
+}  
+.accessButton
+{
+  padding: 2px 5px;
+  float: left;
+  margin-left: 10%;
+  margin-top: -4px;
+}  
+.sortInfo {
+    width: 120px;
+    margin-left: 2%;
+    position: relative;
+    top: 20px;
+    height: 20px;
+}  
+.titleSort
+{
+    position: relative;
+    right:5%;
+    font-size:15px;
+}  
+.changeView
+{
+  cursor: pointer;
+  margin-left: 2%;
+  height: 30px;
+  margin-top: 10px;
+}  
+.addInfoDesk
+{
+    font-size: 15px;
+    position: relative;
+    top: 1px;
+    left: 60%;
+    color: #1D2108;
+    text-decoration: none;
+}  
+.addInfoImg
+{
+  margin-top: -160px;
+  margin-left: 75%;
+  width: 40%; 
+}  
+.editMainTitle
+{
+    font-size: 15px;
+    margin-top: -30px;
+    margin-left: 32%;
+    margin-bottom: 20px;
+    color: #2A2760;
+}  
+.viewTitle
+{
+  font-size: 15px;
+  text-align: center;
+  position: relative;
+  color: #2A2760;
+}  
+#buttonYes
+{
+    margin-left: 20%;
+    padding-right: 30px;
+    padding-left: 30px;
+    cursor: pointer;
+    position: relative;
+    top: 33px;
+}  
+#buttonNo
+{
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 50%;
+  cursor:pointer;
+}  
+.deleteQus
+{
+  font-size: 20px;
+  text-align: center;
+}  
+.addPer
+{
+  position: relative;
+  left: 15%;
+  top: -2px;
+}  
+.perButton
+{
+  position: relative;
+  left: 14%; 
+}  
+.insertTitleTag
+{
+    color: #2A2760;
+    margin-top: -30px;
+    text-align: center;
+    margin-right: 26%;
+    margin-bottom: 30px;
+    font-size: 15px;
+}  
+.submitAddInfo
+{
+  margin-left: 14%;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}  
+.fileButton
+{
+  margin-left: 14%;
+}  
+#selectedCat
+{
+    width: 30%;
+    margin-bottom: 20px;
+    margin-left: 7%;
+}  
+.editPersonal
+{
+   width: 72%;
+   margin: auto;
+}
+.addInfoSpanG {
+    font-size: 12px;
+    position: relative;
+    top: 30px;
+    left: 53%;
+    color: #1D2108;
+    text-decoration: none;
+}
+#filterDoc {
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+    border: 1px solid #D6D6D6;
+    position: relative;
+    left: 5%;
+    top: -19px;
+}
 #insertSubMobile
 {
   font-size: 15px;
@@ -1733,9 +1951,10 @@ font-size:16px;
 } 
 .editTitle
 {
-  font-size: 16px;
-  color: #2A2760;
-  margin-left: 30%;
+    font-size: 15px;
+    color: #2A2760;
+    margin-left: 14%;
+    margin-top: -3px;
 }
 
 .insertTitleG
@@ -1767,21 +1986,21 @@ font-size:16px;
   -webkit-transform: rotate(-135deg);
 }  
 .searchTitle{
-  display:inline-block;
-  position: relative;
-  left: 5%;
-  font-size: 20px;
-  margin-top: 40px;
+    display: inline-block;
+    position: relative;
+    left: 5%;
+    font-size: 15px;
+    top: 20px;
 }
 
 .addInfoSpan
 {
-    font-size: 18px;
+    font-size: 15px;
     position: relative;
-    top: 25px;
-    left: 80px;
+    top: -2px;
+    left: 65%;
     color: #1D2108;
-    text-decoration: none;;
+    text-decoration: none;
 }
 
 .addInfoDeskG
@@ -1801,10 +2020,6 @@ font-size:16px;
   margin-top: 50px;  
   margin-left: 20%;
   text-decoration: none;
-}
-#titleGMobile
-{
-  display: block;
 }
 .emailLoginT
 {
@@ -1934,12 +2149,13 @@ display: none;
 
 .topTitle
 {
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
-position: relative;
-top: -9px;
-left: 35%;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: 25%;
+    position: relative;
+    top: 10px;
 }
 
 .topImgDesk
@@ -2163,21 +2379,21 @@ body{
 }
 .mainImgDeskP {
     height: 290px;
-    width: 500px;
+    width: 100%;
    float: left;
    margin-bottom: 30px;
 }
 .mainImgDesk
 {
      height: 290px;
-    width: 500px;
+    width: 100%;
     float: left;
     margin-top: -147px;
 }
 .mainImgMobile
 {
     height: 290px;
-    width: 500px;
+    width: 100%;
     float: left;
     margin-top: -10px;
 }
@@ -2185,7 +2401,7 @@ body{
     width: 100%;
     height: 35px;
     background-color: #2A2760;
-    margin-top: -17px;
+    margin-top: -1px;
 }
 .titleDesk
 {
@@ -2221,8 +2437,9 @@ body{
 }
 #accessTitle
 {
-  font-size:20px;
+  font-size:15px;
   margin-left:20px;
+  width: 90%;
 }
 #getAccess
 {
