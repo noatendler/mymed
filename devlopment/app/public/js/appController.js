@@ -34,6 +34,7 @@ var emailCookie1 = $cookies.get('cookieEmail');
               //console.log(shortBy);
             
 
+                
             switch(shortBy)
             {
               case 'AZ':{
