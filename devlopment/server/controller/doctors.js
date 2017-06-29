@@ -4,15 +4,12 @@ var cal = require('../models/calSchema');
 
 
 exports.getData = function(req, res){
-    //console.log("in the doctor location");
     doctors.find({},function(err, docs){
-        //console.log("docs "+docs);
         res.json(docs);
     });
 }
 
 exports.getCalRank = function(req,res){
-	console.log(req.body);
 	var saveRank = new cal({
 		insertDate: req.body.insertDate,
         Entity: req.body.entity,
@@ -32,7 +29,6 @@ exports.getCalRank = function(req,res){
         } else {
         	console.log("save");
         	calRank(req.body,0);
-        	//res.redirect('http://localhost:3000/calculateRanking',req.body);
         }
 	});
 res.json("save rank");
@@ -42,19 +38,12 @@ var totalRank = 0;
 var allDocRank=0;
 var numUserRank =0;
 function calRank(req,temp){
-    console.log("in cal rank function");
-	//console.log(req,temp);
 	cal.find({}, function(error, allRank){
-        //console.log("cal find  " + allRank.length);
+		
+        allDocRank = allRank.length;
 
-		allDocRank = allRank.length;
-	
-//console.log("allDocRank   " + allDocRank);
-	//console.log(req);
-	//console.log(sumCal);	
 	cal.find({name: req.name,Address: req.address,Entity:req.entity,Expertise: req.expertise},function(err,docs){
-			//console.log(docs);
-			//res.json(docs);
+
 			var sumCal = [];
 			var t1=0,t2=0,t3=0,t4=0,t5=0;			
 			
@@ -70,19 +59,14 @@ function calRank(req,temp){
 			}
 
 		    numUserRank = docs.length;
-		    //console.log(numUserRank);
-
-
+		   
 			for(var j=0; j<sumCal.length; j++)
 			{
-				//console.log("sunCal[j] "+sumCal[j]);
 				totalRank += sumCal[j]; 
 			}
 			totalRank/=(sumCal.length);
-             var totalRankRound = totalRank.toFixed(2);
-			//console.log("total length "+ sumCal.length);
-			//res.json(sumCal);
-	console.log("totalRank "+totalRankRound);
+            var totalRankRound = totalRank.toFixed(2);
+
 		doctors.findOneAndUpdate(
     	{name: req.name, Entity:req.entity, Address: req.address,
 		Expertise: req.expertise},

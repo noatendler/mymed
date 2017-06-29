@@ -2,6 +2,7 @@
 <html ng-app="mymed">
     <head>
         <title>View private data</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <link rel="stylesheet" href="css/style.css">
@@ -25,13 +26,25 @@
             <a href="tagsManager.html">
                 <h3 class="SearchNav">Tags Manager</h3>
             </a>
-            <a href="profile.html" id="profile">
-                <span data-toggle="tooltip" title="Click to see your profile">Profile</span>
-            </a>
             <a href="login.html" id="loginLink">
                 <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
+         <div class="menu-btn" id="menu-btn">
+            <div></div>
+            <span></span>
+            <span></span>
+            <span></span>
+         </div>
+         <div class="responsive-menu">
+            <ul class="ulMobile">
+               <li><a href="index.html">Home</a></li>
+               <li><a href="getPrivateData.html">Personal Medical Infomation</a></li>
+               <li><a href="generalRanking.html">General Medical Information</a></li>
+               <li><a href="searchDoc.html">Search Doctor Nearby</a></li>
+               <li><a href="login.html">Login</a></li>
+            </ul>
+         </div> 
     </header> 
 <body>
     <main>
@@ -42,14 +55,8 @@
             <span class="topTitle">Personal medical information</span>
         </section>
         <section ng-controller="viewPersonalCtrl">
-<!--             <a href="insertDetailsNoTag.html" class="redirectAdd">
-                <span class="addInfoView">add personal</span>
-                <br>
-                <span class="addInfoSView">information</span>
-                <img src="images/addInfo.png" class="addInfoImg">
-            </a> -->
             <br>
-            <h1 class="viewTitle">You Are Viewing<span class="spanViewTitle"> {{myinfo.Title}}</span></h1><br><br>
+            <h1 class="viewTitle">You Are Viewing {{myinfo.Title}}</h1><br><br>
             <section id="viewSection">
                 <h1 class="viewName">{{myinfo.Title}}</h1>
                 <br>
@@ -72,8 +79,17 @@
                    <span class="contentCat">{{myinfo.Category}}</span>
                    <br>
                    <img  class="contentDoc" ng-src="{{myinfo.file}}">
+            <button type="submit" class="btn btn-default backView" value="Back" onclick="window.history.back()"><< back
+            </button>
         </section> 
     </main>
+    <script type="text/javascript">
+    jQuery(function($){
+             $( '.menu-btn' ).click(function(){
+             $('.responsive-menu').toggleClass('expand')
+             })
+        })
+    </script>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>
     <script src="js/lib/angular/angular-route.min.js"></script>

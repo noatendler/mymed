@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html ng-app="mymed">
   <head>
-  <title>search doctor nearby</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>search doctor nearby</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
     <header class="deskHeader">
         <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
@@ -27,14 +27,29 @@
                 <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
+        <div class="menu-btn" id="menu-btn">
+          <div></div>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="responsive-menu">
+          <ul class="ulMobile">
+             <li class="liMobile"><a href="index.html">Home</a></li>
+             <li class="liMobile"><a href="getPrivateData.html">Personal Medical Infomation</a></li>
+             <li class="liMobile"><a href="generalRanking.html">General Medical Information</a></li>
+             <li class="liMobile"><a href="searchDoc.html">Search Doctor Nearby</a></li>
+             <li class="liMobile"><a href="login.html">Login</a></li>
+          </ul>
+      </div>
     </header>
     <section>
-      <img src="images/search.jpg" class="topImgDesk">
+      <img src="images/search.jpg" class="topImgSearch">
     </section>
-    <section class="topTitleDesk">
+    <section class="topTitleSearch">
       <span class="topTitle">Search doctor nearby</span>
     </section>
-  <body ng-controller="searchController" id="bo">
+<body ng-controller="searchController" id="bo">
     <h2 id="titleSeach">Please enter location, and filter with expertise and HMO </h2>
     <form>
       <label class="entityMobile">Select a specialty</label>
@@ -88,7 +103,7 @@
         <span ng-if="j.Saturday">, Saturday: {{j.Saturday}}</span>
       </span>
       <br><br>
-      <p>Address: {{i.Address}}</p>
+      <p class="addressSearch">Address: {{i.Address}}</p>
     </div>
     <script>
      function initAutocomplete() { //initAutocomplete
@@ -159,6 +174,13 @@
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHo4IfFEKL8UxvDQkoEkD6UPggg9RFPBI&callback=initMap&libraries=places,geometry&callback=initAutocomplete">
+    </script>
+    <script type="text/javascript">
+        jQuery(function($){
+             $( '.menu-btn' ).click(function(){
+             $('.responsive-menu').toggleClass('expand')
+             })
+        })
     </script>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>

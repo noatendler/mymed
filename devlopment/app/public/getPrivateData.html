@@ -32,6 +32,21 @@
                 <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
+     <div class="menu-btn" id="menu-btn">
+        <div></div>
+        <span></span>
+        <span></span>
+        <span></span>
+     </div>
+     <div class="responsive-menu">
+        <ul class="ulMobile">
+           <li class="liMobile"><a href="index.html">Home</a></li>
+           <li class="liMobile"><a href="getPrivateData.html">Personal Medical Infomation</a></li>
+           <li class="liMobile"><a href="generalRanking.html">General Medical Information</a></li>
+           <li class="liMobile"><a href="searchDoc.html">Search Doctor Nearby</a></li>
+           <li class="liMobile"><a href="login.html">Login</a></li>
+        </ul>
+     </div>   
     </header> 
 <body ng-init="list = true" class="bodyHeandler">
     <main>
@@ -39,7 +54,7 @@
             <img src="images/personalImg.jpg" class="topImgDesk">
         </section>
         <section class="topTitleDesk">
-            <span class="topTitle">Personal medical information</span>
+            <span class="topTitlePersonal">Personal medical information</span>
         </section>
          <section ng-controller="getPersonalCtrl">
              <a href="insertDetailsNoTag.html" class="redirectAdd">
@@ -48,8 +63,7 @@
                 <span class="addInfoSpan">information</span>
                 <img src="images/addButton.png" class="addInfoImg">
              </a>
-            <!-- <label class="tagsTitle">Items tags</label> -->
-             <img class="changeView" src="images/list.png" ng-click="list = true; content = false; details = false;" >
+             <img class="changeView listMobile" src="images/list.png" ng-click="list = true; content = false; details = false;" >
              <img class="changeView" src="images/details.png" ng-click="details = true; list=false; content=false;">
              <img class="changeView" src="images/content.png" ng-click="content = true; list=false; details=false;">
              <br><br>
@@ -60,26 +74,13 @@
                     <option value="ZA">Z to A</option>
                     <option value="firstDate">First</option>
                     <option value="lastDate">Last</option>
-                </select>
+                 </select>
              </section>
-<!--              <br>
-             <br>
-             <h3 class="currentDesk"></h3>
-             <h2 class="currentDesk" id="mysearch"></h2> -->
              <span class="searchKeyword">Search item by keyword</span>
              <br>
              <input type="search" id="filter" name="searchString" ng-model="searchString" placeholder="change view by keyword">
              <br>
              <p>{{insertData}}</p>
-<!--              <br>
-             <p id="allTagsTilte">These are the tags in which you've tagged your information</p>
-            <section id="tagsPersonal" ng-repeat="allTags in personalTag" >
-                <span ng-repeat="tag in allTags" class="tag label label-info">{{tag.name}}
-                    <a>
-                        <i class="remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(tag.name)"></i>
-                    </a>
-                </span>
-             </section> -->
              <br>
              <section class="detailsAndler" ng-show="list" ng-repeat="index in insertDataToDB | filter:searchString">
                 <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
@@ -91,7 +92,7 @@
                     <span class="tagDataPer">{{i.name}}</span>
                     </section>
                 <div class="clear"></div>          
-            </section>
+             </section>
              <section ng-repeat="index in insertDataToDB | filter:searchString" class="detailsAndler"  ng-show="details">
                     <img src="images/eye-24-256.png" class="seeImg" title="more details" alt="more details" ng-click="viewCurrent(index)">
                     <img src="images/pencil.png" class="editImg"  title="edit info" alt="edit info" ng-click="editData(index)">
@@ -113,7 +114,6 @@
                     <h2 class="contentName"><span class="titles"> Document information</span>{{index.Info}}</h2>
                     <h2 class="contentName"><span class="titles">Date of creation</span>{{index.myDate}}</h2>                  
                     <div class="clear"></div>        
-
              </section>
              <section id="myModal" class="modal">
                 <section class="modal-content">
@@ -133,8 +133,6 @@
                     <h1 class="titleAccess">{{i.Title}}</h1>
                     <h2 class="contentName"><span class="titles">Info: </span>{{i.Info}}</h2>
                     <h2 class="contentName"><span class="titles">Category: </span>{{i.Category}}</h2>
-<!--                     <img ng-src="{{i.file}}">
-                    <br> -->
                     <h2 class="contentName"><span class="titles">Recommendation: </span>{{i.Recommendation}}</h2>
                     <span class="titlesTag">Tags</span>
                     <section class"displayTags"><p class="tagDataPer" ng-repeat ="a in i.Tags">
@@ -144,6 +142,13 @@
                 </section>
           </section>
     </main>
+    <script type="text/javascript">
+        jQuery(function($){
+             $( '.menu-btn' ).click(function(){
+             $('.responsive-menu').toggleClass('expand')
+             })
+        })
+    </script>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>
     <script src="js/lib/angular/angular-route.min.js"></script>

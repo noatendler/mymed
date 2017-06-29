@@ -13,7 +13,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <header class="deskHeader">
-        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+         <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
          <nav class="navBarPrivate">
             <a href="index.html">
                 <h3 class="homeNav">Home</h3>
@@ -37,103 +37,87 @@
     </header> 
 <body ng-init="allTags=true">
     <main>
-        <section ng-controller="tagsCtrl">
+        <section ng-controller="tagsCtrl" id="tagsSection">
             <div class="collapse navbar-collapse" id="navBarSub">
                 <ul class="nav navbar-nav" id="navBar">
-                    <li ng-class="{ active: isActive('/')}"><a ng-href="#" ng-click="hideme(); allTags=true; addNewTag=false;  createCategory=false; ">All tags</a></li>
-                    <li ng-class="{ active: isActive('/')}"><a href="#" ng-click="hideme(); createCategory=true; allTags=false;  addNewTag=false; ">Create new category</a></li>
-                    <li ng-class="{ active: isActive('/')}"><a ng-href="#" ng-click="hideme(); addNewTag=true; allTags=false; createCategory=false; ">Create new tag</a></li>
+                    <li ng-class="{ active: isActive('/')}"><a ng-href="#" class="navSub" ng-click="hideme(); allTags=true; addNewTag=false;  createCategory=false; ">All tags</a></li>
+                    <li ng-class="{ active: isActive('/')}"><a href="#" class="navSub" ng-click="hideme(); createCategory=true; allTags=false;  addNewTag=false; ">Create new category</a></li>
+                    <li ng-class="{ active: isActive('/')}"><a ng-href="#" class="navSub" ng-click="hideme(); addNewTag=true; allTags=false; createCategory=false; ">Create new tag</a></li>
                 </ul>
             </div>
             <section ng-show="addNewTag" id="addNewTagId">
-            <label for="pwd" id="titleTagM" class="editTitle" data-toggle="tooltip" title="add new tag to tags manager">Add new tag</label>
-            <tags-input ng-model="Tags" class="inputTagM" name="Tags" id="Tags"  display-property="name" placeholder="Add new a tag" replace-spaces-with-dashes="false">
-            </tags-input>
-            <button class="btn btn-default" id="saveTag">Save tag</button>
+                <label for="pwd" id="titleTagM" class="editTitle" data-toggle="tooltip" title="add new tag to tags manager">Add new tag</label>
+                <tags-input ng-model="Tags" class="inputTagM" name="Tags" id="Tags"  display-property="name" placeholder="Add a new tag" replace-spaces-with-dashes="false">
+                </tags-input>
+                <button class="btn btn-default" id="saveTag">Create tag</button>
             </section>
             <section ng-show="allTags" id="allTagsId">
-            <section class="managerAllTags">
-                <span data-toggle="tooltip" title="the tag name">Tag Name</span>
-                <span data-toggle="tooltip" title="how many times the tag exist in items">Count</span>
-                <span data-toggle="tooltip" title="click in button to see items link">Show Me Data Items</span>
-                <span data-toggle="tooltip" title="click on button to remove tag from the list">Delete Tag</span>
-            </section>
-    <div ng-repeat="tagPerCat in tagsToFilter() | filter:filterTags">
-        <p class="HoldTagName">{{tagPerCat.category}}</p>
-        <div ng-repeat="tag in sub | filter:{category: tagPerCat.category}">
-            <p class="subNameTag">{{tag.name}} <span class="tagCount">{{tag.number}}</span></p>  
-            <button data-toggle="tooltip" title="click on button to show tag details" ng-click="getDocument(tag.name)" class="showItemTag">Show</button>
-            <a>
-                <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(tag.name,tag.number)"></i>
-            </a> 
-        </div>        
-    </div>
-    <div ng-repeat="t in tagF">
-        <p class="HoldTagName">{{t.name}}
-            <span class="tagCount">{{t.number}}</span>
-        </p>
-        
-        <button data-toggle="tooltip" title="click on button to show tag details" ng-click="getDocument(t.name)" class="showItemTag">Show</button>
-        <a>
-            <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(t.name,t.number)"></i>
-        </a> 
-    </div>
-            <h3 id="clickTitle">Click on the link to</h3>
-            <span id="spanClick">show the item</span>
-            <div id="linkDocs" ng-repeat="j in linkDataName">
-                <a href="#" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)" class="clickToView">
-                    <span class="linkTitle">{{j.Title}}</span>        
-                </a>
-            </div>
-            <!--display item data-->
-            <section class="itemInfoM" id="itemInfoM">
-                <!-- <label>Document title</label> -->
-                <h1 class="holdTitleItem">{{title}}</h1>
-                <br>
-                <!-- <label>Date of creation</label> -->
-                <h3 class="holdPopUp">{{date}}</h3>
-                <br>
-               <!--  <label>Document information</label> -->
-                <p class="holdInfoItem">{{info}}</p>
-                <br>
-                <!-- <label>Document</label> -->
-                <img ng-src="{{file}}" class="holdImgItem">
-            </section>
-<!--             <label id="linkTitle">choose file from list and click on the link</label>
- -->            <!-- The Modal -->
-<!--             <div id="myModal" class="modal">
-                <section class="modal-content">
-                    <span class="close">&times;</span>
-                        <p id="errorLog"></p>
-                        <label>Document title</label>
-                        <h1 class="holdPopUp">{{title}}</h1>
-                        <br>
-                        <label>Date of creation</label>
-                        <h3 class="holdPopUp">{{date}}</h3>
-                        <br>
-                        <label>Document information</label>
-                        <p class="holdPopUp">{{info}}</p>
-                        <br>
-                        <label>Document</label>
-                        <img ng-src="{{file}}">
+                <section class="managerAllTags">
+                    <span data-toggle="tooltip" title="the tag name">Tag Name</span>
+                    <span data-toggle="tooltip" title="how many times the tag exist in items">Count</span>
+                    <span data-toggle="tooltip" title="click in button to see items link">Show Me Data Items</span>
+                    <span data-toggle="tooltip" title="click on button to remove tag from the list">Delete Tag</span>
                 </section>
-             </div> -->
+                <div ng-repeat="tagPerCat in tagsToFilter() | filter:filterTags">
+                    <p class="HoldTagName">{{tagPerCat.category}}</p>
+                <div ng-repeat="tag in sub | filter:{category: tagPerCat.category}">
+                    <p class="subNameTag">{{tag.name}} <span class="tagCount">{{tag.number}}</span></p>  
+                    <button data-toggle="tooltip" title="click on button to show tag details" ng-click="getDocument(tag.name)" class="showItemTag">Show</button>
+                    <a>
+                        <i class="removeTag remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(tag.name,tag.number)"></i>
+                    </a> 
+                </div>        
+                </div>
+                <div ng-repeat="t in tagF">
+                    <p class="HoldTagName">{{t.name}}
+                    <span class="tagCountF">{{t.number}}</span>
+                </p> 
+                    <button data-toggle="tooltip" title="click on button to show tag details" ng-click="getDocument(t.name)" class="showItemTagF">Show</button>
+                <a>
+                    <i class="removeTagF remove glyphicon glyphicon-remove-sign glyphicon-white" ng-click="removeTag(t.name,t.number)"></i>
+                </a> 
+                </div>
+                <section id="holdClickT">
+                    <h3 id="clickTitle">Click on the link to</h3>
+                    <span id="spanClick">show the item</span>
+                </section>
+                <div id="linkDocs" ng-repeat="j in linkDataName">
+                    <a href="#" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)" class="clickToView">
+                        <span class="linkTitle">{{j.Title}}</span>        
+                    </a>
+                </div>
+                <!--display item data-->
+                <section class="itemInfoM" id="itemInfoM">
+                    <!-- <label>Document title</label> -->
+                    <h1 class="holdTitleItem">{{title}}</h1>
+                    <br>
+                    <!-- <label>Date of creation</label> -->
+                    <h3 class="holdPopUp">{{date}}</h3>
+                    <br>
+                   <!--  <label>Document information</label> -->
+                    <p class="holdInfoItem">{{info}}</p>
+                    <br>
+                    <!-- <label>Document</label> -->
+                    <img ng-src="{{file}}" class="holdImgItem">
+                </section>
              </section>
              <section ng-show="createCategory" id="createCategoryId">
-             <label id="categoryTitle" data-toggle="tooltip" title="add new category to tags manager">Please create new category / update exsiting one</label>
-             <tags-input ng-model="category" class="inputTagM" name="category" id="category"  display-property="name" placeholder="Add new a category" replace-spaces-with-dashes="false" max-tags="1">
-             </tags-input>
-             <label id="subCategory" data-toggle="tooltip" title="Select a tag from the list to append it to the category">Select a tag from the list to append it to the category</label>
-                   <tags-input ng-model="TagsCat" class="editPersonalManger" name="TagsCat" id="TagsCat" display-property="name" placeholder="Add a tag for your item" replace-spaces-with-dashes="false">
-              <auto-complete source="loadTags($query)"
+                <label id="categoryTitle" data-toggle="tooltip" title="add new category to tags manager">Please create new category / update exsiting one</label>
+                <br>
+                <label id="categorySubTitle">Please enter one category at a time</label>
+                <tags-input ng-model="category" class="inputTagM" name="category" id="category"  display-property="name" placeholder="Add a new category" replace-spaces-with-dashes="false" max-tags="1">
+                </tags-input>
+                    <label id="subCategory" data-toggle="tooltip" title="Select a tag from the list to append it to the category">Select a tag from the list to append it to the category</label>
+                    <tags-input ng-model="TagsCat" class="editPersonalManger" name="TagsCat" id="TagsCat" display-property="name" placeholder="Add tag for your item" replace-spaces-with-dashes="false">
+                        <auto-complete source="loadTags($query)"
                              min-length="0"
                              load-on-focus="true"
                              load-on-empty="true"
                              max-results-to-show="32"
                              template="my-custom-template"></auto-complete>
-            </tags-input>
-             <button class="btn btn-default" id="buttonCategory">Add</button>
-            </section>
+                    </tags-input>
+                <button class="btn btn-default" id="buttonCategory">Create</button>
+             </section>
         </section>
     </main>
     <script type="text/ng-template" id="my-custom-template">
@@ -148,3 +132,4 @@
     <script type="text/javascript" src="js/lib/angular/ng-tags-input.min.js"></script>
     <script src="js/tagController.js"></script>
 </body>
+</html>

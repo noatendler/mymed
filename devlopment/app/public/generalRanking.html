@@ -3,33 +3,48 @@
 <head>
   <title>general information</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-       <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-    <header class="deskHeader">
-        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+  <header class="deskHeader">
+        <a href="index.html" id="logo"> </a>
          <nav class="navBarPrivate">
             <a href="index.html">
-                <h3 class="homeNav">Home</h3>
+              <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal Medical Infomation</h3>
+              <h3 class="PersonalNav">Personal Medical Infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General Medical Information</h3>
+              <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search Doctor Nearby</h3>
+              <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
             <a href="tagsManager.html">
-                <h3 class="SearchNav">Tags Manager</h3>
+              <h3 class="SearchNav">Tags Manager</h3>
             </a>
             <a href="login.html" id="loginLink">
-                <span data-toggle="tooltip" title="Click to login">Login</span>
+              <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
-    </header> 
+    <div class="menu-btn" id="menu-btn">
+      <div></div>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="responsive-menu">
+        <ul class="ulMobile">
+           <li class="liMobile"><a href="index.html">Home</a></li>
+           <li class="liMobile"><a href="getPrivateData.html">Personal Medical Infomation</a></li>
+           <li class="liMobile"><a href="generalRanking.html">General Medical Information</a></li>
+           <li class="liMobile"><a href="searchDoc.html">Search Doctor Nearby</a></li>
+           <li class="liMobile"><a href="login.html">Login</a></li>
+        </ul>
+    </div>
+  </header> 
 <body class="bodyContent">
   <section>
     <img src="images/general.jpg" class="topImgDesk">
@@ -49,7 +64,7 @@
   <input type="search" id="filterDoc" name="searchString" ng-model="searchString" placeholder="enter your preference">
   <i ng-click="topFunction()" id="myBtn" title="Go back to the top"></i>
   <br><br><br>
-   <section ng-repeat="doc in general | filter:searchString">
+  <section ng-repeat="doc in general | filter:searchString">
     <section class="medInfo" >
     <h1 class="medTitle">{{doc.name}}</h1>
     <label class="labelGeneral">Ranking:</label>
@@ -66,7 +81,7 @@
     <span ng-repeat="i in doc.reception_hours">
       <span class="daysRank" ng-if="i.Sunday !== undefined">Sunday: {{i.Sunday}}</span>
       <span class="daysRank" ng-if="i.Monday !== undefined
-      ">, Monday: {{i.Monday}}</span>
+      "> Monday: {{i.Monday}}</span>
       <span class="daysRank" ng-if="i.Tuesday !== undefined">, Tuesday: {{i.Tuesday}}</span>
       <span class="daysRank" ng-if="i.Wednesday !== undefined">, Wednesday: {{i.Wednesday}}</span>
       <span class="daysRank" ng-if="i.Thursday !== undefined">, Thursday: {{i.Thursday}}</span>
@@ -110,8 +125,8 @@
                <section star-rating rating="Rec" click="clickRec(param)">
               </section>
               <input class="btn btn-default submitPopUp" type="submit" ng-click="sendRank()" value="save">
-     </section>
-     </div>
+    </section>
+    </div>
     <!-- The Modal -->
     <div id="deletePopup" class="modal">
       <!-- Modal content -->
@@ -126,7 +141,14 @@
     </div>
    </section>
   </section>
-  <script src="js/lib/angular/angular.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function($){
+             $( '.menu-btn' ).click(function(){
+             $('.responsive-menu').toggleClass('expand')
+             })
+        })
+    </script>
+    <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>
     <script src="js/lib/angular/angular-route.min.js"></script>
     <script src="js/lib/angular/angular-cookies.min.js"></script>

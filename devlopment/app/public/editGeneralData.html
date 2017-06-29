@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <header class="deskHeader">
-        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+         <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
          <nav class="navBarPrivate">
             <a href="index.html">
                 <h3 class="homeNav">Home</h3>
@@ -43,7 +43,7 @@
         <section class="topTitleDesk">
             <span class="topTitle">General info</span>
         </section>
-         <section ng-controller="editGeneralCtrl">
+        <section ng-controller="editGeneralCtrl">
              <a href="insertPersonal.html" class="redirectAdd">
                 <span class="addInfoDesk">add info</span>
                 <img src="images/addInfo.png" class="addInfoImg">
@@ -51,7 +51,7 @@
              <br><br><br><br><br><br>
              <form>
                  <label>Entity:</label>
-                 <input class="form-control" value="{{infoGeneral.Entity}}" ng-model="infoGeneral.Entity" name="infoGeneral.Entity"
+                 <input class="form-control" value="{{infoGeneral.Entity}}" ng-model="infoGeneral.Entity" name="infoGeneral.Entity">
                  <br>
                  <label>Name:</label>
                  <input class="form-control" value="{{infoGeneral.name}}" ng-model="infoGeneral.name" name="infoGeneral.name">
@@ -77,6 +77,8 @@
                     <label>Friday:</label>
                     <input type="text" class="form-control" value="{{friday}}" ng-model="friday" name="friday">
                  <button type="submit" class="btn btn-default" ng-click="EditGeneral()">Submit
+                 </button>
+                 <button type="submit" class="btn btn-default backEdit" value="Back" onclick="window.history.back()">back
                  </button>
              </form>
           </section> 

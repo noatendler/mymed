@@ -9,7 +9,7 @@ config = {
 };
 
 
-new CronJob('00  14 * * *', function() {
+new CronJob('01  00 * * *', function() {
   console.log('You will see this message every second');
 function sendMail()
 {

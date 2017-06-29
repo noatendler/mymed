@@ -2,20 +2,17 @@ var mongoose = require('mongoose'),
 user = require('../models/usersSchema');
 var category = require('../models/userCategory');
 var myTag = require('../models/userTagSchema');
-//var setCookie = require('set-cookie');
 
 var cooikeEmail;
 exports.findUser = function(req, res){
-   // console.log(Globals);
+
     user.find({email:req.body.email, pass:req.body.pass},function(err, docs){
         if(docs.length){
           console.log("found");
-          //res.redirect('http://localhost:8080/index.html');
           res.json({"val":204});
         }
         else{
           console.log("can't find user");
-          //res.redirect('http://localhost:8080/register.html');
           res.json({"val":302});
         }
     });
@@ -37,7 +34,6 @@ exports.saveNewUser = function(request, response){
     user.find({email : request.body.email},function(err, docs){
          if (docs.length){
             console.log('User exists already');
-            //response.redirect('http://localhost:8080/login.html');
             response.json({"val":500});
           }
          else{
@@ -54,7 +50,6 @@ exports.saveNewUser = function(request, response){
                 } else {
                   console.log("saved!");
                 }
-                //response.redirect('http://localhost:8080/index.html');
                 response.json({"val":204});
               });
             }
@@ -78,7 +73,6 @@ exports.addPermission=function(request, response){
           toAdd = 1;
         console.log("exist");
         user.find({email:request.body.myemail},function(err,document1){
-        //console.log("document   "+document[0].permission.length);
         for(var i=0; i<document1[0].permission.length; i++)
         {
           if(document1[0].permission[i]["perEmail"] == request.body.email)
@@ -120,7 +114,6 @@ exports.deletePermission=function(request, response){
     user.find({email : request.body.myemail}, function(err, docs){
       for(key=0; key<docs[0].permission.length; key++) {
         if (docs[0].permission[key]["perEmail"] == request.body.email) {
-          //console.log('need to delete');
           user.findOneAndUpdate(
           {email:request.body.myemail},
           {$pull: {"permission": {perEmail: request.body.email}}},
@@ -137,7 +130,6 @@ exports.deletePermission=function(request, response){
 }
 
 exports.getUserByEmail = function(request, response){
-  //console.log(request.body);
   user.find({email:request.body.email}, function(err, docs){
     response.json(docs);
 
@@ -155,11 +147,9 @@ exports.getUsers = function(request, response){
 //add new category to user
 exports.addNewCategory = function(req,res)
 {
-  //console.log(req.body);
   var myemail = req.body.email;
   var cat = req.body.category[0].name;
   var tag = req.body.tags;
-  //console.log(tag);
   var uniqueValue = [];
   var tags = [];
   var tagsDb = [];
@@ -168,7 +158,6 @@ exports.addNewCategory = function(req,res)
     tags.push(tag[i].text);
   }
 
-//console.log(tags[0]);
   category.find({email:myemail,category:cat},function(err,doc){
     if(doc.length)
     {
@@ -182,8 +171,6 @@ exports.addNewCategory = function(req,res)
       var myCurrentTags=[];
   for(var temp=0; temp<tags.length; temp++)
   {
-    console.log("tags   " + tags[temp]);
-    console.log("----------------------");
     if(myCurrentTags.indexOf(tags[temp]) == -1)
     {
       myCurrentTags.push(tags[temp]);
@@ -195,7 +182,6 @@ exports.addNewCategory = function(req,res)
       myCurrentTags.push(tagsDb[temp]);
     }
   }
-  console.log(myCurrentTags);
 
   for(var k=0; k<myCurrentTags.length; k++){
     uniqueValue.push({text:myCurrentTags[k]});
@@ -227,82 +213,10 @@ exports.addNewCategory = function(req,res)
       });
     }
   });
-
-  
-
-//   category.find({email:myemail,category:cat},function(err,doc){
-//     if(doc.length)
-//      {
-//     console.log("doc    " + doc.length);
-//      var myCurrentTags =[];
-//      for(var i=0; i<doc[0].tags.length; i++)
-//      {
-//       //console.log(doc[0].tags[i]);
-//           myCurrentTags.push(doc[0].tags[i].text);
-//      }
-//      var total = myCurrentTags;
-//      console.log("myCurrentTags  " +myCurrentTags);
-// console.log("*****************************");
-//      for(var t=0; t<myCurrentTags.length;t++)
-//      {
-//       for(k=0; k<tag.length; k++)
-//       {
-//         //console.log(tag[k].name);
-//         if(tag[k].name == myCurrentTags[t])
-//         {
-//           if(uniqueValue.indexOf(tag[k].text) == -1)
-//           {
-//             uniqueValue.push(tag[k].text);
-//           }
-//         }
-//         else
-//         {
-//           if(uniqueValue.indexOf(tag[k].text) == -1)
-//           {
-//             uniqueValue.push(tag[k].text); 
-//           }
-//           if(uniqueValue.indexOf(myCurrentTags[t]) == -1)
-//           {
-//            uniqueValue.push(myCurrentTags[t]); 
-//           }
-//         }
-//       }
-//      }
-//   console.log("uniqueValue     " + uniqueValue);
-// console.log("**********************************");
-//         category.findOneAndUpdate({email: myemail,category:cat}, { $set : { 'tags': uniqueValue} },
-//           {safe: true},
-//             function (err, doc) {
-//               if (err) {
-//                   console.log(err);
-//               } else {
-//                   console.log('updated! :)');
-//               }
-//         });
-//      }
-//      else
-//      {
-//         var saveCat = new category({
-//                 email : myemail,
-//                 category : cat,
-//                 tags : tag
-//         });
-//         saveCat.save(function(error, result) {
-//                 if (error) {
-//                   console.error(error);
-//                 } else {
-//                   console.log("saved!");
-
-//                 }
-//                 res.json(200);
-//         });
-//      }
-//   });
 }
 
 exports.getCategory = function(req,res)
 {
-  console.log(req.body);
   category.find({email:req.body.email}, function(err, docs){
     res.json(docs);
   });
@@ -323,7 +237,6 @@ exports.getCategoryByUser = function(req,res)
         console.log(err);
       } else {
         res.json(doc);
-        // console.log('updated! :)');
       }
   });
 }
@@ -331,23 +244,17 @@ exports.getCategoryByUser = function(req,res)
 exports.getCatAndSubBySub =function(req,res)
 {
     category.find({email:req.body.email}, function(err, docs){
-       console.log("********************99999");
-       //console.log(docs);
-       console.log("********************99999");
        for(var i=0; i<docs.length; i++)
        {
-          //console.log(docs[i].tags);
           for(var j=0; j<docs[i].tags.length; j++)
           {
-            //console.log(docs[i].tags[j].text);
             if(docs[i].tags[j].text == req.body.sub)
             {
-              //console.log(docs[i].tags[j].text);
               console.log(docs[i]);
             }
           }
        }
-       //res.json(docs);
+       res.json("204");
     });
 }
 

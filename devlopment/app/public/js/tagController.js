@@ -1,7 +1,11 @@
 var myTags = angular.module("mymed",['ngRoute','ngCookies','ngTagsInput']);
 
+
+
 myTags.controller('tagsCtrl',['$scope','$http','$cookies',function($scope,$http,$cookies) {
-  
+     
+
+
   var emailCookie = $cookies.get('cookieEmail');
   var x= {};
   x.email = emailCookie;
@@ -32,7 +36,6 @@ console.log("in hide me");
             myPersonalTags.push(temp[i].tags[j]);
          }
        }
-       //$scope.personalTag = myPersonalTags;
       });
    
 
@@ -85,15 +88,15 @@ document.getElementById('spanClick').style.display ="none";
 document.getElementById('itemInfoM').style.display = "none";
     $scope.getDocument = function(tag)
     {
+        document.getElementById('holdClickT').scrollIntoView();
         document.getElementById('spanClick').style.display = "block";
         document.getElementById('clickTitle').style.display = "block";
         console.log("getDocument");
-        //console.log(tag);
+
         var dataT = {};
         dataT.email = emailCookie;
         dataT.Tags = tag;
-        //console.log(dataT);
-        //get all docs from db by tag name
+
         //http://localhost:3000/getAllDocs
         //https://mymed1.herokuapp.com/getAllDocs
         //http://localhost:3000/getAllDocs
@@ -105,36 +108,18 @@ document.getElementById('itemInfoM').style.display = "none";
         });
     }
    
-//document.getElementById('linkTitle').style.display = "none";
+
     $scope.createPopUp = function(title,Info,myDate,file)
     {
 
-
+            // document.getElementById('itemInfoM').scrollIntoView();
             $scope.title = title;
             $scope.info = Info;
             $scope.date = myDate;
             $scope.file = file;
 
             console.log(" $scope.title  " +  $scope.title);
-            document.getElementById('itemInfoM').style.display = "block";
-           //  var modal = document.getElementById("myModal");
-           //  modal.style.display = "block";
-           // // document.getElementById('linkTitle').style.display = "block";
- 
-           //  // Get the <span> element that closes the modal
-           //  var span = document.getElementsByClassName("close")[0];
-         
-           //  // When the user clicks on <span> (x), close the modal
-           //  span.onclick = function() {
-           //      modal.style.display = "none";
-           //  }
-
-            // When the user clicks anywhere outside of the modal, close it
-            // window.onclick = function(event) {
-            //     if (event.target == modal) {
-            //         modal.style.display = "none";
-            //     }
-            // }            
+            document.getElementById('itemInfoM').style.display = "block";           
     }
 
 //create new category
@@ -151,7 +136,6 @@ document.getElementById('itemInfoM').style.display = "none";
     return $http.get("https://mymed2.herokuapp.com/getTags/"+emailCookie,{ cache: true}).then(function(response) {
       var tags = response.data;
       return tags.filter(function(tag) {
-        //return tag.toLowerCase();
         return tag.toLowerCase().indexOf($query.toLowerCase()) != -1;
       });
     });
@@ -232,19 +216,13 @@ document.getElementById('itemInfoM').style.display = "none";
                     for(var j=0; j<myTags.length; j++)
                     {
                         var isSet=0;
-                        //console.log("this is the name (all tags) "+ myTags[j].name);
                         for(var k=0; k<categoryAndSub.length; k++)
                         {
                            for(var t=0; t<categoryAndSub[k].tags.length; t++)
                            {
-                            // console.log("sub   "+categoryAndSub[k].tags[t].name);
-                            // console.log("**********************************");
-                            // console.log("this is the name (all tags) "+ myTags[j].name);
                              if(categoryAndSub[k].tags[t].name === myTags[j].name)
                              {
                                 isSet=1;
-                                //console.log(categoryAndSub[k].category);
-                                //console.log('belongs to '+ myTags[j].name);
                                 subCatNum.push({category:categoryAndSub[k].category,name:myTags[j].name,number:myTags[j].number});
                              }
                              else
@@ -259,17 +237,10 @@ document.getElementById('itemInfoM').style.display = "none";
                             tagsNoSub.push({name: myTags[j].name, number: myTags[j].number});       
                         }
                     }
-                    // console.log("tagsNoSub   " + subCatNum);
                     $scope.tagF = tagsNoSub;
                     $scope.sub = subCatNum;
                     $scope.tag = tagsNoSub;
 
-                    // for(var i=0; i<subCatNum.length; i++){
-                    // console.log("subCatNum  "  + subCatNum[i].name);
-                    // }
-                    // for(var j=0; j<tagsNoSub.length; j++){
-                    // console.log("tagsNoSub   " + tagsNoSub[j].name);
-                    // }
         });    
     });
 

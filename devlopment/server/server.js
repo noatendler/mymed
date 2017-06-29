@@ -51,14 +51,13 @@ app.post('/addPerUser', multipartAction, user.addPermission);
 app.post('/deletePerUser', multipartAction, user.deletePermission);
 app.post('/userInfo',multipartAction,user.getUserByEmail);
 app.get('/userInformation',user.getUsers);
-//app.post('/calculateRanking',multipartAction, doctors.calRank);
 app.post('/deletePersonalInfo',multipartAction, personal.delInfo);
 app.post('/getOneRank',multipartAction,doctors.getCalRank);
 app.post('/updatePersonalData',multipartAction,personal.updatePersonal);
 app.post('/getPersonalTags',multipartAction, personal.personalTags);
 app.post('/removePersonalTag',multipartAction,personal.removeTag);
 
-//this is a try to do tag, data not together
+
 app.post('/addDataNoTags',multipartAction, personal.addInfoNoTags);
 app.post('/addPerTags',multipartAction, personal.addTagPer);
 app.post('/getGeneralData',multipartAction,general.saveGeneralData);

@@ -29,17 +29,32 @@
                 <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
+      <div class="menu-btn" id="menu-btn">
+        <div></div>
+        <span></span>
+        <span></span>
+        <span></span>
+       </div>
+       <div class="responsive-menu">
+          <ul class="ulMobile">
+             <li class="liMobile"><a href="index.html">Home</a></li>
+             <li class="liMobile"><a href="getPrivateData.html">Personal Medical Infomation</a></li>
+             <li class="liMobile"><a href="generalRanking.html">General Medical Information</a></li>
+             <li class="liMobile"><a href="searchDoc.html">Search Doctor Nearby</a></li>
+             <li class="liMobile"><a href="login.html">Login</a></li>
+          </ul>
+       </div>
     </header> 
   <section>
     <img src="images/personalImg.jpg" class="topImgDesk">
   </section>
   <section class="topTitleDesk">
-    <span class="topTitle">Personal Medical Information</span>
+    <span class="topTitlePersonal">Personal Medical Information</span>
   </section>
 <body ng-controller="detailsCtrl">
   <br><br><br><br>
   <h2 class="insertTitle insertTitleG">Please insert personal medical information</h2>
-    <form enctype="multipart/form-data" method="post" action="https://mymed2.herokuapp.com/addDataNoTags">
+    <form enctype="multipart/form-data" method="post" action="http://localhost:3000/addDataNoTags">
         <input type="text" class="form-control" id="emailInput" name="email" value={{showEmail}}>
       <div class="form-group">
         <label for="pwd" class="editTitle" id="docTitleMobile" data-toggle="tooltip" title="Enter a title for your information item">Document title</label>
@@ -64,12 +79,21 @@
       <input type="text" class="form-control" id="dateInput" name="mydate" value={{showDate}}>   
       <button type="submit" class="btn btn-default submitAddInfo" ng-click="personalSave()">Submit
       </button>
+      <button type="submit" class="btn btn-default backinsertD" value="Back" onclick="window.history.back()"><< back
+      </button>
     </form>
     <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
-</script>
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();   
+      });
+    </script>
+    <script type="text/javascript">
+        jQuery(function($){
+             $( '.menu-btn' ).click(function(){
+             $('.responsive-menu').toggleClass('expand')
+             })
+        })
+    </script>
     <script src="js/lib/angular/angular.min.js"></script>
     <script src="js/lib/angular/angular-resource.min.js"></script>
     <script src="js/lib/angular/angular-route.min.js"></script>

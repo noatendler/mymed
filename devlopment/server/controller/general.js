@@ -17,7 +17,6 @@ var latitude,longitude;
 
 exports.getData = function(req, res){
     general.find({},function(err, docs){
-        console.log("docs "+docs);
         res.json(docs);
     });
 }
@@ -25,21 +24,22 @@ exports.getData = function(req, res){
 
 exports.saveGeneralData = function(req , res){
     var convertAddress = req.body.address;
+    var hours = req.body.reception_hours;
+    var newHours = [];
+
     geocoder.geocode(convertAddress, function(err, res) {
-        //console.log(res);
         for(var i=0; i<res.length; i++)
         {
             latitude = res[i].latitude;
             longitude = res[i].longitude;
         }
-        console.log(latitude+" "+longitude);
         var saveGeneralData = new doctors({
         Entity: req.body.Entity,
         name: req.body.name,
         Expertise: req.body.Expertise,
         HMO: req.body.HMO,
         Address: req.body.Address,
-        reception_hours: req.body.reception_hours,
+        reception_hours: hours,
         lat: latitude,
         lng: longitude,
         Ranking: 0,
@@ -51,19 +51,16 @@ exports.saveGeneralData = function(req , res){
         if (error) {
             console.error(error);
         } else {
-            result.json("save");
-            //console.log("save");
+            console.log("save");
         }
     });
 
-
     });
-    
+res.json("save");    
 }
 
 exports.updateGeneral = function(req , res)
 {
-console.log(req.body);
  doctors.update({Entity: req.body.EntityBefore, name:req.body.NameBefore, Address:req.body.AddressBefore},{Entity: req.body.Entity, name:req.body.name, Address:req.body.Address, Expertise:req.body.Expertise,HMO:req.body.HMO,reception_hours:req.body.reception_hours},
         function(err, num) {
           if(err)
