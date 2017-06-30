@@ -4,17 +4,19 @@ var userTags = require('../models/userTagSchema');
 
 
 exports.getTag = function(req, res){
+    console.log("in get tags");
     var doc1 = []; 
     var doc2 = [];
     var total;
    
     tags.find({},function(err, docs){
-       
+       console.log("docs  "  + docs);
         for(var i=0; i<docs.length; i++)
         {
             doc1.push(docs[i].name);
         }
         userTags.find({email:req.params.email},function(err,docsUser){
+            console.log("docsUser   " + docsUser);
             for(var j=0; j<docsUser.length; j++)
             {
                 for(var t=0; t<docsUser[j].tags.length; t++)
@@ -27,9 +29,10 @@ exports.getTag = function(req, res){
             uniqueNames = total.filter(function(item, pos) {
                 return total.indexOf(item) == pos;
             })
+            console.log("uniqueNames   " + uniqueNames);
             res.json(uniqueNames);
         });
-    })
+    });
 }
 
 exports.getAllTag = function(req, res){

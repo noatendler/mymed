@@ -10,6 +10,7 @@ exports.getData = function(req, res){
 }
 
 exports.getCalRank = function(req,res){
+    console.log("in get cal server");
 	var saveRank = new cal({
 		insertDate: req.body.insertDate,
         Entity: req.body.entity,

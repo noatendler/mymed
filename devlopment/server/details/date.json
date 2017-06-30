@@ -40,5 +40,7 @@
     "years":365,
     "and":"+",
     "every":"every",
-    "today":0
+    "today":0,
+    "months":20,
+    "tomorrow":1
 }

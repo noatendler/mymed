@@ -6,7 +6,7 @@ var mime = require('mime');
 var user = require('../models/usersSchema');
 var taginsert = require('../models/userTagSchema');
 var ImageResize = require('node-image-resize');
-var notifi = require('../models/notificationSchema');
+var myNoti = require('../models/notificationSchema');
 var category = require('../models/userCategory');
 var data = require('../details/date.json');
 var moment = require('moment');
@@ -716,10 +716,11 @@ Sync(function(){
 
 exports.saveNotification = function(req, res)
 {
-
+  console.log("in saveNotification");
+//console.log("req.body.dateNoti  " + req.body.dateNoti);
   var myDate = new Date(req.body.dateNoti);
-
-  var saveMyNoti = new notifi({
+console.log("myDate " + myDate);
+  var saveMyNoti = new myNoti({
           email: req.body.email,
           Recommendation : req.body.Recommendation,
           dateNoti : myDate,
@@ -732,6 +733,7 @@ exports.saveNotification = function(req, res)
           console.log("save");
         }
       });
+  res.json("save notification");  
 }
 exports.getAllDocumentByTag = function(req,res)
 {

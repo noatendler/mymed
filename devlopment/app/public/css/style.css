@@ -13,10 +13,11 @@ a
     font-family: Comfortaa;
     src: url(../fonts/Comfortaa-Regular.ttf);
 }
-.addressSearch
+#accessTitle
 {
-
-}
+    font-size: 16px;
+    margin-left: 2%;
+} 
 #tagsSection
 {
   margin-top: 40px;
@@ -93,6 +94,12 @@ html, body
   margin: 0;
   padding: 0;
   font-family: Comfortaa;
+}
+#selectedName
+{
+    margin-left: 45%;
+    position: relative;
+    top: -35px;
 }
 #description
 {
@@ -575,6 +582,7 @@ html, body
   color: #bbb;
   cursor: pointer;
   opacity: 0.6;
+  margin: 0 0 0 .3em;
 }
 .tag a:hover
 {
@@ -584,10 +592,6 @@ html, body
 {
   vertical-align: bottom;
   top: 0;
-}
-.tag a
-{
-  margin: 0 0 0 .3em;
 }
 .tag a .glyphicon-white
 {
@@ -675,6 +679,8 @@ html, body
 {
   padding: 2px 5px;
   margin-left: 20px;
+  position: relative;
+  top: -42px;
 }
 #tagsPersonal
 {
@@ -686,7 +692,7 @@ html, body
 }
 .tagDataPer
 {
-color: #ffffff;
+    color: #ffffff;
     font-size: 15px;
     background-color: #5bc0de;
     border-radius: 4px;
@@ -717,7 +723,7 @@ color: #ffffff;
     font-size: 16px;
     position: relative;
     top: 100px;
-    right: 20%;
+    right: 18%;
 }
 .contentInfo
 {
@@ -1164,7 +1170,7 @@ color: #ffffff;
     color: #2A2760;
     font-size: 16px;
     position: relative;
-    margin-left: 210px;
+    margin-left: 100px;
     top: 150px;
     width:70%;
     height:60%;
@@ -1176,7 +1182,7 @@ color: #ffffff;
     font-weight: bold;
     position: relative;
     top: 100px;
-    right: 25.5%;
+    right: 19%;
 }
 .infoView
 {
@@ -1246,7 +1252,7 @@ color: #ffffff;
     color: #2A2760;
     margin-top: -30px;
     text-align: center;
-    margin-right: 4%;
+    margin-right: 3%;
     margin-bottom: 30px;
 }
 .editAdmin
@@ -1433,7 +1439,7 @@ color: #ffffff;
 }
 .searchKeyword
 {
-position: relative;
+    position: relative;
     top: 1px;
     font-size: 20px;
     color: #2A2760;
@@ -1485,7 +1491,7 @@ position: relative;
 }
 .labelGeneral
 {
-font-size:16px;
+ font-size:16px;
  margin-left:10px; 
 }
 .medTitle
@@ -1511,10 +1517,6 @@ font-size:16px;
   padding-right:5px;
   font-size: 16px;
   padding-bottom:5px;
-}
-@font-face {
-    font-family: Comfortaa;
-    src: url(../fonts/Comfortaa-Regular.ttf);
 }
 #myBtn {
   display: none;
@@ -1757,9 +1759,10 @@ font-size:16px;
 }
 .backView
 {
-    margin-top: 160px;
     background-color: gainsboro;
     margin-right: 100px;
+    float: left;
+    margin-top: 900px;
 }
 .backinsertD
 {
@@ -1781,10 +1784,56 @@ font-size:16px;
 }
 /*mobile*/
 @media (max-width:500px){
+.backView
+{
+    margin-top: 150px;
+    background-color: gainsboro;
+    margin-right: 100px;
+    padding: 5px;
+}  
+.contentDoc
+{
+    color: #2A2760;
+    font-size: 16px;
+    position: relative;
+    margin-left: 10px;
+    top: 150px;
+    width:70%;
+    height:60%;
+}  
+.contentRec
+{
+    color: #2A2760;
+    font-size: 16px;
+    position: relative;
+    top: 100px;
+   left: 2%;
+}  
+.recView
+{
+    font-size: 18px;
+    color: #2A2760;
+    font-weight: bold;
+    position: relative;
+    top: 100px;
+    left: 2%;
+}  
+.accessButton
+{
+  padding: 2px;
+  float: left;
+  margin-left: 10%;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}   
 .liMobile
 {
   margin-top: 10px;
 }  
+#accessTitle
+{
+  font-size: 13px;
+}
 body
 {
    overflow-x: hidden;
@@ -1830,7 +1879,6 @@ body
   vertical-align: middle;
   z-index: 99;
 }
- 
 .menu-btn span {
   display: block;
   width: 19px;
@@ -1839,13 +1887,10 @@ body
   background: rgb(0,0,0);
   z-index: 99;
 }
- 
 .responsive-menu{
   display: none;
   background-color: #ffffff;
-
 }
- 
 .expand {
   display: block !important; 
 }  
@@ -1867,7 +1912,6 @@ body
 {
   background-color: #69678F;
   width: 100%;
-.addTitle
   height: 350px;
   margin-top: 5px;
 }  
@@ -1896,14 +1940,10 @@ body
 }  
 #selectedName
 {
-  float: left;
-  width: 20%;
-  margin-left: 5%;
-} 
-#accessTitle
-{
-  font-size:15px;
-  margin-left:2%;
+    float: left;
+    width: 20%;
+    margin-left: 2%;
+    margin-top: 40px;
 }  
 .searchKeyword {
     position: relative;
@@ -1920,14 +1960,7 @@ body
     position: relative;
     top: 20px;
     left: -23%;
-}  
-.accessButton
-{
-  padding: 2px 5px;
-  float: left;
-  margin-left: 10%;
-  margin-top: -4px;
-}  
+}   
 .sortInfo {
     width: 120px;
     margin-left: 2%;
@@ -2359,7 +2392,7 @@ display: none;
     width: 100%;
     height: 150px;
     position: relative;
-    top: -5px;
+    top: -1px;
 } 
 .navBarPrivate
 {
@@ -2573,12 +2606,12 @@ display: none;
   right:22%;
   width:50%;
 }
-#accessTitle
+/*.accessTitle
 {
   font-size:15px;
   margin-left:20px;
   width: 90%;
-}
+}*/
 #getAccess
 {
   position: relative;
@@ -2625,4 +2658,5 @@ display: none;
     position: relative;
     margin-left: 10px;
     top: 120px;
+}
 }
