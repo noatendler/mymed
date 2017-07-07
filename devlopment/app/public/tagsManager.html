@@ -28,7 +28,7 @@
                 <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
             <a href="tagsManager.html">
-                <h3 class="SearchNav">Tags Manager</h3>
+                <h3 class="SearchNav onTab">Tags Manager</h3>
             </a>
             <a href="login.html" id="loginLink">
                 <span data-toggle="tooltip" title="Click to login">Login</span>
@@ -82,24 +82,32 @@
                     <span id="spanClick">show the item</span>
                 </section>
                 <div id="linkDocs" ng-repeat="j in linkDataName">
-                    <a href="#" ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)" class="clickToView">
+                    <p ng-click="createPopUp(j.Title,j.Info,j.myDate,j.file)" class="clickToView" id="clickToView">
                         <span class="linkTitle">{{j.Title}}</span>        
-                    </a>
+                    </p>
                 </div>
                 <!--display item data-->
                 <section class="itemInfoM" id="itemInfoM">
-                    <!-- <label>Document title</label> -->
                     <h1 class="holdTitleItem">{{title}}</h1>
                     <br>
-                    <!-- <label>Date of creation</label> -->
                     <h3 class="holdPopUp">{{date}}</h3>
                     <br>
-                   <!--  <label>Document information</label> -->
                     <p class="holdInfoItem">{{info}}</p>
                     <br>
-                    <!-- <label>Document</label> -->
-                    <img ng-src="{{file}}" class="holdImgItem">
-                </section>
+                    <img id="myImg" ng-if="showimg == 1" src="{{file}}" class="tagImgM" >
+                    <!-- The Modal -->
+                    <div id="myModal" class="modalM">
+
+                      <!-- The Close Button -->
+                      <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+                      <!-- Modal Content (The Image) -->
+                      <img class="modal-contentM" id="img01">
+
+                      <!-- Modal Caption (Image Text) -->
+                      <div id="caption"></div>
+                    </div>
+               </section>
              </section>
              <section ng-show="createCategory" id="createCategoryId">
                 <label id="categoryTitle" data-toggle="tooltip" title="add new category to tags manager">Please create new category / update exsiting one</label>
@@ -131,5 +139,13 @@
     <script src="js/lib/angular/angular-cookies.min.js"></script>
     <script type="text/javascript" src="js/lib/angular/ng-tags-input.min.js"></script>
     <script src="js/tagController.js"></script>
+    <script>
+    $(function() {
+        $('.pop').on('click', function() {
+            $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+            $('#imagemodal').modal('show');   
+        });     
+    });
+    </script>
 </body>
 </html>

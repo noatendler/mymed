@@ -11,34 +11,34 @@
         <link rel="stylesheet" href="css/ng-tags-input.bootstrap.min.css">
     </head>
     <header class="deskHeader">
-        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+        <a href="index.html" id="logo"> </a>
          <nav class="navBarPrivate">
             <a href="index.html">
-                <h3 class="homeNav">Home</h3>
+              <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical infomation</h3>
+              <h3 class="PersonalNav onTab">Personal Medical Infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General medical information</h3>
+              <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search doctor nearby</h3>
+              <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
             <a href="tagsManager.html">
-                <h3 class="SearchNav">Tags manager</h3>
+              <h3 class="SearchNav">Tags Manager</h3>
             </a>
             <a href="login.html" id="loginLink">
-                <span data-toggle="tooltip" title="Click to login">Login</span>
+              <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
-     <div class="menu-btn" id="menu-btn">
-        <div></div>
-        <span></span>
-        <span></span>
-        <span></span>
-     </div>
-     <div class="responsive-menu">
+    <div class="menu-btn" id="menu-btn">
+      <div></div>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="responsive-menu">
         <ul class="ulMobile">
            <li class="liMobile"><a href="index.html">Home</a></li>
            <li class="liMobile"><a href="getPrivateData.html">Personal Medical Infomation</a></li>
@@ -46,8 +46,8 @@
            <li class="liMobile"><a href="searchDoc.html">Search Doctor Nearby</a></li>
            <li class="liMobile"><a href="login.html">Login</a></li>
         </ul>
-     </div>   
-    </header> 
+    </div>
+  </header> 
 <body ng-init="list = true" class="bodyHeandler">
     <main>
         <section>
@@ -129,7 +129,7 @@
                     <select ng-model="selectedName" id="selectedName" name="selectedName" value="" ng-options="access for access in names"></select>
                     <button ng-click="getAllAccess()" class="btn btn-default accessButton">Access user</button>
                 </span>
-                <section ng-repeat ="i in getUserPer" class="accesInfo">
+                <section ng-repeat ="i in getUserPer" class="detailsAndler">
                     <h1 class="titleAccess">{{i.Title}}</h1>
                     <h2 class="contentName"><span class="titles">Info: </span>{{i.Info}}</h2>
                     <h2 class="contentName"><span class="titles">Category: </span>{{i.Category}}</h2>

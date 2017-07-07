@@ -8,26 +8,44 @@
       <link rel="stylesheet" href="css/ng-tags-input.min.css">
       <link rel="stylesheet" href="css/ng-tags-input.bootstrap.min.css">
 </head>
-<header class="deskHeader">
+  <header class="deskHeader">
         <a href="index.html" id="logo"> </a>
-         <nav>
+         <nav class="navBarPrivate">
             <a href="index.html">
-                <h3 class="homeNav">Home</h3>
+              <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal medical info</h3>
+              <h3 class="PersonalNav">Personal Medical Infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General info</h3>
+              <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search doctor nearby</h3>
+              <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
-            <a href="profile.html" id="profile">
-                <h5 data-toggle="tooltip" title="Click to see your profile">profile</h5>
+            <a href="tagsManager.html">
+              <h3 class="SearchNav">Tags Manager</h3>
+            </a>
+            <a href="login.html" id="loginLink">
+              <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
-</header>
+    <div class="menu-btn" id="menu-btn">
+      <div></div>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="responsive-menu">
+        <ul class="ulMobile">
+           <li class="liMobile"><a href="index.html">Home</a></li>
+           <li class="liMobile"><a href="getPrivateData.html">Personal Medical Infomation</a></li>
+           <li class="liMobile"><a href="generalRanking.html">General Medical Information</a></li>
+           <li class="liMobile"><a href="searchDoc.html">Search Doctor Nearby</a></li>
+           <li class="liMobile"><a href="login.html">Login</a></li>
+        </ul>
+    </div>
+  </header> s
 <body ng-controller="MainCtrl">
     <form enctype="multipart/form-data" method="post" action="http://localhost:3000/addPersonal">
     <h1 class="InsertPerT">Please add your private info</h1>

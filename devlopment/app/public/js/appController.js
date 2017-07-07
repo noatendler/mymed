@@ -299,7 +299,7 @@ mymedical.controller('searchController',['$scope','$http',function($scope,$http)
       }
      
       console.log('get closest Doc' + colsestDoc);
-      
+
       var docAroundMe = [];
 
       colsestDoc.sort(function (a, b) {   
@@ -701,7 +701,7 @@ $scope.SaveNoti = function(val)
   console.log("val  " + val);
     if(val == 'no')
     {
-      modal.style.display = "none";
+      window.location ="getPrivateData.html";
     }
     if(val == 'yes')
     {
@@ -721,7 +721,7 @@ $scope.SaveNoti = function(val)
       console.log("saveNoti  "  + saveNoti.dateNoti);
       modal.style.display = "none";
       //http://localhost:3000/addNotification
-      $http.post("http://localhost:3000/addNotification",JSON.stringify(saveNoti)).then(function(res){
+      $http.post("https://mymed2.herokuapp.com/addNotification",JSON.stringify(saveNoti)).then(function(res){
           window.location ="getPrivateData.html";
       }); 
     }
@@ -1118,6 +1118,18 @@ mymedical.directive('starRating', function () {
 mymedical.controller('viewPersonalCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){
     $scope.myinfo=JSON.parse($cookies.get('cookieView'));
     console.log(typeof($scope.myinfo));
+    
+    $(window).load(function() { 
+     $("img").each(function(){ 
+        var image = $(this); 
+        if(image.context.naturalWidth == 0 || 
+        image.readyState == 'uninitialized'){  
+           $(image).unbind("error").hide();
+        } 
+      }); 
+    });
+
+
 }]);
 
 mymedical.controller('editPersonalCtrl',['$scope','$http','$cookies', function($scope,$http,$cookies){

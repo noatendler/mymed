@@ -7,44 +7,44 @@
       <link rel="stylesheet" href="css/style.css">
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-    <header class="deskHeader">
-        <a href="index.html" id="logo" data-toggle="tooltip" title="MyMedical" alt="MyMedical"> </a>
+  <header class="deskHeader">
+        <a href="index.html" id="logo"> </a>
          <nav class="navBarPrivate">
             <a href="index.html">
-                <h3 class="homeNav">Home</h3>
+              <h3 class="homeNav">Home</h3>
             </a>
             <a href="getPrivateData.html">
-                <h3 class="PersonalNav">Personal Medical Infomation</h3>
+              <h3 class="PersonalNav onTab">Personal Medical Infomation</h3>
             </a>
             <a href="generalRanking.html">
-                <h3 class="GeneralNav">General Medical Information</h3>
+              <h3 class="GeneralNav">General Medical Information</h3>
             </a>
             <a href="searchDoc.html">
-                <h3 class="SearchNav">Search Doctor Nearby</h3>
+              <h3 class="SearchNav">Search Doctor Nearby</h3>
             </a>
             <a href="tagsManager.html">
-                <h3 class="SearchNav">Tags Manager</h3>
+              <h3 class="SearchNav">Tags Manager</h3>
             </a>
             <a href="login.html" id="loginLink">
-                <span data-toggle="tooltip" title="Click to login">Login</span>
+              <span data-toggle="tooltip" title="Click to login">Login</span>
             </a>
          </nav>
-      <div class="menu-btn" id="menu-btn">
-        <div></div>
-        <span></span>
-        <span></span>
-        <span></span>
-       </div>
-       <div class="responsive-menu">
-          <ul class="ulMobile">
-             <li class="liMobile"><a href="index.html">Home</a></li>
-             <li class="liMobile"><a href="getPrivateData.html">Personal Medical Infomation</a></li>
-             <li class="liMobile"><a href="generalRanking.html">General Medical Information</a></li>
-             <li class="liMobile"><a href="searchDoc.html">Search Doctor Nearby</a></li>
-             <li class="liMobile"><a href="login.html">Login</a></li>
-          </ul>
-       </div>
-    </header> 
+    <div class="menu-btn" id="menu-btn">
+      <div></div>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="responsive-menu">
+        <ul class="ulMobile">
+           <li class="liMobile"><a href="index.html">Home</a></li>
+           <li class="liMobile"><a href="getPrivateData.html">Personal Medical Infomation</a></li>
+           <li class="liMobile"><a href="generalRanking.html">General Medical Information</a></li>
+           <li class="liMobile"><a href="searchDoc.html">Search Doctor Nearby</a></li>
+           <li class="liMobile"><a href="login.html">Login</a></li>
+        </ul>
+    </div>
+  </header> 
   <section>
     <img src="images/personalImg.jpg" class="topImgDesk">
   </section>
@@ -54,7 +54,7 @@
 <body ng-controller="detailsCtrl">
   <br><br><br><br>
   <h2 class="insertTitle insertTitleG">Please insert personal medical information</h2>
-    <form enctype="multipart/form-data" method="post" action="https://mymed2.herokuapp.com/addDataNoTags">
+    <form enctype="multipart/form-data" method="post" action="http://localhost:3000/addDataNoTags">
         <input type="text" class="form-control" id="emailInput" name="email" value={{showEmail}}>
       <div class="form-group">
         <label for="pwd" class="editTitle" id="docTitleMobile" data-toggle="tooltip" title="Enter a title for your information item">Document title</label>
@@ -65,8 +65,8 @@
         <input type="text" class="form-control editPersonal" id="pwd" name="Info" ng-model="Info" placeholder="document information" required>
       </div>
       <div class="form-group">
-        <label for="pwd" class="editTitle" data-toggle="tooltip" title="choose from the list category to add to this item">Category of the item</label>
-        <select id="selectedCat" ng-model="selectedCat" ng-options="x for x in names"></select>
+        <label for="pwd" class="editTitle " data-toggle="tooltip" title="choose from the list category to add to this item">Category of the item</label>
+        <select id="selectedCat" ng-model="selectedCat" ng-options="x for x in names" ></select>
       </div>
       <div class="form-group">
           <label for="pwd" class="editTitle" data-toggle="tooltip" title="Upload file that belongs to the information item">Attach file to the item</label>

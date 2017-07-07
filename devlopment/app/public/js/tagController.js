@@ -88,7 +88,8 @@ document.getElementById('spanClick').style.display ="none";
 document.getElementById('itemInfoM').style.display = "none";
     $scope.getDocument = function(tag)
     {
-        document.getElementById('holdClickT').scrollIntoView();
+
+        document.getElementById('clickTitle').scrollIntoView();
         document.getElementById('spanClick').style.display = "block";
         document.getElementById('clickTitle').style.display = "block";
         console.log("getDocument");
@@ -112,11 +113,17 @@ document.getElementById('itemInfoM').style.display = "none";
     $scope.createPopUp = function(title,Info,myDate,file)
     {
 
-            // document.getElementById('itemInfoM').scrollIntoView();
+            document.getElementById('clickTitle').scrollIntoView();
             $scope.title = title;
             $scope.info = Info;
             $scope.date = myDate;
-            $scope.file = file;
+            $scope.showimg = 0;
+            if(file!=='none')
+            {
+              $scope.showimg =1;
+              $scope.file = file;
+            }
+
 
             console.log(" $scope.title  " +  $scope.title);
             document.getElementById('itemInfoM').style.display = "block";           
@@ -288,3 +295,4 @@ document.getElementById('itemInfoM').style.display = "none";
         return teamIsNew;
     }
 }]);
+

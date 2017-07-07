@@ -13,6 +13,108 @@ a
     font-family: Comfortaa;
     src: url(../fonts/Comfortaa-Regular.ttf);
 }
+#myImg {
+    width: 250px;
+    height: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    float: right;
+    margin-top: -165px;
+    margin-right: 20px;
+}
+#myImg:hover {opacity: 0.7;}
+/* The Modal (background) */
+.modalM {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+/* Modal Content (image) */
+.modal-contentM {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+/* Add Animation */
+.modal-contentM, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-contentM {
+        width: 100%;
+    }
+}
+.titleAccess
+{
+    color: #2A2760;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.imgTagM
+{
+  width: 200px;
+  float: right;
+  margin-top: -165px;
+  margin-right: 20px;
+}
+.imgPopUpM
+{
+  width:800px;
+  height:400px;
+}
 #accessTitle
 {
     font-size: 16px;
@@ -221,7 +323,15 @@ html, body
   z-index:99;
   position: sticky;
   top: 0;
+  font-family: Comfortaa;
+  font-weight: normal;
   height:120px;
+}
+.onTab 
+{
+ background-color: #F7F6F6; 
+ padding: 5px;
+
 }
 .homeNav
 {
@@ -231,6 +341,7 @@ html, body
     color: #2A2760;
     font-size: 20px;
     margin-right: 30px;
+    font-weight: normal;
 }
 .homeNav:hover
 {
@@ -242,6 +353,7 @@ html, body
     color: #2A2760;
     font-size: 20px;
     margin-right: 30px;
+    font-weight: normal;
 }
 .PersonalNav:hover
 {
@@ -253,6 +365,7 @@ html, body
     color: #2A2760;
     font-size: 20px;
     margin-right: 30px;
+    font-weight: normal;
 }
 .GeneralNav:hover
 {
@@ -264,6 +377,7 @@ html, body
     color: #2A2760;
     font-size: 20px;
     margin-right: 30px;
+    font-weight: normal;
 }
 .SearchNav:hover
 {  
@@ -325,28 +439,32 @@ html, body
     width: 100%;
     height: 150px;
     position: relative;
-    top: -3px;
+    top: -20px;
 }
 .topTitle
 {
-  color: #ffffff;
-  font-size: 30px;
-  margin-left: 450px;
-  font-weight: bold;
+    color: #ffffff;
+    font-size: 30px;
+    margin-left: 450px;
+    font-weight: bold;
+    padding-top:2px;
+    font-family: Comfortaa;
 }
 .topTitleSearch
 {
   width: 100%;
   height: 35px;
   background-color: #2A2760;
-  margin-top: -10px;
+  margin-top: -25px;
+  font-family: Comfortaa;
 }
 .topTitlePersonal
 {
-  color: #ffffff;
-  font-size: 30px;
-  margin-left: 450px;
-  font-weight: bold; 
+    color: #ffffff;
+    font-size: 30px;
+    margin-left: 450px;
+    font-weight: bold;
+    font-family: Comfortaa;
 }
 .topTitleDesk
 {
@@ -723,7 +841,7 @@ html, body
     font-size: 16px;
     position: relative;
     top: 100px;
-    right: 18%;
+    left: -200px;
 }
 .contentInfo
 {
@@ -1170,7 +1288,7 @@ html, body
     color: #2A2760;
     font-size: 16px;
     position: relative;
-    margin-left: 100px;
+    margin-left: 10px;
     top: 150px;
     width:70%;
     height:60%;
@@ -1182,7 +1300,7 @@ html, body
     font-weight: bold;
     position: relative;
     top: 100px;
-    right: 19%;
+    left: -210px;
 }
 .infoView
 {
@@ -1363,13 +1481,15 @@ html, body
 .holdImgItem
 {
     float: right;
-    margin-top: -140px;
+    margin-top: -160px;
     margin-right: 6%;
+    width:150px;
+    height:150px;
 }
 .linkTitle
 {
     position: relative;
-    left: 70%;
+    left: 72%;
     top: -80px;
 }
 #categoryTitle
@@ -1416,6 +1536,7 @@ html, body
       width: 230px;
     margin-bottom: 20px;
     margin-left: 60px;
+    border-radius: 2px;
 }
 .liDynamic
 {
@@ -1587,14 +1708,14 @@ html, body
 {
     font-size: 23px;
     position: relative;
-    top: -40px;
+    top: -30px;
     background-color: #ffffff;
     width: 150px;
     float: left;
     height: 100%;
     padding-top: 20px;
     padding-right: 30px;
-    padding-bottom: 800px;
+    padding-bottom: 100px;
     color: #2A2760;
 }
 #categorySub
@@ -1634,6 +1755,7 @@ html, body
     border-color: darkgray;
     width: 68%;
     margin-bottom: 32px;
+    margin-top: 40px;
 }
 .subNameTag
 {
@@ -1658,10 +1780,10 @@ html, body
 }
 .clickToView
 {
-    margin-top: -00px;
     position: relative;
     top: -500px;
     right: 50%;
+    cursor: pointer;
 }
 #holdClickT
 {
@@ -1672,7 +1794,7 @@ html, body
 {
     float: right;
     margin-right: 19%;
-    margin-top: -40px;
+    margin-top: -28px;
 }
 .removeTagF
 {
@@ -1698,7 +1820,7 @@ html, body
     padding-right: 20px;
     padding-left: 20px;
     position: absolute;
-    right: 520px;
+    right: 524px;
     margin-top: -57px;
 }
 .linkToDocs

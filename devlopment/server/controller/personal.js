@@ -13,8 +13,8 @@ var moment = require('moment');
 var Sync = require('sync');
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 var natural_language_understanding = new NaturalLanguageUnderstandingV1({
-  'username': '6b67cdbd-8e43-48a9-9e80-16f45128caac',
-  'password': 'kqUf2M10gsyN',
+  'username': '6c380536-13b4-4188-b79b-1d2eae6a7e19',
+  'password': 'japaBXYA4teX',
   'version_date': '2017-02-27'
 });
 
@@ -138,7 +138,7 @@ exports.getData = function(req, res){
 var client = knox.createClient({
     key: 'key'
     , secret: 'secret'
-    , bucket: 'mybucket'
+    , bucket: 'bucket'
 });
 
 function hasher(){
@@ -162,137 +162,137 @@ var saved=0;
 
 exports.saveData=function(request, response){
 
-checkReq++;
+// checkReq++;
 
-if(typeof(request.files)==="undefined"){
-  checkfile=0;
-}
-else{
-  if(request.files.file.originalFilename==='')
-    checkfile=0;
-  else{
-    checkfile=1;
-    myfile = request.files.file;
-  }
-}
-if(JSON.stringify(request.body.Tags)!=null){
-  checktags=1;
-  mytags=request.body.Tags;
-  myemail= request.body.email;
-  tempDate = request.body.myDate;
+// if(typeof(request.files)==="undefined"){
+//   checkfile=0;
+// }
+// else{
+//   if(request.files.file.originalFilename==='')
+//     checkfile=0;
+//   else{
+//     checkfile=1;
+//     myfile = request.files.file;
+//   }
+// }
+// if(JSON.stringify(request.body.Tags)!=null){
+//   checktags=1;
+//   mytags=request.body.Tags;
+//   myemail= request.body.email;
+//   tempDate = request.body.myDate;
 
-}
+// }
 
 
-if(checkReq===2 && checkfile===0)
-{ 
-  var savePersonal = new personal({
-                email : myemail,
-                Tags : mytags,
-                Title: request.body.Title,
-                Info: request.body.Info,
-                Category: request.body.Category,
-                file: "none",
-                Recommendation:request.body.Recommendation,
-                myDate:tempDate
-              });
-              savePersonal.save(function(error, result) {
+// if(checkReq===2 && checkfile===0)
+// { 
+//   var savePersonal = new personal({
+//                 email : myemail,
+//                 Tags : mytags,
+//                 Title: request.body.Title,
+//                 Info: request.body.Info,
+//                 Category: request.body.Category,
+//                 file: "none",
+//                 Recommendation:request.body.Recommendation,
+//                 myDate:tempDate
+//               });
+//               savePersonal.save(function(error, result) {
                 
-                if (error) {
-                  console.error(error);
-                } else {
-                  console.log("save");                    
-                }
-              })
-  checkfile=0;
-  checktags=0;
-}
-if( checkfile===1 && checktags===1)
-{ 
-    var hash = hasher();
-    var stream = fs.createReadStream(myfile.path);
-    var mimetype = mime.lookup(myfile.path);
-    var req;
-        if (mimetype.localeCompare('image/jpeg')
-        || mimetype.localeCompare('image/pjpeg')
-        || mimetype.localeCompare('image/png')
-        || mimetype.localeCompare('image/gif')) {
+//                 if (error) {
+//                   console.error(error);
+//                 } else {
+//                   console.log("save");                    
+//                 }
+//               })
+//   checkfile=0;
+//   checktags=0;
+// }
+// if( checkfile===1 && checktags===1)
+// { 
+//     var hash = hasher();
+//     var stream = fs.createReadStream(myfile.path);
+//     var mimetype = mime.lookup(myfile.path);
+//     var req;
+//         if (mimetype.localeCompare('image/jpeg')
+//         || mimetype.localeCompare('image/pjpeg')
+//         || mimetype.localeCompare('image/png')
+//         || mimetype.localeCompare('image/gif')) {
 
-        req = client.putStream(stream, hash+'.jpeg',
-            {
-                'Content-Type': mimetype,
-                'Cache-Control': 'max-age=604800',
-                'x-amz-acl': 'public-read',
-                'Content-Length': myfile.size
-            },
-            function(err, result) {
-             var savePersonal = new personal({
-                email : myemail,
-                Tags : mytags,
-                Title: request.body.Title,
-                Info: request.body.Info,
-                Category:request.body.Category,
-                file: req.url,
-                Recommendation:request.body.Recommendation,
-                myDate:tempDate
+//         req = client.putStream(stream, hash+'.jpeg',
+//             {
+//                 'Content-Type': mimetype,
+//                 'Cache-Control': 'max-age=604800',
+//                 'x-amz-acl': 'public-read',
+//                 'Content-Length': myfile.size
+//             },
+//             function(err, result) {
+//              var savePersonal = new personal({
+//                 email : myemail,
+//                 Tags : mytags,
+//                 Title: request.body.Title,
+//                 Info: request.body.Info,
+//                 Category:request.body.Category,
+//                 file: req.url,
+//                 Recommendation:request.body.Recommendation,
+//                 myDate:tempDate
 
-              });
-              savePersonal.save(function(error, result) {
-                if (error) {
-                  console.error(error);
-                } else {
-                  console.log("save");                  
-                }
-              })
-          });
-       } else {
-            console.log(err);
-        }
-  checkfile=0;
-  checktags=0;
-  }
+//               });
+//               savePersonal.save(function(error, result) {
+//                 if (error) {
+//                   console.error(error);
+//                 } else {
+//                   console.log("save");                  
+//                 }
+//               })
+//           });
+//        } else {
+//             console.log(err);
+//         }
+//   checkfile=0;
+//   checktags=0;
+//   }
    
-  if(usertags == 0)
-  {
-    taginsert.find({email: myemail}, function(err, docsTags){
-      var tagtemp = [];
+//   if(usertags == 0)
+//   {
+//     taginsert.find({email: myemail}, function(err, docsTags){
+//       var tagtemp = [];
 
-      for(var t=0; t<docsTags.length; t++)
-      {
-        for(var k=0; k<(docsTags[t].tags).length ; k++)
-        {
-          tagtemp.push(docsTags[t].tags[k].name);
-        }
-      }
+//       for(var t=0; t<docsTags.length; t++)
+//       {
+//         for(var k=0; k<(docsTags[t].tags).length ; k++)
+//         {
+//           tagtemp.push(docsTags[t].tags[k].name);
+//         }
+//       }
 
-        for(var j=0; j<(mytags).length ; j++)
-        {
-          if(!((tagtemp).indexOf(mytags[j].name) != -1))
-          {
-            taginsert.findOneAndUpdate(
-            {email:myemail},
-            {$push: {"tags": {name: mytags[j].name, number:1}}},
-            {safe: true, upsert: true},
-            function(err, model) {
-              if(err)
-                console.log(err);
-            });
-          }
-          else
-          {
-           taginsert.find({tags: {$elemMatch: {name: req.body.username}}, email:myemail}, function(error, myTagsDoc){
-              if(myTagsDoc.length)
-              {
-                console.log(myTagsDoc);
-              }
-           });
-          }
+//         for(var j=0; j<(mytags).length ; j++)
+//         {
+//           if(!((tagtemp).indexOf(mytags[j].name) != -1))
+//           {
+//             taginsert.findOneAndUpdate(
+//             {email:myemail},
+//             {$push: {"tags": {name: mytags[j].name, number:1}}},
+//             {safe: true, upsert: true},
+//             function(err, model) {
+//               if(err)
+//                 console.log(err);
+//             });
+//           }
+//           else
+//           {
+//            taginsert.find({tags: {$elemMatch: {name: req.body.username}}, email:myemail}, function(error, myTagsDoc){
+//               if(myTagsDoc.length)
+//               {
+//                 console.log(myTagsDoc);
+//               }
+//            });
+//           }
 
-        }
-    });
-    usertags++;
-  }
-  response.json("sucess");
+//         }
+//     });
+//     usertags++;
+//   }
+//   response.json("sucess");
 }
 
 
@@ -303,11 +303,15 @@ exports.addInfoNoTags = function(request, response){
 
     var stream = fs.createReadStream(myfile.path);
     var mimetype = mime.lookup(myfile.path);
+
+    console.log("request.files.file.size "+request.files.file.size);
+
     var req;
+    
         if (mimetype.localeCompare('image/jpeg')
         || mimetype.localeCompare('image/pjpeg')
         || mimetype.localeCompare('image/png')
-        || mimetype.localeCompare('image/gif')) {
+        || mimetype.localeCompare('image/gif') ) {
 
         req = client.putStream(stream, hash+'.jpeg',
             {
@@ -317,6 +321,8 @@ exports.addInfoNoTags = function(request, response){
                 'Content-Length': myfile.size
             },
             function(err, result) {
+            if(request.files.file.size!==0)
+            {
              var savePersonal = new personal({
                 email : request.body.email,
                 Tags : [],
@@ -327,6 +333,20 @@ exports.addInfoNoTags = function(request, response){
                 Recommendation:request.body.Recommendation,
                 myDate: request.body.mydate
               });
+            }
+            else
+            {
+                var savePersonal = new personal({
+                email : request.body.email,
+                Tags : [],
+                Title: request.body.Title,
+                Info: request.body.Info,
+                Category:request.body.Category,
+                file: "none",
+                Recommendation:request.body.Recommendation,
+                myDate: request.body.mydate
+              });
+            }
               savePersonal.save(function(error, result) {
                 if (error) {
                   console.error(error);
@@ -378,6 +398,8 @@ natural_language_understanding.analyze(parameters, function(err, response) {
 
 }
 exports.addTagPer = function(req, res){
+  console.log("88888888888888888888888888888888");
+  console.log("in the addTagPer!!!!!!!!!!!!!!!!!!!");
   var mydata = JSON.parse(JSON.stringify(data));
   var myKeys = Object.keys(mydata);
   //var myValue = Object.values(mydata);
@@ -720,6 +742,8 @@ exports.saveNotification = function(req, res)
 //console.log("req.body.dateNoti  " + req.body.dateNoti);
   var myDate = new Date(req.body.dateNoti);
 console.log("myDate " + myDate);
+console.log("req.body.email "+req.body.email);
+console.log("repeat: req.body.repeat "+ req.body.repeat);
   var saveMyNoti = new myNoti({
           email: req.body.email,
           Recommendation : req.body.Recommendation,
